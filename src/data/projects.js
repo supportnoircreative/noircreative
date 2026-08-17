@@ -1,0 +1,38 @@
+export const projects = [
+  {
+    id: "01",
+    thumb: "thumb-a",
+    name: "The Gallery Event",
+    mono: "The Gallery Event",
+    tag: "SEO & Branding",
+    short: "Full brand identity and search visibility rebuild for an events venue.",
+    full: "Full brand identity and search visibility rebuild for an events venue — new mark, site, and local SEO foundation.",
+  },
+  {
+    id: "02",
+    thumb: "thumb-b",
+    name: "Elite Tax Solutions",
+    mono: "Elite Tax Solutions",
+    tag: "Website Design",
+    short: "A conversion-focused site and market positioning for a growing tax practice, built to convert seasonal search traffic.",
+    full: "A conversion-focused site and market positioning for a growing tax practice, built to convert seasonal search traffic.",
+  },
+  {
+    id: "03",
+    thumb: "thumb-c",
+    name: "TerraLogistical Company",
+    mono: "TerraLogistical",
+    tag: "Dev & Design",
+    short: "End-to-end development and design system for a logistics operator, from brand system through to a booking-ready site.",
+    full: "End-to-end development and design system for a logistics operator, from brand system through to a booking-ready site.",
+  },
+  {
+    id: "04",
+    thumb: "thumb-d",
+    name: "Nexus Guard",
+    mono: "Nexus Guard",
+    tag: "Security & Branding",
+    short: "Website design and brand system for a physical security services company, built to read as established and trustworthy.",
+    full: "Website design and brand system for a physical security services company, built to read as established and trustworthy.",
+  },
+];

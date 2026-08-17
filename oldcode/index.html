@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noir Creative LLC — Digital Engineering &amp; Design Collective</title>
+<meta name="description" content="Noir Creative transforms bold ideas into lasting digital experiences — brand design, web development, digital marketing and brand strategy for ambitious businesses.">
+<meta name="theme-color" content="#0A0A0B">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Noir Creative LLC">
+<meta property="og:title" content="Noir Creative LLC — Where Bold Ideas Get Built">
+<meta property="og:description" content="Digital Engineering &amp; Design Collective. Fusing technical mastery with visual excellence.">
+<meta property="og:image" content="assets/img/logo-wordmark-transparent.svg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/logo-mark.svg">
+<script>(function(){try{var t=localStorage.getItem('noir-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <img src="assets/img/mark-nib-solid.svg" alt="">
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Noir Creative — home" data-nav>
+      <img src="assets/img/logo-wordmark-transparent.svg" alt="Noir Creative">
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="services.html" data-nav>Services</a></li>
+        <li><a href="work.html" data-nav>Work</a></li>
+        <li><a href="about.html" data-nav>About</a></li>
+        <li><a href="#testimonials" data-nav>Reviews</a></li>
+        <li><a href="services.html#faq" data-nav>FAQ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-cta">
+      <div class="status-chip"><span class="dot"></span>Available for new projects</div>
+      <a href="contact.html" class="btn btn-primary">
+        <span>Start a project</span>
+        <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle light and dark theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE NAV ============ -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <a href="services.html" data-nav>Services</a>
+  <a href="work.html" data-nav>Work</a>
+  <a href="about.html" data-nav>About</a>
+  <a href="#testimonials" data-nav>Reviews</a>
+  <a href="services.html#faq" data-nav>FAQ</a>
+  <a href="contact.html" data-nav>Contact</a>
+  <a href="contact.html" class="btn btn-primary btn-block" data-nav>
+    <span>Start a project</span>
+  </a>
+  <div class="theme-row">
+    <span>Theme</span>
+    <button class="theme-toggle" aria-label="Toggle light and dark theme">
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <span class="code-chip" style="top:22%;left:7%" aria-hidden="true">const brand = bold;</span>
+    <span class="code-chip lime" style="top:16%;right:9%;animation-delay:1.4s" aria-hidden="true">npm run ship</span>
+    <span class="code-chip" style="bottom:20%;left:11%;animation-delay:2.6s" aria-hidden="true">{ growth: true }</span>
+    <span class="code-chip violet" style="bottom:26%;right:7%;animation-delay:.8s" aria-hidden="true">&lt;Noir/&gt;</span>
+
+    <div class="wrap">
+      <div class="hero-head" data-reveal>
+        <div class="eyebrow">Digital Engineering &amp; Design Collective</div>
+        <h1>Where bold ideas <em>get built.</em></h1>
+        <p class="hero-sub">Noir Creative transforms ambitious ideas into lasting digital experiences — brand identity, websites, and digital systems, engineered with the same discipline as they're designed.</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary">
+            <span>Start a project</span>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="work.html" class="btn btn-outline">See the work</a>
+        </div>
+        <div class="hero-proof-row">
+          <span class="stars">★★★★★</span>
+          <span><strong>100%</strong> client recommend rate</span>
+          <span class="div"></span>
+          <span><strong>29+</strong> projects shipped</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee-section">
+      <div class="marquee">
+        <div class="marquee-track">
+          <span>Graphic Design <i>✦</i></span>
+          <span>Web Development <i>✦</i></span>
+          <span>Digital Marketing <i>✦</i></span>
+          <span>Brand Strategy <i>✦</i></span>
+          <span>UI/UX Design <i>✦</i></span>
+          <span>Video Editing <i>✦</i></span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span>Graphic Design <i>✦</i></span>
+          <span>Web Development <i>✦</i></span>
+          <span>Digital Marketing <i>✦</i></span>
+          <span>Brand Strategy <i>✦</i></span>
+          <span>UI/UX Design <i>✦</i></span>
+          <span>Video Editing <i>✦</i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT TEASER ============ -->
+  <section class="section-pad on-bone">
+    <div class="wrap">
+      <div class="about-grid">
+        <div data-reveal>
+          <div class="eyebrow">Company profile</div>
+          <h2>We build intelligent digital solutions, not just deliverables.</h2>
+          <div class="about-stat" style="margin-top:34px">
+            <div class="big">06<span>.</span></div>
+            <div class="lbl">Disciplines under one roof — no sub-contracted black boxes.</div>
+          </div>
+        </div>
+        <div data-reveal>
+          <div class="about-copy">
+            <p>Noir Creative provides quick, efficient, and accountable solutions for the growing need for online businesses and services. We've earned a reputation for professionalism and commitment fulfillment — websites and brand systems that fuse original, imaginative concepts with the unmatched talent of an in-house team.</p>
+          </div>
+          <ul class="about-checklist">
+            <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Strategic discovery before design</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Built entirely in-house</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Systems built to scale with you</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5l2.5 2.5L10 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>24/7 global support</li>
+          </ul>
+          <div style="display:flex;gap:14px;flex-wrap:wrap">
+            <a href="services.html" class="btn btn-dark">
+              <span>See our services</span>
+              <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="about.html" class="btn btn-outline" style="border-color:var(--line-on-bone-strong);color:var(--ink)">More about us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat" data-reveal>
+          <div class="num"><span data-count="100" data-suffix="%">0%</span></div>
+          <div class="lbl">Clients who'd recommend us</div>
+        </div>
+        <div class="stat" data-reveal>
+          <div class="num"><span data-count="29" data-suffix="+">0+</span></div>
+          <div class="lbl">Projects shipped</div>
+        </div>
+        <div class="stat" data-reveal>
+          <div class="num"><span class="accent" data-count="6">0</span></div>
+          <div class="lbl">Disciplines under one roof</div>
+        </div>
+        <div class="stat" data-reveal>
+          <div class="num">24/7</div>
+          <div class="lbl">Support &amp; project visibility</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES TEASER ============ -->
+  <section class="section-pad" id="services">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div>
+          <div class="eyebrow">What we do</div>
+          <h2>Six disciplines. One accountable team.</h2>
+          <p class="desc">From first sketch to shipped product — we cover the full stack of a modern brand's digital presence, so nothing gets lost between vendors.</p>
+        </div>
+        <div class="side">See the full breakdown, process, and FAQ. <a href="services.html" style="color:var(--lime);text-decoration:underline">All services →</a></div>
+      </div>
+
+      <div class="services-grid" data-reveal-stagger>
+        <article class="service-card">
+          <div class="n">01</div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M3 16l5-6 4 4 5-7 4 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.4" fill="currentColor"/></svg></div>
+          <h3>Graphic Design</h3>
+          <p>Make your brand stand out with identity systems, print and packaging built to hold up at any size.</p>
+          <a href="contact.html" class="go">Start a brief <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="service-card">
+          <div class="n">02</div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M3 5h18v11H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21h6M12 16v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3>Web Development</h3>
+          <p>Modern, functional, responsive websites engineered for growth — not just for launch day.</p>
+          <a href="contact.html" class="go">Start a brief <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="service-card">
+          <div class="n">03</div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V10M12 19V5M20 19v-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3>Digital Marketing</h3>
+          <p>Grow through data-driven campaigns — SEO, paid, and content strategy tied to real revenue.</p>
+          <a href="contact.html" class="go">Start a brief <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="service-card">
+          <div class="n">04</div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></div>
+          <h3>Brand Strategy</h3>
+          <p>Positioning, naming, and messaging that give your brand something worth saying — and a reason to say it.</p>
+          <a href="contact.html" class="go">Start a brief <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="service-card">
+          <div class="n">05</div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.6"/><path d="M8 9v11" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h3>UI/UX Design</h3>
+          <p>Interfaces and product flows designed around how people actually use them, not just how they look.</p>
+          <a href="contact.html" class="go">Start a brief <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+
+        <article class="service-card">
+          <div class="n">06</div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="14" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M17 10l4-2.5v9L17 14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <h3>Video Editing</h3>
+          <p>Polished, engaging edits for social, ads, and brand content that hold attention past the hook.</p>
+          <a href="contact.html" class="go">Start a brief <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED WORK ============ -->
+  <section class="section-pad">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div>
+          <div class="eyebrow">Featured work</div>
+          <h2>A couple of recent builds.</h2>
+          <p class="desc">Two of the brands we've helped move from idea to impossible-to-ignore.</p>
+        </div>
+        <div class="side">See the full portfolio. <a href="work.html" style="color:var(--lime);text-decoration:underline">All case studies →</a></div>
+      </div>
+
+      <div class="work-grid" data-reveal-stagger>
+        <a href="contact.html" class="work-card">
+          <div class="thumb thumb-a"><span class="idx">01</span><span class="mono">The Gallery Event</span></div>
+          <div class="body">
+            <div>
+              <span class="tag">SEO &amp; Branding</span>
+              <h3>The Gallery Event</h3>
+              <p>Full brand identity and search visibility rebuild for an events venue.</p>
+            </div>
+            <div class="chip-btn"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </a>
+
+        <a href="contact.html" class="work-card">
+          <div class="thumb thumb-d"><span class="idx">02</span><span class="mono">Nexus Guard</span></div>
+          <div class="body">
+            <div>
+              <span class="tag">Security &amp; Branding</span>
+              <h3>Nexus Guard</h3>
+              <p>Website design and brand system for a physical security services company.</p>
+            </div>
+            <div class="chip-btn"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EDITORIAL STATEMENT ============ -->
+  <section class="statement" data-reveal>
+    <div class="wrap">
+      <p>We empower startups and established businesses with the <span class="accent">tools</span> and technologies they need to thrive.</p>
+      <p class="cap">Strategy, identity, engineering, and growth — under one accountable roof, built to scale with you past the next milestone.</p>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section-pad testi" id="testimonials">
+    <div class="wrap">
+      <div class="testi-head" data-reveal>
+        <div>
+          <div class="eyebrow">Client reviews</div>
+          <h2>Don't take our word for it.</h2>
+        </div>
+        <div class="testi-nav">
+          <button id="testiPrev" aria-label="Previous reviews"><svg viewBox="0 0 16 16" fill="none"><path d="M10 3L4 8l6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button id="testiNext" aria-label="Next reviews"><svg viewBox="0 0 16 16" fill="none"><path d="M6 3l6 5-6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <div class="testi-row" id="testiRow" data-reveal>
+        <div class="testi-card">
+          <div class="top-row"><span class="stars">★★★★★</span><span class="rating">5.0</span></div>
+          <span class="cat">General</span>
+          <blockquote>"They were responsive, professional, and really listened to what we needed. It felt like a partnership, not a vendor relationship."</blockquote>
+          <div class="who"><strong>Mary David</strong>Client</div>
+        </div>
+        <div class="testi-card">
+          <div class="top-row"><span class="stars">★★★★★</span><span class="rating">5.0</span></div>
+          <span class="cat">Graphic Design</span>
+          <blockquote>"I recommend this creative team without hesitation — excellent work, and they actually hit their deadlines."</blockquote>
+          <div class="who"><strong>Kenny Moneyman</strong>Client</div>
+        </div>
+        <div class="testi-card">
+          <div class="top-row"><span class="stars">★★★★★</span><span class="rating">5.0</span></div>
+          <span class="cat">SEO</span>
+          <blockquote>"Within just a few months, our website traffic doubled. Noir Creative didn't just design a site — they engineered a growth channel."</blockquote>
+          <div class="who"><strong>Brent Nicolosi</strong>Client</div>
+        </div>
+        <div class="testi-card">
+          <div class="top-row"><span class="stars">★★★★☆</span><span class="rating">4.5</span></div>
+          <span class="cat">Web Development</span>
+          <blockquote>"Our website is now fast, user-friendly, and visually appealing. They delivered exactly what they promised and on time."</blockquote>
+          <div class="who"><strong>Ayesha Siddiqui</strong>Client</div>
+        </div>
+        <div class="testi-card">
+          <div class="top-row"><span class="stars">★★★★★</span><span class="rating">5.0</span></div>
+          <span class="cat">Digital Marketing</span>
+          <blockquote>"The campaigns brought in more leads than we expected. They truly understand how to target the right audience."</blockquote>
+          <div class="who"><strong>Hamza Malik</strong>Client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA BANNER ============ -->
+  <section class="cta-banner">
+    <div class="wrap" data-reveal>
+      <h2>Ready to build something <em>impossible to ignore</em>?</h2>
+      <p>Tell us where the business needs to go — we'll tell you exactly what it takes to build it, and what it costs.</p>
+      <div class="actions">
+        <a href="contact.html" class="btn btn-primary">
+          <span>Get a quote</span>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="mailto:support@noircreative.com" class="btn btn-outline">Email us directly</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/logo-wordmark-transparent.svg" alt="Noir Creative">
+        <p>Digital Engineering &amp; Design Collective. Fusing technical mastery with visual excellence.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="#testimonials" data-nav>Reviews</a></li>
+          <li><a href="services.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Graphic Design</a></li>
+          <li><a href="services.html">Web Development</a></li>
+          <li><a href="services.html">Digital Marketing</a></li>
+          <li><a href="services.html">Brand Strategy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@noircreative.com">support@noircreative.com</a></li>
+          <li><a href="tel:+16282724787">+1 (628) 272-4787</a></li>
+          <li><a href="contact.html">Start a project →</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Noir Creative LLC. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://facebook.com/noircreativellc" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://instagram.com/noircreativellc" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 16 16" fill="none"><path d="M8 13V3M8 3L3 8M8 3l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
