@@ -35,6 +35,7 @@
     0 0 0 1px rgba(10, 10, 11, 0.08);
 
   /* theme-role tokens — dark is the default site theme */
+  color-scheme: dark;
   --surface: var(--ink);
   --ink-raised-role: var(--ink-raised);
   --text-1: var(--bone);
@@ -43,6 +44,7 @@
 }
 
 :root[data-theme="light"] {
+  color-scheme: light;
   --surface: #fafaf8;
   --ink-raised-role: #ffffff;
   --text-1: var(--ink);
@@ -491,6 +493,10 @@ select {
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
+}
+select option {
+  background-color: #ffffff;
+  color: #0a0a0b;
 }
 
 /* ---------- CTA banner nib watermark ---------- */
