@@ -6,9 +6,8 @@ import { cn } from "@/lib/utils";
 const THEME_KEY = "noir-theme";
 
 export function ThemeToggle({ className }) {
-  function toggle() {
+  function applyTheme(next) {
     const root = document.documentElement;
-    const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
     root.setAttribute("data-theme", next);
     try {
       localStorage.setItem(THEME_KEY, next);
@@ -19,13 +18,23 @@ export function ThemeToggle({ className }) {
     if (meta) meta.setAttribute("content", next === "light" ? "#F4F4EF" : "#0A0A0B");
   }
 
+  function toggle() {
+    const root = document.documentElement;
+    const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    if (typeof document.startViewTransition === "function") {
+      document.startViewTransition(() => applyTheme(next));
+    } else {
+      applyTheme(next);
+    }
+  }
+
   return (
     <button
       type="button"
       onClick={toggle}
       aria-label="Toggle light and dark theme"
       className={cn(
-        "theme-toggle flex size-11 flex-none items-center justify-center rounded-full border border-(--line-strong) bg-transparent text-text-1 transition-colors duration-300 hover:border-lime",
+        "theme-toggle surface-hover flex size-11 flex-none items-center justify-center rounded-full border border-(--line-strong) bg-transparent text-text-1",
         className
       )}
     >

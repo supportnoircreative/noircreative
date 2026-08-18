@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/data/site";
+import { LogoWordmark } from "@/components/layout/LogoWordmark";
 import { SocialLinks } from "@/components/shared/SocialLinks";
 
 const studioLinks = [
@@ -24,9 +24,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-9 pb-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.7fr_1fr] lg:gap-10">
           <div>
             <Link href="/" aria-label="Noir Creative — home">
-              <Image
-                src="/images/logo-wordmark-transparent.svg"
-                alt="Noir Creative"
+              <LogoWordmark
                 width={46}
                 height={28}
                 className="mb-[22px] h-[26px] w-auto"

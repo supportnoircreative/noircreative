@@ -8,8 +8,11 @@ export function CtaBanner() {
       <div className="cta-mark" aria-hidden="true" />
       <div className="relative z-[1] mx-auto max-w-[1220px]">
         <Reveal>
-          <h2 className="mx-auto max-w-[16ch] text-[clamp(32px,4.8vw,60px)] tracking-tight">
-            Ready to build something <em className="lime-accent not-italic">impossible to ignore</em>?
+          <h2 className="mx-auto text-[clamp(32px,4.8vw,60px)] tracking-tight">
+            Ready to build something{" "}
+            <em className="lime-accent not-italic">
+              impossible{"\u00A0"}to{"\u00A0"}ignore?
+            </em>
           </h2>
           <p className="mx-auto mt-6 max-w-[50ch] text-base text-body">
             Tell us where the business needs to go — we&apos;ll tell you exactly what it takes to build

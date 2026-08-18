@@ -38,7 +38,7 @@ export function Button({
         <ArrowRight
           size={15}
           strokeWidth={2}
-          className="transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
+          className="transition-transform duration-300 ease-(--ease) group-hover:translate-x-1"
         />
       )}
     </>

@@ -33,7 +33,7 @@ export const metadata = {
   },
   description:
     "Noir Creative transforms bold ideas into lasting digital experiences — brand design, web development, digital marketing and brand strategy for ambitious businesses.",
-  metadataBase: new URL("https://noircreative.com"),
+  metadataBase: new URL("https://noircreativellc.com"),
   alternates: {
     canonical: "/",
   },
@@ -62,6 +62,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <head>

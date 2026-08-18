@@ -80,7 +80,7 @@ export function Header() {
         <div
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(10,10,11,.55),rgba(10,10,11,0))] transition-opacity duration-[350ms]",
+            "header-fade pointer-events-none absolute inset-0 transition-opacity duration-[350ms]",
             isScrolled ? "opacity-0" : "opacity-100"
           )}
         />
@@ -122,6 +122,7 @@ export function Header() {
               href="/contact#contact-form"
               size="sm"
               arrow
+              aria-label="Start a project"
               className="max-sm:size-11 max-sm:p-0 max-sm:rounded-full"
             >
               <span className="max-sm:hidden">Start a project</span>
@@ -133,7 +134,7 @@ export function Header() {
               onClick={() => setIsOpen((v) => !v)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
-              className="flex size-11 flex-none items-center justify-center rounded-full border border-(--line-strong) bg-transparent text-text-1 transition-colors duration-300 hover:border-lime lg:hidden"
+              className="surface-hover flex size-11 flex-none items-center justify-center rounded-full border border-(--line-strong) bg-transparent text-text-1 lg:hidden"
             >
               {isOpen ? <X size={20} strokeWidth={1.7} /> : <Menu size={20} strokeWidth={1.7} />}
             </button>

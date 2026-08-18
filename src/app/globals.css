@@ -94,7 +94,7 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
   overflow-x: hidden;
-  transition: background 0.4s var(--ease), color 0.4s var(--ease);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
 }
 
 img {
@@ -368,7 +368,7 @@ body::before {
 .loader {
   position: fixed;
   inset: 0;
-  background: var(--ink);
+  background: var(--surface);
   z-index: 3000;
   display: flex;
   align-items: center;
@@ -412,12 +412,16 @@ body::before {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 .to-top.is-show {
   opacity: 1;
   pointer-events: auto;
   transform: none;
+}
+.to-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -10px rgba(198, 242, 78, 0.55);
 }
 
 /* ---------- toast ---------- */
@@ -518,6 +522,14 @@ select {
   --header-bg: rgba(244, 244, 239, 0.86);
 }
 
+/* scrim behind the header when the page sits at the top (theme-aware) */
+.header-fade {
+  background: linear-gradient(rgba(10, 10, 11, 0.55), rgba(10, 10, 11, 0));
+}
+[data-theme="light"] .header-fade {
+  background: linear-gradient(rgba(244, 244, 239, 0.92), rgba(244, 244, 239, 0));
+}
+
 /* theme toggle icon swap (icon visibility is CSS-driven, like the original site) */
 .theme-toggle .i-moon {
   display: none;
@@ -529,10 +541,36 @@ select {
   display: block;
 }
 
+/* quiet surface hover for small icon controls (theme toggle, menu button) —
+   a faint tint and a hairline brightening instead of a full accent flash */
+.surface-hover {
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.surface-hover:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: var(--line-strong);
+}
+[data-theme="light"] .surface-hover:hover {
+  background-color: rgba(10, 10, 11, 0.05);
+  border-color: var(--line-on-bone-strong);
+}
+
+/* theme crossfade — the whole page swaps as one fast, unified fade */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.22s;
+  animation-timing-function: var(--ease);
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
   .dot::after,
   .code-chip,

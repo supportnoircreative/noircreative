@@ -56,7 +56,7 @@ export function Stats() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="border-(--line) border-l-0 px-8 py-[60px] sm:[&:nth-child(2n)]:border-l max-sm:px-6 max-sm:py-9 lg:[&:nth-child(n+2)]:border-l"
+              className="border-(--line) border-l-0 px-8 py-[60px] sm:[&:nth-child(2n)]:border-l sm:[&:nth-child(n+3)]:border-t max-sm:px-6 max-sm:py-9 lg:[&:nth-child(n+2)]:border-l lg:[&:nth-child(n+3)]:border-t-0"
             >
               {stat.static ? (
                 <div className="text-[clamp(38px,4.4vw,64px)] font-extrabold tracking-[-0.04em] text-text-1">

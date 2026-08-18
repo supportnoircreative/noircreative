@@ -18,7 +18,9 @@ export default function ContactPage() {
         title={
           <>
             Let&apos;s discuss a project —{" "}
-            <em className="lime-accent not-italic">and grow together.</em>
+            <em className="lime-accent not-italic">
+              and{"\u00A0"}grow{"\u00A0"}together.
+            </em>
           </>
         }
         description="Tell us a little about what you're building. We reply to every inquiry within one business day, from wherever you're calling from."

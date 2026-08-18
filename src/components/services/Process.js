@@ -37,7 +37,7 @@ export function Process() {
           {steps.map((step) => (
             <Reveal
               key={step.id}
-              className="border-(--line) border-t p-[34px] first:border-t-0 sm:border-t-0 sm:[&:nth-child(2n)]:border-l lg:[&:nth-child(n+2)]:border-l"
+              className="border-(--line) border-t p-[34px] first:border-t-0 sm:[&:nth-child(-n+2)]:border-t-0 sm:[&:nth-child(2n)]:border-l lg:[&:nth-child(n+2)]:border-l lg:[&:nth-child(n+3)]:border-t-0"
             >
               <div className="badge-num mb-[22px]">{step.id}</div>
               <h3 className="mb-2.5 text-[17px]">{step.title}</h3>

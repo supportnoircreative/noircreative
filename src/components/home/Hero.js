@@ -39,7 +39,7 @@ export function Hero() {
           </Reveal>
           <Reveal>
             <h1 className="text-[clamp(44px,8.6vw,118px)] tracking-[-0.045em]">
-              Where bold ideas <em className="lime-accent not-italic">get built.</em>
+              Where bold ideas <em className="lime-accent not-italic">get{"\u00A0"}built.</em>
             </h1>
           </Reveal>
           <Reveal>

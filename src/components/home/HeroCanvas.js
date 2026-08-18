@@ -3,7 +3,34 @@
 import { useEffect, useRef } from "react";
 
 const GLYPHS = ["{ }", "</>", "01", "=>", "[ ]", "fx()", "git", "npm i", "AI", "...", "const", "01101", "#", "*", "&&", "( )"];
-const COLOR_MAP = { ash: "154,160,166", lime: "198,242,78", violet: "124,92,255" };
+const COLOR_MAP = {
+  ash: "154,160,166",
+  lime: "198,242,78",
+  violet: "124,92,255",
+  ink: "10,10,11",
+  neon: "106,156,26",
+};
+
+function pickHue(light) {
+  if (light) {
+    const r = Math.random();
+    if (r < 0.2) return "neon";
+    if (r < 0.6) return "ink";
+    if (r < 0.82) return "violet";
+    return "ash";
+  }
+  const r = Math.random();
+  if (r < 0.22) return "lime";
+  if (r < 0.36) return "violet";
+  return "ash";
+}
+
+function peakAlpha(hue, light) {
+  if (light) return hue === "violet" ? 0.38 : 0.55;
+  return hue === "ash" ? 0.3 : 0.42;
+}
+
+const GLOW_HUES = new Set(["lime", "violet", "neon"]);
 
 export function HeroCanvas() {
   const canvasRef = useRef(null);
@@ -17,9 +44,10 @@ export function HeroCanvas() {
     const rect = { width: 0, height: 0 };
     let particles = [];
     let raf = 0;
+    let light = document.documentElement.getAttribute("data-theme") === "light";
 
     function spawn() {
-      const hue = Math.random() < 0.22 ? "lime" : Math.random() < 0.14 ? "violet" : "ash";
+      const hue = pickHue(light);
       return {
         x: Math.random() * rect.width,
         y: Math.random() * rect.height,
@@ -46,7 +74,7 @@ export function HeroCanvas() {
     }
 
     function alphaFor(t, hue) {
-      const peak = hue === "ash" ? 0.3 : 0.42;
+      const peak = peakAlpha(hue, light);
       if (t < 0.15) return (t / 0.15) * peak;
       if (t > 0.85) return ((1 - t) / 0.15) * peak;
       return peak;
@@ -58,7 +86,7 @@ export function HeroCanvas() {
         const t = p.life / p.dur;
         const a = alphaFor(t, p.hue);
         ctx.font = `600 ${p.size}px var(--font-mono)`;
-        if (p.hue !== "ash") {
+        if (GLOW_HUES.has(p.hue)) {
           ctx.shadowColor = `rgba(${COLOR_MAP[p.hue]},${(a * 0.9).toFixed(3)})`;
           ctx.shadowBlur = 6;
         } else {
@@ -80,6 +108,15 @@ export function HeroCanvas() {
       raf = requestAnimationFrame(step);
     }
 
+    const mo = new MutationObserver(() => {
+      const next = document.documentElement.getAttribute("data-theme") === "light";
+      if (next === light) return;
+      light = next;
+      particles = particles.map(spawn);
+      paint();
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
     resize();
     window.addEventListener("resize", resize);
     if (reduced) {
@@ -90,6 +127,7 @@ export function HeroCanvas() {
 
     return () => {
       cancelAnimationFrame(raf);
+      mo.disconnect();
       window.removeEventListener("resize", resize);
     };
   }, []);

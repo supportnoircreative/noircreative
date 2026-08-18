@@ -3,13 +3,13 @@ export const site = {
   tagline: "Digital Engineering & Design Collective",
   description:
     "Digital Engineering & Design Collective. Fusing technical mastery with visual excellence.",
-  email: "support@noircreative.com",
+  email: "supportnoircreative@gmail.com",
   phone: "+1 (628) 272-4787",
   phoneHref: "tel:+16282724787",
   socials: [
     {
       label: "Facebook",
-      href: "https://facebook.com/noircreativellc",
+      href: "https://www.facebook.com/share/19Z97rLmGv/",
       key: "facebook",
     },
     {
