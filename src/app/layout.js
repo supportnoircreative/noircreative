@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { Loader } from "@/components/layout/Loader";
+import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import { site } from "@/data/site";
 
 const inter = Inter({
@@ -74,6 +75,11 @@ export default function RootLayout({ children }) {
         <main id="top">{children}</main>
         <Footer />
         <BackToTop />
+        <WhatsAppButton
+          variant="floating"
+          phoneNumber={site.phone}
+          message="Hi Noir Creative! I found you via your website and would like to chat."
+        />
       </body>
     </html>
   );

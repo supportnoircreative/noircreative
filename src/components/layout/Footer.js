@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { LogoWordmark } from "@/components/layout/LogoWordmark";
 import { SocialLinks } from "@/components/shared/SocialLinks";
+import WhatsAppButton from "@/components/shared/WhatsAppButton";
 
 const studioLinks = [
   { label: "About", href: "/about" },
@@ -56,6 +57,13 @@ export function Footer() {
                 <Link href="/contact" className="text-sm text-body transition-colors link-lime">
                   Start a project →
                 </Link>
+              </li>
+              <li>
+                <WhatsAppButton
+                  phoneNumber={site.phone}
+                  message="Hi Noir Creative! I found you via your website and would like to chat."
+                  label="Chat on WhatsApp"
+                />
               </li>
             </ul>
           </div>
