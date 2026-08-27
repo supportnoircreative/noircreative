@@ -2,7 +2,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function Statement({ caption }) {
   return (
-    <section className="border-b border-(--line) py-[110px] text-center">
+    <section className="border-b border-(--line) py-[110px] text-center max-sm:py-[64px]">
       <div className="mx-auto max-w-[1220px] px-5 md:px-8">
         <Reveal>
           <p className="mx-auto max-w-[20ch] text-[clamp(24px,3.4vw,42px)] font-bold leading-[1.28] tracking-tight text-text-1">

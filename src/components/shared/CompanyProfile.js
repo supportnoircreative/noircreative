@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { RollText } from "@/components/ui/RollText";
 
 const checklist = [
   "Strategic discovery before design",
@@ -12,16 +13,21 @@ const checklist = [
 
 export function CompanyProfile({ long = false }) {
   return (
-    <section className="on-bone px-5 py-[130px] max-sm:py-[88px] md:px-8">
+    <section className="on-bone px-5 py-[130px] max-sm:py-[64px] md:px-8">
       <div className="mx-auto max-w-[1220px]">
         <div className="grid grid-cols-1 items-start gap-11 min-[1080px]:grid-cols-[0.9fr_1.1fr] min-[1080px]:gap-[70px]">
           <Reveal>
             <Eyebrow>{long ? "Who we are" : "Company profile"}</Eyebrow>
-            <h2 className="max-w-[14ch] text-[clamp(30px,4vw,46px)]">
-              {long
-                ? "Professionalism and commitment fulfillment, by design."
-                : "We build intelligent digital solutions, not just deliverables."}
-            </h2>
+            <RollText
+              as="h2"
+              stagger={80}
+              className="max-w-[14ch] text-[clamp(30px,4vw,46px)]"
+              lines={[
+                long
+                  ? "Professionalism and commitment fulfillment, by design."
+                  : "We build intelligent digital solutions, not just deliverables.",
+              ]}
+            />
             <div className="mt-[34px] border-t border-(--line-on-bone) pt-[26px]">
               <div className="text-[56px] font-extrabold tracking-[-0.03em] text-ink">
                 06<span className="text-violet">.</span>

@@ -7,7 +7,7 @@ export function Brand({ compact = false }) {
       <LogoWordmark
         width={77}
         height={47}
-        className={`w-auto transition-[height] duration-300 ${compact ? "h-9" : "h-[38px] md:h-[46px]"}`}
+        className={`w-auto transition-[height] duration-300 ${compact ? "h-10" : "h-[46px] md:h-[56px]"}`}
       />
     </Link>
   );

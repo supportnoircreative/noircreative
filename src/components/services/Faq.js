@@ -11,7 +11,7 @@ export function Faq() {
   const [openId, setOpenId] = useState("01");
 
   return (
-    <section id="faq" className="on-bone px-5 py-[130px] max-sm:py-[88px] md:px-8">
+    <section id="faq" className="on-bone px-5 py-[130px] max-sm:py-[64px] md:px-8">
       <div className="mx-auto max-w-[1220px]">
         <SectionHead eyebrow="Good to know" title="Frequently asked questions." />
         <Reveal className="max-w-[860px]">

@@ -1,6 +1,7 @@
 import { HeroCanvas } from "@/components/home/HeroCanvas";
 import { Marquee } from "@/components/shared/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
+import { RollText } from "@/components/ui/RollText";
 import { Button } from "@/components/ui/Button";
 import { StarRating } from "@/components/ui/StarRating";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -34,32 +35,36 @@ export function Hero() {
 
       <div className="relative z-[2] mx-auto max-w-[1220px]">
         <div className="mx-auto max-w-[1000px] text-center">
-          <Reveal>
+          <Reveal delay={50}>
             <Eyebrow center bare>Digital Engineering &amp; Design Collective</Eyebrow>
           </Reveal>
-          <Reveal>
-            <h1 className="text-[clamp(44px,8.6vw,118px)] tracking-[-0.045em]">
-              Where bold ideas <em className="lime-accent not-italic">get{"\u00A0"}built.</em>
-            </h1>
-          </Reveal>
-          <Reveal>
+          <RollText
+            as="h1"
+            stagger={90}
+            className="mx-auto max-w-[1000px] text-[clamp(44px,8.6vw,118px)] tracking-[-0.045em]"
+            lines={[
+              "Where bold ideas",
+              <em key="l" className="lime-accent not-italic">
+                get{"\u00A0"}built.
+              </em>,
+            ]}
+          />
+          <Reveal delay={450}>
             <p className="mx-auto mt-[30px] max-w-[56ch] text-lg text-body">
-              Noir Creative transforms ambitious ideas into lasting digital experiences — brand
-              identity, websites, and digital systems, engineered with the same discipline as
-              they&apos;re designed.
+              Noir Creative transforms ambitious ideas into lasting digital experiences 
             </p>
           </Reveal>
-          <Reveal>
+          <Reveal delay={620}>
             <div className="mt-11 flex flex-wrap justify-center gap-3.5 max-sm:w-full max-sm:flex-col max-sm:[&>a]:w-full">
-              <Button href="/contact" arrow>
+              <Button href="/contact" arrow roll>
                 Start a project
               </Button>
-              <Button href="/work" variant="outline">
+              <Button href="/work" variant="outline" roll>
                 See the work
               </Button>
             </div>
           </Reveal>
-          <Reveal>
+          <Reveal delay={800}>
             <div className="mt-[60px] flex flex-wrap items-center justify-center gap-[22px] text-[13.5px] text-ash max-sm:mt-10">
               <span className="flex items-center gap-2">
                 <StarRating rating={5} />

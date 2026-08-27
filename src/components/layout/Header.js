@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/data/site";
@@ -86,6 +87,12 @@ export function Header() {
         />
         <div
           className={cn(
+            "pointer-events-none absolute inset-0",
+            isScrolled && "border-b border-(--line) bg-[linear-gradient(rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_1px_0_rgba(255,255,255,.05)_inset,0_18px_40px_-18px_rgba(0,0,0,.55)]"
+          )}
+        />
+        <div
+          className={cn(
             "relative z-[1] mx-auto flex w-full max-w-[1220px] items-center justify-between gap-6 px-5 md:px-8",
             isScrolled ? "py-0" : "py-[22px]"
           )}
@@ -101,29 +108,31 @@ export function Header() {
                   <a
                     href={link.href}
                     className={cn(
-                      "block rounded-full px-[18px] py-[10px] text-[13.5px] font-semibold transition-colors duration-300",
+                      "group block rounded-full px-[18px] py-[10px] text-[13.5px] font-semibold transition-colors duration-300",
                       isActive(link)
                         ? "bg-lime text-ink"
                         : "text-mute hover:bg-white/[0.06] hover:text-text-1"
                     )}
                   >
-                    {link.label}
+                    <span className="roll-nav">
+                      <span className="roll-nav-stack">
+                        <span>{link.label}</span>
+                        <span aria-hidden="true">{link.label}</span>
+                      </span>
+                    </span>
                   </a>
                 </li>
               ))}
             </ul>
           </nav>
           <div className="flex items-center gap-[18px]">
-            <span className="status-chip hidden items-center gap-[9px] whitespace-nowrap rounded-full border border-(--line) bg-white/[0.03] px-4 py-[9px] text-xs font-semibold text-mute xl:flex">
-              <span className="dot" aria-hidden="true" />
-              Available for new projects
-            </span>
             <Button
               href="/contact#contact-form"
               size="sm"
               arrow
+              roll
               aria-label="Start a project"
-              className="max-sm:size-11 max-sm:p-0 max-sm:rounded-full"
+              className="max-sm:size-11 max-sm:p-0 max-sm:rounded-full max-sm:[&_.roll-btn]:hidden"
             >
               <span className="max-sm:hidden">Start a project</span>
             </Button>
@@ -134,9 +143,14 @@ export function Header() {
               onClick={() => setIsOpen((v) => !v)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
-              className="surface-hover flex size-11 flex-none items-center justify-center rounded-full border border-(--line-strong) bg-transparent text-text-1 lg:hidden"
+              className={cn(
+                "flex size-11 flex-none items-center justify-center rounded-full border transition-colors duration-200 lg:hidden",
+                isOpen
+                  ? "border-lime bg-lime text-ink shadow-[0_0_18px_rgba(198,242,78,.45)] hover:bg-lime/90"
+                  : "surface-hover border-(--line-strong) bg-transparent text-text-1"
+              )}
             >
-              {isOpen ? <X size={20} strokeWidth={1.7} /> : <Menu size={20} strokeWidth={1.7} />}
+              {isOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={1.7} />}
             </button>
           </div>
         </div>
@@ -146,41 +160,71 @@ export function Header() {
         ref={menuRef}
         tabIndex={-1}
         className={cn(
-          "fixed inset-0 z-[1100] flex flex-col gap-[6px] bg-surface px-8 pt-[110px] pb-10 text-text-1 transition-transform duration-[400ms] ease-(--ease) lg:hidden",
+          "fixed inset-0 z-[1100] bg-surface text-text-1 transition-transform duration-[400ms] ease-(--ease) lg:hidden",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <nav aria-label="Mobile" className="flex flex-col">
-          {navLinks.map((link) => (
+        <button
+          type="button"
+          onClick={() => setIsOpen(false)}
+          aria-label="Close menu"
+          className="group absolute top-[22px] right-5 flex size-11 items-center justify-center rounded-full border border-lime bg-lime text-ink shadow-[0_0_18px_rgba(198,242,78,.45)] transition-colors duration-200 hover:bg-lime/90"
+        >
+          <Image
+            src="/images/mark-nib-solid.svg"
+            alt=""
+            width={44}
+            height={44}
+            className="h-6 w-auto animate-[loader-pulse_1.1s_ease-in-out_infinite] transition-opacity duration-200 group-hover:opacity-0"
+          />
+          <X
+            size={20}
+            strokeWidth={2}
+            className="absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          />
+        </button>
+        <div
+          className={cn(
+            "flex flex-col gap-[6px] px-8 pt-[110px] pb-10 opacity-0 transition-[opacity,transform] duration-[400ms] ease-(--ease)",
+            isOpen ? "translate-y-0 opacity-100" : "translate-y-4"
+          )}
+        >
+          <nav aria-label="Mobile" className="flex flex-col">
+            {navLinks.map((link, i) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                style={{ transitionDelay: isOpen ? `${120 + i * 45}ms` : `${i * 30}ms` }}
+                className={cn(
+                  "border-b border-(--line) py-[14px] text-[28px] font-bold tracking-tight opacity-0 transition-[opacity,transform] duration-[400ms] ease-(--ease)",
+                  isActive(link) ? "lime-accent" : "text-text-1",
+                  isOpen ? "translate-y-0 opacity-100" : "translate-y-3"
+                )}
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              key={link.href}
-              href={link.href}
+              href="/contact"
               onClick={() => setIsOpen(false)}
+              style={{ transitionDelay: isOpen ? `${120 + navLinks.length * 45}ms` : `${navLinks.length * 30}ms` }}
               className={cn(
-                "border-b border-(--line) py-[14px] text-[28px] font-bold tracking-tight transition-colors",
-                isActive(link) ? "lime-accent" : "text-text-1"
+                "border-b border-(--line) py-[14px] text-[28px] font-bold tracking-tight opacity-0 transition-[opacity,transform] duration-[400ms] ease-(--ease)",
+                pathname === "/contact" ? "lime-accent" : "text-text-1",
+                isOpen ? "translate-y-0 opacity-100" : "translate-y-3"
               )}
             >
-              {link.label}
+              Contact
             </a>
-          ))}
-          <a
-            href="/contact"
-            onClick={() => setIsOpen(false)}
-            className={cn(
-              "border-b border-(--line) py-[14px] text-[28px] font-bold tracking-tight",
-              pathname === "/contact" ? "lime-accent" : "text-text-1"
-            )}
-          >
-            Contact
-          </a>
-        </nav>
-        <Button href="/contact" onClick={() => setIsOpen(false)} className="mt-[30px] w-full">
-          Start a project
-        </Button>
-        <div className="mt-5 flex items-center justify-between border-t border-(--line) pt-5 text-sm font-semibold text-ash">
-          <span>Theme</span>
-          <ThemeToggle />
+          </nav>
+          <Button href="/contact" onClick={() => setIsOpen(false)} className="mt-[30px] w-full">
+            Start a project
+          </Button>
+          <div className="mt-5 flex items-center justify-between border-t border-(--line) pt-5 text-sm font-semibold text-ash">
+            <span>Theme</span>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </>

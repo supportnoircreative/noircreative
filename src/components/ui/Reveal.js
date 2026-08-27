@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export function Reveal({ children, stagger, className, ...props }) {
+export function Reveal({ children, stagger, delay = 0, className, ...props }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -34,6 +34,7 @@ export function Reveal({ children, stagger, className, ...props }) {
         visible && "is-visible",
         className
       )}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
       {...props}
     >
       {children}

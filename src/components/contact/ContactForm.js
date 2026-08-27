@@ -1,17 +1,36 @@
 "use client";
 
 import { Children, cloneElement, useState } from "react";
-import { ChevronDown, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { EMAIL_RE, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 
 const initialStatus = { type: null, text: "" };
+
+const SERVICE_OPTIONS = [
+  "Graphic Design",
+  "Web Development",
+  "Digital Marketing",
+  "Brand Strategy",
+  "UI/UX Design",
+  "Video Editing",
+  "Something else",
+];
+
+const BUDGET_OPTIONS = [
+  "Under $1,000",
+  "$1,000 – $5,000",
+  "$5,000 – $15,000",
+  "$15,000+",
+];
 
 export function ContactForm() {
   const [status, setStatus] = useState(initialStatus);
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
   const [toast, setToast] = useState(false);
+  const [service, setService] = useState("");
+  const [budget, setBudget] = useState("");
 
   function clearError(name) {
     setErrors((prev) => {
@@ -108,43 +127,20 @@ export function ContactForm() {
             />
           </Field>
         </div>
-        <div className="mb-5 grid grid-cols-1 gap-[18px] sm:grid-cols-2">
-          <Field id="service" label="Service">
-            <div className="relative">
-              <select name="service" defaultValue="" className="pr-10">
-                <option value="">What do you need?</option>
-                <option>Graphic Design</option>
-                <option>Web Development</option>
-                <option>Digital Marketing</option>
-                <option>Brand Strategy</option>
-                <option>UI/UX Design</option>
-                <option>Video Editing</option>
-                <option>Something else</option>
-              </select>
-              <ChevronDown
-                size={14}
-                strokeWidth={1.6}
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ash"
-              />
-            </div>
-          </Field>
-          <Field id="budget" label="Budget">
-            <div className="relative">
-              <select name="budget" defaultValue="" className="pr-10">
-                <option value="">Approximate range</option>
-                <option>Under $1,000</option>
-                <option>$1,000 – $5,000</option>
-                <option>$5,000 – $15,000</option>
-                <option>$15,000+</option>
-              </select>
-              <ChevronDown
-                size={14}
-                strokeWidth={1.6}
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ash"
-              />
-            </div>
-          </Field>
-        </div>
+        <ChoiceField
+          name="service"
+          label="Service"
+          options={SERVICE_OPTIONS}
+          value={service}
+          onChange={setService}
+        />
+        <ChoiceField
+          name="budget"
+          label="Budget"
+          options={BUDGET_OPTIONS}
+          value={budget}
+          onChange={setBudget}
+        />
         <Field
           id="message"
           label="Project details"
@@ -227,6 +223,38 @@ function Field({ id, label, error, onClear, children, className }) {
           {error}
         </div>
       )}
+    </div>
+  );
+}
+
+function ChoiceField({ name, label, options, value, onChange }) {
+  return (
+    <div className="mb-5">
+      <span className="mb-2.5 block text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ash">
+        {label}
+      </span>
+      <div className="flex flex-wrap gap-2" role="group" aria-label={label}>
+        {options.map((opt) => {
+          const active = value === opt;
+          return (
+            <button
+              key={opt}
+              type="button"
+              aria-pressed={active}
+              onClick={() => onChange(active ? "" : opt)}
+              className={cn(
+                "rounded-full border px-4 py-2 text-[13px] font-medium leading-none transition-colors duration-200",
+                active
+                  ? "border-lime bg-lime text-ink"
+                  : "border-(--line-strong) text-body hover:border-lime hover:text-text-1"
+              )}
+            >
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+      <input type="hidden" name={name} value={value} />
     </div>
   );
 }

@@ -21,7 +21,7 @@ const pillars = [
 
 export function Solutions() {
   return (
-    <section className="px-5 py-[130px] max-sm:py-[88px] md:px-8">
+    <section className="px-5 py-[130px] max-sm:py-[64px] md:px-8">
       <div className="mx-auto max-w-[1220px]">
         <SectionHead
           eyebrow="Why Noir Creative"

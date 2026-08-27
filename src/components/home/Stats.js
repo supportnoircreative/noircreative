@@ -50,13 +50,13 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="border-y border-(--line)">
+    <section className="border-y border-(--line) max-sm:hidden">
       <div className="mx-auto max-w-[1220px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="border-(--line) border-l-0 px-8 py-[60px] sm:[&:nth-child(2n)]:border-l sm:[&:nth-child(n+3)]:border-t max-sm:px-6 max-sm:py-9 lg:[&:nth-child(n+2)]:border-l lg:[&:nth-child(n+3)]:border-t-0"
+              className="border-(--line) border-l-0 px-8 py-[60px] sm:[&:nth-child(2n)]:border-l sm:[&:nth-child(n+3)]:border-t lg:[&:nth-child(n+2)]:border-l lg:[&:nth-child(n+3)]:border-t-0"
             >
               {stat.static ? (
                 <div className="text-[clamp(38px,4.4vw,64px)] font-extrabold tracking-[-0.04em] text-text-1">

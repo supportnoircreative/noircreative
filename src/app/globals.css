@@ -24,6 +24,7 @@
   --radius: 2px;
   --maxw: 1220px;
   --ease: cubic-bezier(0.16, 0.8, 0.24, 1);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
   --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 -1px 0 rgba(0, 0, 0, 0.4) inset,
     0 24px 48px -24px rgba(0, 0, 0, 0.75), 0 8px 16px -8px rgba(0, 0, 0, 0.6);
   --shadow-card-hover: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 -1px 0 rgba(0, 0, 0, 0.4) inset,
@@ -366,6 +367,74 @@ body::before {
   transform: none;
 }
 
+/* ---------- premium rolling text reveal ---------- */
+/* Vertical roll-up reveal: text rises out of an overflow clip, settles with no bounce. */
+.text-roll-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em; /* keep descenders from clipping during the roll */
+}
+.text-roll {
+  display: block;
+  will-change: transform, opacity;
+  transform: translateY(112%);
+  opacity: 0;
+  transition: transform 0.7s var(--ease-premium), opacity 0.5s var(--ease-premium);
+}
+.is-rolled .text-roll {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* roll-in headers with a per-line stagger applied via explicit transition-delay */
+.roll-line {
+  display: block;
+}
+.roll-line .text-roll {
+  transition-delay: var(--roll-delay, 0ms);
+}
+
+/* ---------- rolling button label (duplicate text rises from below) ---------- */
+.roll-btn {
+  overflow: hidden;
+  display: inline-block;
+  height: 1lh; /* mask shows exactly one line; duplicate sits below the clip */
+}
+.roll-btn-stack {
+  display: block;
+  transform: translateY(0);
+  transition: transform 0.4s var(--ease-premium);
+  will-change: transform;
+}
+.roll-btn:hover .roll-btn-stack {
+  transform: translateY(-50%);
+}
+.roll-btn .roll-btn-stack > span {
+  display: block;
+  line-height: inherit;
+}
+
+/* ---------- rolling navigation label (subtle, interaction-only) ---------- */
+.roll-nav {
+  display: inline-block;
+  overflow: hidden;
+  height: 1lh; /* mask shows exactly one line */
+}
+.roll-nav-stack {
+  display: block;
+  transform: translateY(0);
+  transition: transform 0.34s var(--ease-premium);
+  will-change: transform;
+}
+.roll-nav:hover .roll-nav-stack,
+.group:hover .roll-nav-stack {
+  transform: translateY(-50%);
+}
+.roll-nav .roll-nav-stack > span {
+  display: block;
+  line-height: inherit;
+}
+
 /* ---------- loader ---------- */
 .loader {
   position: fixed;
@@ -522,10 +591,10 @@ select option {
 
 /* ---------- header ---------- */
 :root {
-  --header-bg: rgba(10, 10, 11, 0.86);
+  --header-bg: rgba(10, 10, 11, 0.62);
 }
 :root[data-theme="light"] {
-  --header-bg: rgba(244, 244, 239, 0.86);
+  --header-bg: rgba(244, 244, 239, 0.66);
 }
 
 /* scrim behind the header when the page sits at the top (theme-aware) */
@@ -587,6 +656,16 @@ select option {
   .reveal,
   .reveal-stagger > * {
     opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .text-roll {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: opacity 200ms ease;
+  }
+  .roll-btn-stack,
+  .roll-nav-stack {
     transform: none;
     transition: none;
   }

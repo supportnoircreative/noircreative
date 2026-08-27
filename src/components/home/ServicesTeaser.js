@@ -6,7 +6,7 @@ import { services } from "@/data/services";
 
 export function ServicesTeaser() {
   return (
-    <section id="services" className="px-5 py-[130px] max-sm:py-[88px] md:px-8">
+    <section id="services" className="px-5 py-[130px] max-sm:py-[64px] md:px-8">
       <div className="mx-auto max-w-[1220px]">
         <SectionHead
           eyebrow="What we do"

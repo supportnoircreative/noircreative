@@ -21,10 +21,22 @@ const sizes = {
   sm: "px-[26px] py-3 text-[14px]",
 };
 
+function RollLabel({ children }) {
+  return (
+    <span className="roll-btn">
+      <span className="roll-btn-stack">
+        <span>{children}</span>
+        <span aria-hidden="true">{children}</span>
+      </span>
+    </span>
+  );
+}
+
 export function Button({
   variant = "primary",
   size = "md",
   arrow = false,
+  roll = false,
   href,
   className,
   children,
@@ -33,7 +45,7 @@ export function Button({
   const classes = cn(base, variants[variant], sizes[size], className);
   const content = (
     <>
-      {children}
+      {roll ? <RollLabel>{children}</RollLabel> : children}
       {arrow && (
         <ArrowRight
           size={15}
