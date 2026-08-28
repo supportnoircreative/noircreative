@@ -14,22 +14,22 @@ export function SectionHead({ eyebrow, title, desc, side, className }) {
   return (
     <div
       className={cn(
-        "mb-[68px] flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end",
+        "mb-[68px] flex flex-col items-center justify-between gap-10 text-center lg:flex-row lg:items-end lg:text-left",
         className
       )}
     >
-      <div>
-        <Eyebrow>{eyebrow}</Eyebrow>
+      <div className="flex flex-col items-center lg:items-start">
+        <Eyebrow center>{eyebrow}</Eyebrow>
         <RollText
           as="h2"
           stagger={80}
-          className="text-[clamp(30px,4vw,50px)]"
+          className="max-w-[24ch] text-[clamp(30px,4vw,50px)] lg:max-w-none"
           lines={lines}
         />
-        {desc && <p className="mt-5 max-w-[46ch] text-[15.5px] text-body">{desc}</p>}
+        {desc && <p className="mx-auto mt-5 max-w-[46ch] text-[15.5px] text-body lg:mx-0">{desc}</p>}
       </div>
       {side && (
-        <div className="max-w-[34ch] text-sm text-ash lg:text-right">{side}</div>
+        <div className="max-w-[34ch] text-sm text-ash lg:ml-auto lg:text-right">{side}</div>
       )}
     </div>
   );

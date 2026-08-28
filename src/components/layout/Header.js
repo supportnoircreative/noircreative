@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/data/site";
@@ -168,20 +167,9 @@ export function Header() {
           type="button"
           onClick={() => setIsOpen(false)}
           aria-label="Close menu"
-          className="group absolute top-[22px] right-5 flex size-11 items-center justify-center rounded-full border border-lime bg-lime text-ink shadow-[0_0_18px_rgba(198,242,78,.45)] transition-colors duration-200 hover:bg-lime/90"
+          className="group absolute top-[22px] right-5 z-[2] flex size-11 items-center justify-center rounded-full border border-lime bg-lime text-ink shadow-[0_0_18px_rgba(198,242,78,.45)] transition-colors duration-200 hover:bg-lime/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2"
         >
-          <Image
-            src="/images/mark-nib-solid.svg"
-            alt=""
-            width={44}
-            height={44}
-            className="h-6 w-auto animate-[loader-pulse_1.1s_ease-in-out_infinite] transition-opacity duration-200 group-hover:opacity-0"
-          />
-          <X
-            size={20}
-            strokeWidth={2}
-            className="absolute opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-          />
+          <X size={20} strokeWidth={2.2} />
         </button>
         <div
           className={cn(

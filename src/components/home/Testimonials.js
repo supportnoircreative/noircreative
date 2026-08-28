@@ -67,17 +67,17 @@ export function Testimonials() {
       className="border-b border-(--line) bg-ink-raised px-5 py-[130px] max-sm:py-[64px] md:px-8"
     >
       <div className="mx-auto max-w-[1220px]">
-        <div className="mb-[50px] flex flex-wrap items-end justify-between gap-[30px]">
-          <Reveal>
-            <Eyebrow>Client reviews</Eyebrow>
+        <div className="mb-[50px] flex flex-wrap items-center justify-center gap-[30px] text-center lg:items-end lg:justify-between lg:text-left">
+          <Reveal className="flex flex-col items-center lg:items-start">
+            <Eyebrow center>Client reviews</Eyebrow>
             <RollText
               as="h2"
-              className="text-[clamp(30px,4vw,50px)]"
-              lines={["Don&apos;t take our word for it."]}
+              className="max-w-[24ch] text-[clamp(30px,4vw,50px)] lg:max-w-none"
+              lines={["Don't take our word for it."]}
             />
           </Reveal>
           <Reveal>
-            <div className="flex gap-2.5">
+            <div className="mx-auto flex gap-2.5 lg:mx-0">
               <button
                 type="button"
                 aria-label="Previous reviews"
@@ -113,7 +113,7 @@ export function Testimonials() {
             onPointerDown={onPointerDown}
             onPointerUp={onPointerUp}
           >
-            <div className="relative h-[var(--vh)]">
+            <div className="relative mt-9 h-[var(--vh)] max-sm:mt-4">
               {testimonials.map((t, i) => {
                 const off = slotOffset(current, i);
                 const val = Math.abs(off);

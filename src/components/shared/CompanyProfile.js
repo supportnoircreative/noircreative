@@ -16,8 +16,8 @@ export function CompanyProfile({ long = false }) {
     <section className="on-bone px-5 py-[130px] max-sm:py-[64px] md:px-8">
       <div className="mx-auto max-w-[1220px]">
         <div className="grid grid-cols-1 items-start gap-11 min-[1080px]:grid-cols-[0.9fr_1.1fr] min-[1080px]:gap-[70px]">
-          <Reveal>
-            <Eyebrow>{long ? "Who we are" : "Company profile"}</Eyebrow>
+          <Reveal className="flex flex-col items-center text-center lg:items-start lg:text-left">
+            <Eyebrow center>{long ? "Who we are" : "Company profile"}</Eyebrow>
             <RollText
               as="h2"
               stagger={80}
