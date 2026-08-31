@@ -29,6 +29,7 @@ export function Testimonials() {
   const [reduced, setReduced] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
+  const [showHint, setShowHint] = useState(false);
   const stripRef = useRef(null);
 
   // gesture / momentum state (kept in refs — updated every pointermove)
@@ -51,6 +52,15 @@ export function Testimonials() {
     mq.addEventListener?.("change", onChange);
     return () => mq.removeEventListener?.("change", onChange);
   }, []);
+
+  useEffect(() => {
+    if (reduced) return;
+    const isMobile = window.matchMedia("(max-width: 639px)").matches;
+    if (!isMobile) return;
+    const t = setTimeout(() => setShowHint(true), 1200);
+    const hide = setTimeout(() => setShowHint(false), 4200);
+    return () => { clearTimeout(t); clearTimeout(hide); };
+  }, [reduced]);
 
   const stopAnim = () => {
     if (animRef.current) {
@@ -189,6 +199,7 @@ export function Testimonials() {
   }, [pos, paused, reduced, step]);
 
   const s = step || readStep();
+  const activeIdx = (((Math.round(pos / s) % N) + N) % N);
 
   return (
     <section
@@ -285,6 +296,55 @@ export function Testimonials() {
                 );
               })}
             </div>
+          </div>
+
+          {/* Mobile swipe hint */}
+          <div
+            className="pointer-events-none mt-5 flex items-center justify-center gap-1.5 transition-all duration-700 sm:hidden"
+            style={{
+              opacity: showHint ? 1 : 0,
+              transform: showHint ? "translateX(0)" : "translateX(8px)",
+            }}
+          >
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-ash">
+              swipe
+            </span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-ash">
+              <path
+                d="M10 3L5 8L10 13"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+
+          {/* Swipe dots */}
+          <div className="mt-6 flex items-center justify-center gap-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  stopAnim();
+                  animateTo(i * s, 480, 0);
+                  setPaused(true);
+                  setTimeout(() => setPaused(false), AUTOPLAY_MS);
+                }}
+                aria-label={`Go to review ${i + 1}`}
+                className="group relative flex items-center justify-center p-1"
+              >
+                <span
+                  className="block rounded-full transition-all duration-500"
+                  style={{
+                    width: activeIdx === i ? 24 : 7,
+                    height: 7,
+                    background: activeIdx === i ? "var(--lime)" : "var(--ash)",
+                    opacity: activeIdx === i ? 1 : 0.45,
+                  }}
+                />
+              </button>
+            ))}
           </div>
         </Reveal>
       </div>
