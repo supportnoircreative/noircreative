@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/layout/BackToTop";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Loader } from "@/components/layout/Loader";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import { site } from "@/data/site";
@@ -25,7 +26,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('noir-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('noir-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
 
 export const metadata = {
   title: {
@@ -55,7 +56,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0A0A0B",
+  themeColor: "#F4F4EF",
 };
 
 export default function RootLayout({ children }) {
@@ -75,6 +76,7 @@ export default function RootLayout({ children }) {
         <main id="top">{children}</main>
         <Footer />
         <BackToTop />
+        <ThemeToggle className="fixed bottom-[10rem] right-[30px] z-50 shadow-lg" />
         <WhatsAppButton
           variant="floating"
           phoneNumber={site.phone}

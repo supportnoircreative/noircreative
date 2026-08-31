@@ -416,7 +416,7 @@ body::before {
 
 /* ---------- rolling navigation label (subtle, interaction-only) ---------- */
 .roll-nav {
-  display: inline-block;
+  display: block;
   overflow: hidden;
   height: 1lh; /* mask shows exactly one line */
 }
@@ -556,7 +556,7 @@ textarea {
 }
 input::placeholder,
 textarea::placeholder {
-  color: #5c6066;
+  color: #8a8f96;
 }
 select {
   appearance: none;

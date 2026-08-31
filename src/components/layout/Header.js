@@ -6,7 +6,6 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/data/site";
 import { Brand } from "@/components/layout/Brand";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Button } from "@/components/ui/Button";
 
 const SPY_IDS = ["testimonials", "faq"];
@@ -131,11 +130,11 @@ export function Header() {
               arrow
               roll
               aria-label="Start a project"
-              className="max-sm:size-11 max-sm:p-0 max-sm:rounded-full max-sm:[&_.roll-btn]:hidden"
+              className="max-sm:px-[18px] max-sm:py-2.5"
             >
-              <span className="max-sm:hidden">Start a project</span>
+              <span className="hidden sm:inline">Start a project</span>
+              <span className="sm:hidden">Start</span>
             </Button>
-            <ThemeToggle />
             <button
               ref={toggleRef}
               type="button"
@@ -209,10 +208,6 @@ export function Header() {
           <Button href="/contact" onClick={() => setIsOpen(false)} className="mt-[30px] w-full">
             Start a project
           </Button>
-          <div className="mt-5 flex items-center justify-between border-t border-(--line) pt-5 text-sm font-semibold text-ash">
-            <span>Theme</span>
-            <ThemeToggle />
-          </div>
         </div>
       </div>
     </>

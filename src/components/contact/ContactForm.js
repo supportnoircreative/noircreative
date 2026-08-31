@@ -208,7 +208,7 @@ function Field({ id, label, error, onClear, children, className }) {
       </label>
       <div
         className={cn(
-          "rounded-[2px] border border-(--line-strong) text-text-1 transition-colors duration-250 focus-within:border-lime focus-within:bg-lime/[0.03]",
+          "rounded-[2px] border border-(--line) text-text-1 transition-colors duration-250 focus-within:border-lime focus-within:bg-lime/[0.03]",
           error && "border-[#FF6B6B]"
         )}
       >
@@ -246,7 +246,7 @@ function ChoiceField({ name, label, options, value, onChange }) {
                 "rounded-full border px-4 py-2 text-[13px] font-medium leading-none transition-colors duration-200",
                 active
                   ? "border-lime bg-lime text-ink"
-                  : "border-(--line-strong) text-body hover:border-lime hover:text-text-1"
+                  : "border-(--line) text-body hover:border-lime hover:text-text-1"
               )}
             >
               {opt}
