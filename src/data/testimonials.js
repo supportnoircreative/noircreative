@@ -42,7 +42,7 @@ export const testimonials = [
     rating: 5,
     category: "Graphic Design",
     quote:
-      "NOIR Creative did EXACTLY what I contracted them to do: Turn my logo into a scalable vectorized image for print purposes. They gave me three different versions (full logo, icon only, and full logo without my tag line) in MULTIPLE options — full color, solid black, solid white, and more. They were affordable and FAST. I was able to order my marketing materials the SAME day that I hired them due to their super fast turn around time. 10 out of 10 stars!",
+      "NOIR Creative did EXACTLY what I contracted them to do: Turn my logo into a scalable vectorized image for print purposes. They gave me three different versions (full logo, icon only, and full logo without my tag line) in MULTIPLE options - full color, solid black, solid white, and more. They were affordable and FAST. I was able to order my marketing materials the SAME day that I hired them due to their super fast turn around time. 10 out of 10 stars!",
     name: "Patti Yost",
     role: "Client",
   },

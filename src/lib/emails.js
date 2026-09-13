@@ -42,7 +42,7 @@ function esc(value) {
 }
 
 function mailto(name, email) {
-  const subject = encodeURIComponent(`Re: your inquiry — ${name}`);
+  const subject = encodeURIComponent(`Re: your inquiry from ${name}`);
   return `mailto:${email}?subject=${subject}`;
 }
 
@@ -101,7 +101,7 @@ function shell({ preheader, children, cta }) {
                   <tr>
                     <td style="border-top:1px solid ${TOKENS.line};padding-top:24px;">
                       <div style="text-align:center;font-family:'JetBrains Mono',Consolas,'Courier New',monospace;font-size:9px;font-weight:600;letter-spacing:0.18em;color:${TOKENS.ash};">
-                        ${esc(SITE.legal)} — ${esc(SITE.tagline.toUpperCase())}
+                        ${esc(SITE.legal)} · ${esc(SITE.tagline.toUpperCase())}
                       </div>
                       <div style="text-align:center;font-family:Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;color:${TOKENS.ash};margin-top:10px;">
                         <a href="mailto:${esc(SITE.email)}" style="color:${TOKENS.ash};text-decoration:underline;">${esc(SITE.email)}</a>
@@ -212,10 +212,10 @@ function messagePanel(label, message) {
 
 export function inquiryEmail({ name, email, service, budget, message }) {
   const first = name.split(/\s+/)[0] || name;
-  const subject = `New project inquiry — ${name}`;
+  const subject = `New project inquiry from ${name}`;
 
   const html = shell({
-    preheader: `New project inquiry from ${name} — ${service}.`,
+    preheader: `New project inquiry from ${name} about ${service}.`,
     cta: { href: mailto(name, email), label: `Reply to ${first}` },
     children: `
       ${eyebrow("NEW PROJECT INQUIRY")}
@@ -232,7 +232,7 @@ export function inquiryEmail({ name, email, service, budget, message }) {
   });
 
   const text = [
-    `New project inquiry — ${name}`,
+    `New project inquiry from ${name}`,
     "",
     `Name: ${name}`,
     `Email: ${email}`,
@@ -252,14 +252,14 @@ export function inquiryEmail({ name, email, service, budget, message }) {
 
 export function ackEmail({ name, email, service, budget, message }) {
   const first = name.split(/\s+/)[0] || name;
-  const subject = `We received your inquiry — ${SITE.name} will be in touch`;
+  const subject = `We received your inquiry. ${SITE.name} will be in touch`;
 
   const html = shell({
-    preheader: `Thanks, ${first} — your inquiry about ${service} is with the team.`,
+    preheader: `Thanks, ${first}. Your inquiry about ${service} is with the team.`,
     cta: { href: SITE_URL, label: "Explore our work" },
     children: `
       ${eyebrow("INQUIRY RECEIVED")}
-      ${heading(`Thanks, ${esc(first)} — <span style="color:${TOKENS.lime};">message&nbsp;received.</span>`)}
+      ${heading(`Thanks, ${esc(first)}. <span style="color:${TOKENS.lime};">Message&nbsp;received.</span>`)}
       ${lead(`Your inquiry about <strong style="color:${TOKENS.bone};">${esc(service)}</strong> is with the team now. Someone from ${esc(SITE.name)} will reply to this address within one business day.`)}
       ${detailTable([
         ["INQUIRY ID", `NC-${Date.now().toString(36).toUpperCase().slice(-6)}`],
@@ -271,7 +271,7 @@ export function ackEmail({ name, email, service, budget, message }) {
   });
 
   const text = [
-    `Thanks, ${first} — message received.`,
+    `Thanks, ${first}. Message received.`,
     "",
     `Your inquiry about ${service} is with the team now. Someone from ${SITE.name} will reply to this address within one business day.`,
     "",
@@ -281,7 +281,7 @@ export function ackEmail({ name, email, service, budget, message }) {
     "What you sent us:",
     message,
     "",
-    `${SITE.name} — ${SITE.tagline}`,
+    `${SITE.name} · ${SITE.tagline}`,
     `${SITE.email} · ${SITE.phone}`,
     SITE_URL,
   ].join("\n");

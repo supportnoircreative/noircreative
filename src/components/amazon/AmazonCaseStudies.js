@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Quote } from "lucide-react";
+import { ArrowUpRight, Quote } from "lucide-react";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
@@ -168,6 +168,22 @@ export function AmazonCaseStudies() {
                   </li>
                 ))}
               </ul>
+
+              {study.pdf && (
+                <a
+                  href={study.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-7 inline-flex items-center gap-2 text-[13.5px] font-semibold underline underline-offset-4 transition-opacity duration-200 lime-accent hover:opacity-70"
+                >
+                  Read the full case study
+                  <ArrowUpRight
+                    size={15}
+                    strokeWidth={2}
+                    className="transition-transform duration-300 ease-(--ease) group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </a>
+              )}
             </div>
 
             <div className="p-[34px] md:p-[44px]">
@@ -204,7 +220,7 @@ export function AmazonCaseStudies() {
                   {study.testimonial.quote}
                 </blockquote>
                 <figcaption className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-mute">
-                  {study.testimonial.author} — {study.testimonial.role}
+                  {study.testimonial.author} · {study.testimonial.role}
                 </figcaption>
               </div>
             </figure>

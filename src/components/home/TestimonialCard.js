@@ -30,7 +30,7 @@ function initialsOf(name) {
  * rather than character count, so it's measured (scrollHeight vs clientHeight)
  * and re-measured on resize — that's what decides if "Read more" appears.
  */
-export function TestimonialCard({ testimonial: t, style, onExpand }) {
+export function TestimonialCard({ testimonial: t, onExpand }) {
   const quoteRef = useRef(null);
   const [clipped, setClipped] = useState(false);
 
@@ -51,7 +51,6 @@ export function TestimonialCard({ testimonial: t, style, onExpand }) {
 
   return (
     <article
-      style={style}
       className="testi-card flex h-[var(--card-h)] flex-col overflow-hidden rounded-2xl border border-lime bg-ink-raised text-center shadow-[0_0_0_1px_rgba(198,242,78,.2),0_10px_30px_-14px_rgba(198,242,78,.35)]"
     >
       {/* ---- header band: category + nib watermark ---- */}

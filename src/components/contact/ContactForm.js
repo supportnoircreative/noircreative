@@ -19,8 +19,8 @@ const SERVICE_OPTIONS = [
 
 const BUDGET_OPTIONS = [
   "Under $1,000",
-  "$1,000 – $5,000",
-  "$5,000 – $15,000",
+  "$1,000 - $5,000",
+  "$5,000 - $15,000",
   "$15,000+",
 ];
 
@@ -68,7 +68,7 @@ export function ContactForm() {
       form.reset();
       setStatus({
         type: "ok",
-        text: "Message sent — we'll reply within one business day.",
+        text: "Message sent. We'll reply within one business day.",
       });
       setToast(true);
       setTimeout(() => setToast(false), 4200);
@@ -77,7 +77,7 @@ export function ContactForm() {
         type: "err",
         text: (
           <>
-            Couldn&apos;t reach the server — please email us directly at{" "}
+            Couldn&apos;t reach the server. Please email us directly at{" "}
             <a href="mailto:support@noircreative.com" className="underline">
               support@noircreative.com
             </a>

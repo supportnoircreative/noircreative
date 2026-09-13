@@ -17,7 +17,7 @@ export default function HomePage() {
       <ServicesTeaser />
       <FeaturedWork />
       <AmazonTeaser />
-      <Statement caption="Strategy, identity, engineering, and growth — under one accountable roof, built to scale with you past the next milestone." />
+      <Statement caption="Strategy, identity, engineering, and growth, all under one accountable roof, built to scale with you past the next milestone." />
       <Testimonials />
       <CtaBanner />
     </>

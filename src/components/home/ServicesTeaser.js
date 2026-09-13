@@ -11,7 +11,7 @@ export function ServicesTeaser() {
         <SectionHead
           eyebrow="What we do"
           title="Six disciplines. One accountable team."
-          desc="From first sketch to shipped product — we cover the full stack of a modern brand's digital presence, so nothing gets lost between vendors."
+          desc="From first sketch to shipped product, we cover the full stack of a modern brand's digital presence, so nothing gets lost between vendors."
           side={
             <>
               See the full breakdown, process, and FAQ.{" "}

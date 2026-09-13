@@ -6,7 +6,7 @@ export const projects = [
     mono: "The Gallery Event",
     tag: "SEO & Branding",
     short: "Full brand identity and search visibility rebuild for an events venue.",
-    full: "Full brand identity and search visibility rebuild for an events venue — new mark, site, and local SEO foundation.",
+    full: "Full brand identity and search visibility rebuild for an events venue: new mark, site, and local SEO foundation.",
   },
   {
     id: "02",

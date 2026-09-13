@@ -33,7 +33,7 @@ export function CompanyProfile({ long = false }) {
                 06<span className="text-violet">.</span>
               </div>
               <div className="mt-[6px] text-[13px] text-[#6C7169]">
-                Disciplines under one roof — no sub-contracted black boxes.
+                Disciplines under one roof, with no sub-contracted black boxes.
               </div>
             </div>
           </Reveal>
@@ -42,13 +42,13 @@ export function CompanyProfile({ long = false }) {
               <p className="m-0 mb-8 max-w-[52ch] text-base text-[#3E423B]">
                 Noir Creative provides quick, efficient, and accountable solutions for the growing
                 need for online businesses and services. We&apos;ve earned a reputation for
-                professionalism and commitment fulfillment — websites and brand systems that fuse
+                professionalism and commitment fulfillment: websites and brand systems that fuse
                 original, imaginative concepts with the unmatched talent of an in-house team.
               </p>
               {long && (
                 <p className="m-0 mb-8 max-w-[52ch] text-base text-[#3E423B]">
                   We know how crucial your company&apos;s online presence is, so we customize every
-                  engagement — from a single brand refresh to a full multi-channel digital system —
+                  engagement, from a single brand refresh to a full multi-channel digital system,
                   to satisfy exactly what your business needs.
                 </p>
               )}

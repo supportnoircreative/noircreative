@@ -7,7 +7,7 @@ import { site } from "@/data/site";
 export const metadata = {
   title: "Contact",
   description:
-    "Start a project with Noir Creative — tell us what you're building and we'll reply within one business day.",
+    "Start a project with Noir Creative. Tell us what you're building and we'll reply within one business day.",
 };
 
 export default function ContactPage() {
@@ -17,7 +17,7 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title={
           <>
-            Let&apos;s discuss a project —{" "}
+            Let&apos;s discuss a project,{" "}
             <em className="lime-accent not-italic">
               and{"\u00A0"}grow{"\u00A0"}together.
             </em>

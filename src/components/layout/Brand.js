@@ -3,7 +3,7 @@ import { LogoWordmark } from "@/components/layout/LogoWordmark";
 
 export function Brand({ compact = false }) {
   return (
-    <Link href="/" aria-label="Noir Creative — home" className="flex items-center">
+    <Link href="/" aria-label="Noir Creative, home" className="flex items-center">
       <LogoWordmark
         width={77}
         height={47}

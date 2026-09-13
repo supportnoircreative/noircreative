@@ -9,7 +9,7 @@ import { CtaBanner } from "@/components/shared/CtaBanner";
 export const metadata = {
   title: "Amazon Virtual Assistant Services",
   description:
-    "Dedicated Amazon VAs for listing optimisation, PPC management, inventory and FBA operations, and account health — with detailed case studies and agreed performance targets.",
+    "Dedicated Amazon VAs for listing optimisation, PPC management, inventory and FBA operations, and account health, with detailed case studies and agreed performance targets.",
 };
 
 export default function AmazonVaPage() {

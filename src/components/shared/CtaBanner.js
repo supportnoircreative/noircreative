@@ -21,7 +21,7 @@ export function CtaBanner() {
             ]}
           />
           <p className="mx-auto mt-6 max-w-[50ch] text-base text-body">
-            Tell us where the business needs to go — we&apos;ll tell you exactly what it takes to build
+            Tell us where the business needs to go and we&apos;ll tell you exactly what it takes to build
             it, and what it costs.
           </p>
           <div className="mt-11 flex flex-wrap justify-center gap-3.5">

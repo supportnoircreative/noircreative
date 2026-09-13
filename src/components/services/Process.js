@@ -10,7 +10,7 @@ const steps = [
   {
     id: "02",
     title: "Design",
-    body: "Identity and interface, iterated with you — not delivered as a surprise.",
+    body: "Identity and interface, iterated with you, not delivered as a surprise.",
   },
   {
     id: "03",
@@ -20,7 +20,7 @@ const steps = [
   {
     id: "04",
     title: "Deliver",
-    body: "Launched, measured, and supported — with a clear line to us afterward.",
+    body: "Launched, measured, and supported, with a clear line to us afterward.",
   },
 ];
 

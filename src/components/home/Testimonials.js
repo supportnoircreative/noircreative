@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { RollText } from "@/components/ui/RollText";
@@ -9,200 +9,198 @@ import { TestimonialCard } from "@/components/home/TestimonialCard";
 import { TestimonialDialog } from "@/components/home/TestimonialDialog";
 
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
-const DURATION = 700;
-const AUTOPLAY_MS = 5200;
+const DURATION = 680;
+const AUTOPLAY_MS = 6000;
+const SWIPE_PX = 60; // drag past this and the slide commits
+const GAP = 40; // breathing room between a card and its neighbour
 const N = testimonials.length;
 
-/* The carousel is driven by a single continuous horizontal position `pos`
-   (in px). Each card's integer loop index `j` maps to a fractional slot
-   distance from the centered card, so translation *and* coverflow styling
-   (scale/opacity/blur) interpolate smoothly as the strip is dragged — this
-   is what makes it feel like a real slide instead of a snap. */
-const lerp = (a, b, t) => a + (b - a) * t;
-const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+/* How a neighbour card is set back from the active one. */
+const NEAR = { scale: 0.92, opacity: 0.45, blur: 3 };
 
+const clamp01 = (v) => Math.min(1, Math.max(0, v));
+
+/**
+ * Styling for a card at fractional distance `d` from centre, where 0 is the
+ * active card and 1 is a neighbour.
+ *
+ * Fractional matters: while a finger is down, d slides smoothly between the
+ * two, so the incoming review sharpens and brightens as it arrives and the
+ * outgoing one dims and blurs as it leaves. Computing this from the integer
+ * slot instead left the incoming card frozen as a dim, blurred ghost for the
+ * whole gesture, which is why a swipe never looked like a handoff.
+ */
+function depthAt(d) {
+  const t = clamp01(d);
+  return {
+    scale: 1 + (NEAR.scale - 1) * t,
+    blur: NEAR.blur * t,
+    // past the neighbour slot, fade the rest of the way out
+    opacity: d <= 1 ? 1 + (NEAR.opacity - 1) * t : NEAR.opacity * clamp01(2 - d),
+  };
+}
+
+/**
+ * One review at a time, sliding in from the side.
+ *
+ * The movement is driven entirely by CSS transitions on each card's transform:
+ * changing `index` writes one new transform per card and the browser animates
+ * it off the main thread. The previous version advanced a continuous position
+ * with requestAnimationFrame and called setState on every frame, re-rendering
+ * all eight cards ~60 times a second — which is what made the slide stutter
+ * and read as "not moving".
+ *
+ * Cards are laid out by signed distance from the active one, wrapped into
+ * [-N/2, N/2], so the rail loops in both directions forever. The active review
+ * sits in front at full size; the previous and next sit either side, scaled
+ * back, dimmed and blurred. Slots ±2 stay in the DOM and keep their transition
+ * so a card leaving the frame slides out rather than snapping; everything
+ * beyond that is parked with its transition off, so the card wrapping from one
+ * end of the loop to the other teleports instead of flying across the view.
+ */
 export function Testimonials() {
-  const [pos, setPos] = useState(0);
-  const [step, setStep] = useState(0);
+  const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [dragging, setDragging] = useState(false);
-  const [animating, setAnimating] = useState(false);
-  const [reduced, setReduced] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
   const [showHint, setShowHint] = useState(false);
   // review shown in the full-text dialog (null = closed)
   const [expanded, setExpanded] = useState(null);
-  const stripRef = useRef(null);
+  const [reduced, setReduced] = useState(false);
 
-  // gesture / momentum state (kept in refs — updated every pointermove)
-  const drag = useRef(null); // { id, startX, originPos }
-  const animRef = useRef(null);
+  const viewportRef = useRef(null);
+  const cardRefs = useRef([]);
+  const slideW = useRef(0);
+  const drag = useRef(null); // { id, startX, dx }
 
-  const readStep = (el) => {
-    if (el) {
-      const cs = getComputedStyle(el);
-      const cardW = parseFloat(cs.getPropertyValue("--card-w")) || 380;
-      const gap = parseFloat(cs.getPropertyValue("--gap")) || 18;
-      return cardW + gap;
-    }
-    return 398;
-  };
-
+  /* ---------- reduced motion ---------- */
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = (e) => setReduced(e.matches);
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener?.("change", sync);
+    return () => mq.removeEventListener?.("change", sync);
   }, []);
 
+  /* ---------- layout ----------
+     Positions every card from the current index. `dragPx` offsets the whole
+     rail while a finger is down; `animate` turns the CSS transition on or off. */
+  const layout = useCallback(
+    (dragPx = 0, animate = true) => {
+      const w = slideW.current;
+      if (!w) return;
+      cardRefs.current.forEach((el, i) => {
+        if (!el) return;
+        // signed distance from the active card, wrapped so the rail is a loop
+        let slot = i - index;
+        slot -= Math.round(slot / N) * N;
+        const dist = Math.abs(slot);
+
+        /* Slots 0, ±1 and ±2 all animate. ±2 is off-screen but still
+           transitions, so the neighbour leaving the frame slides out instead
+           of snapping. Anything beyond that teleports: without this, the card
+           wrapping from one end of the loop to the other would fly across the
+           whole viewport. */
+        const animates = dist <= 2;
+        // Distance including the live drag offset, so styling tracks the finger.
+        const depth = depthAt(Math.abs(slot + dragPx / w));
+
+        el.style.transition =
+          animate && animates && !reduced
+            ? `transform ${DURATION}ms ${EASE}, opacity ${DURATION}ms ${EASE}, filter ${DURATION}ms ${EASE}`
+            : "none";
+        // -50% centres the slide; the scale sets the neighbours back a little
+        // so the active review reads as the one in front.
+        el.style.transform =
+          `translate3d(calc(-50% + ${slot * w + dragPx}px), 0, 0) scale(${depth.scale.toFixed(4)})`;
+        el.style.opacity = depth.opacity.toFixed(3);
+        el.style.filter = depth.blur > 0.01 ? `blur(${depth.blur.toFixed(2)}px)` : "none";
+        el.style.zIndex = slot === 0 ? 2 : 1;
+        // keep off-screen cards out of the tab order and off the a11y tree
+        el.style.visibility = dist <= 2 ? "visible" : "hidden";
+        el.inert = slot !== 0;
+      });
+    },
+    [index, reduced]
+  );
+
+  /* Measure the viewport, then lay out. useLayoutEffect so the first paint
+     already has the cards positioned rather than stacked on top of each other. */
+  useLayoutEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const measure = () => {
+      // Step is one card plus the gap, NOT the viewport width: the viewport is
+      // deliberately wider than a card so the neighbours show at the edges.
+      const card = cardRefs.current.find(Boolean);
+      slideW.current = (card?.clientWidth || 0) + GAP;
+      layout(0, false);
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", measure);
+      return () => window.removeEventListener("resize", measure);
+    }
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [layout]);
+
+  useEffect(() => {
+    layout(0, true);
+  }, [index, layout]);
+
+  const go = useCallback((delta) => {
+    setIndex((i) => ((i + delta) % N + N) % N);
+  }, []);
+
+  /* ---------- autoplay ---------- */
+  useEffect(() => {
+    if (paused || reduced || expanded) return;
+    const id = setTimeout(() => go(1), AUTOPLAY_MS);
+    return () => clearTimeout(id);
+  }, [index, paused, reduced, expanded, go]);
+
+  /* ---------- mobile swipe hint ---------- */
   useEffect(() => {
     if (reduced) return;
-    const isMobile = window.matchMedia("(max-width: 639px)").matches;
-    if (!isMobile) return;
-    const t = setTimeout(() => setShowHint(true), 1200);
+    if (!window.matchMedia("(max-width: 639px)").matches) return;
+    const show = setTimeout(() => setShowHint(true), 1200);
     const hide = setTimeout(() => setShowHint(false), 4200);
-    return () => { clearTimeout(t); clearTimeout(hide); };
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
   }, [reduced]);
 
-  const stopAnim = () => {
-    if (animRef.current) {
-      cancelAnimationFrame(animRef.current);
-      animRef.current = null;
-    }
-  };
-
-  // Animate `pos` toward `target`, optionally carrying residual velocity, then settle.
-  const animateTo = (target, duration, residualVelocity) => {
-    stopAnim();
-    if (reduced) {
-      setPos(wrap(target));
-      return;
-    }
-    setAnimating(true);
-    const from = pos;
-    let start = 0;
-    const wrapTarget = wrap(target);
-
-    const frame = (now) => {
-      if (!start) start = now;
-      const t = clamp((now - start) / duration, 0, 1);
-      // easeOutQuint — smooth, natural arrival
-      const e = 1 - Math.pow(1 - t, 5);
-      // residual momentum (in pos-space) decays over the animation
-      const extra = residualVelocity * duration * (1 - t) * 0.6;
-      setPos(wrap(lerp(from, wrapTarget, e) + extra));
-      if (t < 1) {
-        animRef.current = requestAnimationFrame(frame);
-      } else {
-        animRef.current = null;
-        setAnimating(false);
-      }
-    };
-    animRef.current = requestAnimationFrame(frame);
-  };
-
-  // Normalize into one loop window: 0 <= pos < N*step
-  const wrap = (value) => {
-    const s = step || 398;
-    const total = N * s;
-    return ((value % total) + total) % total;
-  };
-
-  /* ----- rendering model ----- */
-  // Continuous distance (in steps) of card `j` from the centered card at `p`.
-  const slotFor = (j, p) => {
-    const s = step || 398;
-    const centerF = p / s;
-    let dist = j - centerF;
-    dist -= Math.round(dist / N) * N; // wrap into [-N/2, N/2]
-    return dist;
-  };
-
-  useEffect(() => {
-    const update = () => setStep(readStep(stripRef.current));
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  /* ----- gestures ----- */
-  const velocitySamples = useRef([]);
-
+  /* ---------- drag / swipe ----------
+     The rail follows the finger by writing transforms straight to the DOM —
+     no state updates during the gesture, so the eight cards never re-render
+     mid-swipe. */
   const onPointerDown = (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
-    stopAnim();
-    drag.current = { id: e.pointerId, startX: e.clientX, originPos: pos };
-    velocitySamples.current = [];
-    setDragging(true);
+    drag.current = { id: e.pointerId, startX: e.clientX, dx: 0 };
     setPaused(true);
     e.currentTarget.setPointerCapture?.(e.pointerId);
   };
 
   const onPointerMove = (e) => {
-    if (!drag.current || e.pointerId !== drag.current.id) return;
-    const dx = e.clientX - drag.current.startX;
-    if (reduced) {
-      setPos(wrap(drag.current.originPos));
-      return;
-    }
-    const next = drag.current.originPos - dx;
-    setPos(wrap(next));
-    velocitySamples.current.push({ t: e.timeStamp, x: e.clientX });
-    if (velocitySamples.current.length > 6) velocitySamples.current.shift();
+    const d = drag.current;
+    if (!d || e.pointerId !== d.id) return;
+    d.dx = e.clientX - d.startX;
+    layout(d.dx, false);
   };
 
-  const onPointerUp = (e) => {
-    if (!drag.current || e.pointerId !== drag.current.id) return;
-    const samples = velocitySamples.current;
-    let velocity = 0;
-    if (samples.length >= 2) {
-      const a = samples[0];
-      const b = samples[samples.length - 1];
-      const dt = b.t - a.t;
-      if (dt > 0) velocity = (b.x - a.x) / dt; // px per ms
-    }
+  const endDrag = (e) => {
+    const d = drag.current;
+    if (!d || e.pointerId !== d.id) return;
     drag.current = null;
-    setDragging(false);
-    setPaused(false);
     e.currentTarget.releasePointerCapture?.(e.pointerId);
-    settle(velocity);
-  };
-
-  const onPointerCancel = (e) => {
-    drag.current = null;
-    setDragging(false);
     setPaused(false);
-    e.currentTarget.releasePointerCapture?.(e.pointerId);
-    settle(0);
+    if (Math.abs(d.dx) > SWIPE_PX) {
+      go(d.dx < 0 ? 1 : -1); // effect re-lays out with animation
+    } else {
+      layout(0, true); // didn't travel far enough — settle back
+    }
   };
-
-  // Snap to the nearest card; apply fling momentum if the release was fast.
-  const settle = (velocity) => {
-    const s = step || readStep();
-    const isFling = Math.abs(velocity) > 0.35;
-    // momentum of `pos` is opposite the cursor velocity (dragging right lowers pos)
-    const pv = isFling ? -velocity : 0;
-    // project where pos would travel with momentum, snap to nearest card
-    const target = Math.round((pos + pv * 160) / s) * s;
-    animateTo(target, isFling ? 620 : 480, isFling ? pv : 0);
-  };
-
-  const pausers = { onPointerEnter: () => setPaused(true), onPointerLeave: () => setPaused(false) };
-
-  // Autoplay advances the continuous position by one step, with easing.
-  useEffect(() => {
-    if (reduced || paused) return;
-    const s = step || readStep();
-    const id = setTimeout(() => {
-      animateTo(pos - s, DURATION, 0);
-    }, AUTOPLAY_MS);
-    return () => clearTimeout(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pos, paused, reduced, step]);
-
-  const s = step || readStep();
-  const activeIdx = (((Math.round(pos / s) % N) + N) % N);
 
   return (
     <section
@@ -222,69 +220,38 @@ export function Testimonials() {
         </div>
 
         <Reveal className="block">
+          {/* Viewport is wider than a card, so the previous and next reviews
+              show at the edges (dimmed, blurred and set back) while the active
+              one sits in front. Overflow clips whatever runs past the edges. */}
           <div
-            ref={stripRef}
-            className="relative overflow-hidden cursor-grab active:cursor-grabbing px-[6px] pt-[6px]"
+            ref={viewportRef}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+            onPointerEnter={() => setPaused(true)}
+            onPointerLeave={() => setPaused(false)}
             style={{
-              marginInline: "calc(50% - 50vw)",
-              width: "100vw",
               "--card-w": "min(380px,86vw)",
-              "--gap": "18px",
-              "--step": "calc(var(--card-w) + var(--gap))",
               "--card-h": "min(500px,78vh)",
-              "--vh": "calc(var(--card-h) + 40px)",
+              width: "min(1100px,100%)",
               touchAction: "pan-y",
               userSelect: "none",
             }}
-            {...pausers}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerCancel}
+            className="relative mx-auto cursor-grab overflow-hidden active:cursor-grabbing"
           >
-            <div className="relative mt-9 h-[var(--vh)] max-sm:mt-4">
-              {testimonials.map((t, i) => {
-                const dist = slotFor(i, pos);
-                const adist = Math.abs(dist);
-
-                let scale, blur, opacity;
-                if (reduced) {
-                  scale = 1;
-                  blur = 0;
-                  opacity = adist < 0.5 ? 1 : 0.5;
-                } else {
-                  scale = lerp(1.05, 0.86, clamp(adist, 0, 2) / 2);
-                  opacity = lerp(1, 0.42, clamp(adist, 0, 2) / 2);
-                  blur = lerp(0, 3, clamp((adist - 0.6) / 1.6, 0, 1));
-                }
-                const z = adist < 1 ? 10 : adist < 2 ? 5 : 1;
-
-                const style = {
-                  position: "absolute",
-                  top: 0,
-                  left: "50%",
-                  width: "var(--card-w)",
-                  zIndex: z,
-                  opacity,
-                  transform: `translateX(calc(-50% + ${dist * s}px)) scale(${scale})`,
-                  filter: blur ? `blur(${blur}px)` : "none",
-                  transition: dragging || animating
-                    ? "none"
-                    : reduced
-                      ? "opacity 300ms linear"
-                      : `transform ${DURATION}ms ${EASE}, opacity ${DURATION}ms ${EASE}, filter ${DURATION}ms ${EASE}`,
-                  willChange: "transform, opacity, filter",
-                };
-
-                return (
-                  <TestimonialCard
-                    key={t.name}
-                    testimonial={t}
-                    style={style}
-                    onExpand={setExpanded}
-                  />
-                );
-              })}
+            <div className="relative h-[var(--card-h)]">
+              {testimonials.map((t, i) => (
+                <div
+                  key={t.name}
+                  ref={(el) => {
+                    cardRefs.current[i] = el;
+                  }}
+                  className="absolute top-0 left-1/2 h-full w-[var(--card-w)] will-change-[transform,opacity,filter]"
+                >
+                  <TestimonialCard testimonial={t} onExpand={setExpanded} />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -310,27 +277,24 @@ export function Testimonials() {
             </svg>
           </div>
 
-          {/* Swipe dots */}
+          {/* Dots */}
           <div className="mt-6 flex items-center justify-center gap-2">
-            {testimonials.map((_, i) => (
+            {testimonials.map((t, i) => (
               <button
-                key={i}
-                onClick={() => {
-                  stopAnim();
-                  animateTo(i * s, 480, 0);
-                  setPaused(true);
-                  setTimeout(() => setPaused(false), AUTOPLAY_MS);
-                }}
+                key={t.name}
+                type="button"
+                onClick={() => setIndex(i)}
                 aria-label={`Go to review ${i + 1}`}
+                aria-current={index === i}
                 className="group relative flex items-center justify-center p-1"
               >
                 <span
                   className="block rounded-full transition-all duration-500"
                   style={{
-                    width: activeIdx === i ? 24 : 7,
+                    width: index === i ? 24 : 7,
                     height: 7,
-                    background: activeIdx === i ? "var(--lime)" : "var(--ash)",
-                    opacity: activeIdx === i ? 1 : 0.45,
+                    background: index === i ? "var(--lime)" : "var(--ash)",
+                    opacity: index === i ? 1 : 0.45,
                   }}
                 />
               </button>

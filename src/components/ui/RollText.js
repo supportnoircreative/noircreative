@@ -41,14 +41,18 @@ export function RollText({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || reduced) {
-      setVisible(true);
-      return;
+    if (!el) return;
+
+    /* Reduced motion, or a browser without IntersectionObserver: reveal
+       straight away. Scheduling the reveal on the next frame rather than
+       calling setVisible in the effect body keeps the update out of this
+       commit, so it can't cascade renders (react-hooks/set-state-in-effect).
+       The roll itself is already neutralised in CSS under reduced motion. */
+    if (reduced || !("IntersectionObserver" in window)) {
+      const frame = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(frame);
     }
-    if (!("IntersectionObserver" in window)) {
-      setVisible(true);
-      return;
-    }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

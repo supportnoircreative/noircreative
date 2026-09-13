@@ -5,7 +5,7 @@ const pillars = [
   {
     id: "01",
     title: "Strategic Discovery",
-    body: "We start by understanding your market, your customer, and the real business problem — not just the brief.",
+    body: "We start by understanding your market, your customer, and the real business problem, not just the brief.",
   },
   {
     id: "02",
@@ -15,7 +15,7 @@ const pillars = [
   {
     id: "03",
     title: "Scalable Growth",
-    body: "Every system we hand off is built to grow with you — no rebuild required at your next milestone.",
+    body: "Every system we hand off is built to grow with you, with no rebuild required at your next milestone.",
   },
 ];
 

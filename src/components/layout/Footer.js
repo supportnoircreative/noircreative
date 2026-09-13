@@ -24,7 +24,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1220px] px-5 md:px-8">
         <div className="grid grid-cols-1 gap-9 pb-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.7fr_1fr] lg:gap-10">
           <div>
-            <Link href="/" aria-label="Noir Creative — home">
+            <Link href="/" aria-label="Noir Creative, home">
               <LogoWordmark
                 width={46}
                 height={28}

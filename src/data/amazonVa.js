@@ -41,7 +41,7 @@ export const amazonVa = {
     // One clear promise. Keep it under ~30 words — it sits directly under an
     // oversized headline and competes with it if it runs long.
     description:
-      "Dedicated Amazon virtual assistants who own the unglamorous work — listings, PPC, cases, inventory — so you get your week back and your catalogue stops leaking margin.",
+      "Dedicated Amazon virtual assistants who own the unglamorous work: listings, PPC, cases and inventory, so you get your week back and your catalogue stops leaking margin.",
     primaryCta: { label: "Get a free account audit", href: "/contact" },
     secondaryCta: { label: "See the case studies", href: "#amazon-case-studies" },
     // Small trust line beneath the buttons.
@@ -61,12 +61,12 @@ export const amazonVa = {
   painPoints: {
     eyebrow: "Sound familiar?",
     title: ["Most sellers aren't", "short on product."],
-    desc: "They're short on hours. Here's what we hear on almost every first call — and what changes once someone owns it full-time.",
+    desc: "They're short on hours. Here's what we hear on almost every first call, and what changes once someone owns it full-time.",
     items: [
       {
         icon: "clock",
         quote: "I'm spending my evenings in Seller Central instead of on the business.",
-        shift: "A VA takes the daily queue — cases, pricing, stock alerts — and reports once a week.",
+        shift: "A VA takes the daily queue of cases, pricing and stock alerts, and reports once a week.",
       },
       {
         icon: "ads",
@@ -81,7 +81,7 @@ export const amazonVa = {
       {
         icon: "inventory",
         quote: "I've gone out of stock on my best ASIN more than once.",
-        shift: "Reorder points tied to velocity and lead time, reviewed weekly — not guessed.",
+        shift: "Reorder points tied to velocity and lead time, reviewed weekly, not guessed.",
       },
     ],
   },
@@ -101,7 +101,7 @@ export const amazonVa = {
       {
         icon: "search",
         title: "SEO & Keyword Research",
-        body: "Helium 10 and Cerebro-driven research turned into an indexing plan — front-end, backend and PPC sharing one keyword universe.",
+        body: "Helium 10 and Cerebro-driven research turned into an indexing plan, with front-end, backend and PPC sharing one keyword universe.",
         deliverables: ["Relevancy map", "Backend terms", "Index audits", "Competitor gap"],
       },
       {
@@ -113,13 +113,13 @@ export const amazonVa = {
       {
         icon: "inventory",
         title: "Inventory & FBA Ops",
-        body: "Shipment plans, reorder points, removal orders, stranded and aged inventory — the stuff that quietly costs you the Buy Box.",
+        body: "Shipment plans, reorder points, removal orders, stranded and aged inventory: the stuff that quietly costs you the Buy Box.",
         deliverables: ["Reorder planning", "Shipment creation", "Stranded recovery", "IPI health"],
       },
       {
         icon: "account",
         title: "Account Health & Cases",
-        body: "Suppressed listings, policy flags, IP complaints and reimbursement claims — chased through Seller Support until they actually close.",
+        body: "Suppressed listings, policy flags, IP complaints and reimbursement claims, chased through Seller Support until they actually close.",
         deliverables: ["Case management", "Suppression fixes", "Reimbursements", "Policy appeals"],
       },
       {
@@ -139,7 +139,7 @@ export const amazonVa = {
       {
         id: "01",
         title: "Audit",
-        body: "We go through the account line by line — listings, campaigns, health, stock — and hand you a prioritised findings doc. Free, and yours regardless.",
+        body: "We go through the account line by line, covering listings, campaigns, health and stock, and hand you a prioritised findings doc. Free, and yours regardless.",
       },
       {
         id: "02",
@@ -160,110 +160,130 @@ export const amazonVa = {
   },
 
   /* ------------------------------------------------------- case studies
-     Each entry is fully self-contained. Replace the placeholder numbers with
-     your own — they render exactly as typed, so keep units in the string
-     ("+184%", "2.4x", "$61k"). Order here is the order shown. */
+     Transcribed from the client decks in public/casestudies/. Every figure
+     below appears in one of those PDFs — nothing here is estimated or
+     rounded up. Order here is the order shown.
+
+     `testimonial` is optional and deliberately absent: the source decks
+     contain performance data, not client quotes. Add one to an entry and the
+     card renders it automatically.
+
+     `pdf` links the full deck. Those files are served from /public, so the
+     link makes them publicly downloadable — remove the field if a deck
+     shouldn't be reachable from the site. */
   caseStudies: {
     eyebrow: "Exclusive case studies",
     title: ["Receipts, not", "round numbers."],
-    desc: "Three accounts we took over, what was actually broken, and what the numbers looked like ninety days later.",
-    side: "Every figure below comes from the client's own Business Reports and Advertising console.",
+    desc: "Four accounts we took over, what was actually broken, and what the numbers looked like afterwards.",
+    side: "Every figure comes from the client's own Seller Central Business Reports and Advertising console.",
     items: [
       {
-        id: "cs-01",
-        // Short label for the selector rail.
-        tab: "Home & Kitchen",
+        id: "cs-pearl-linens",
+        tab: "Home & Linens",
         accent: "lime",
-        client: "Private-label kitchenware brand",
-        // Use a descriptive stand-in if the client is under NDA.
-        category: "Home & Kitchen · FBA · US",
-        timeline: "90 days",
-        scope: ["Listing rebuild", "PPC restructure", "Review recovery"],
-        // The one-line story. This is what shows in the collapsed card.
-        headline: "A best-seller stuck on page three, rebuilt to own its category term.",
+        client: "Pearl Linens, private-label home textiles",
+        category: "Home & Linens · FBA · US",
+        timeline: "24 months",
+        scope: ["Listing & conversion", "PPC efficiency", "Subscribe & Save"],
+        headline: "From break-even to breakthrough: 12× monthly revenue without buying growth at a loss.",
         challenge:
-          "Eleven ASINs sharing one badly-built variation family, a title stuffed with terms the listing never indexed for, and 61% of ad spend running against a single broad campaign nobody had touched in eight months. Organic rank for the primary keyword sat at #34.",
+          "A sub-scale operation doing ~$14.8K a month on 419 units, swinging between $15K and $49K with no reliable trend. Advertising ran hot, quarterly profit sat at −$9.3K on a −2.75% margin, and almost all traffic came from category search, and branded demand was effectively non-existent.",
         approach: [
-          "Split the variation family into two parents so the hero ASIN stopped inheriting a 2.9-star sibling's reviews.",
-          "Rebuilt titles and bullets off a Cerebro relevancy map, moving 40 unindexed terms into backend fields.",
-          "Broke the broad campaign into exact / phrase / broad tiers with a negative list mined from 6 months of search-term data.",
-          "Set a 14% TACoS ceiling and ran weekly bid passes against it instead of monthly.",
+          "Optimised titles, imagery and A+ content, lifting session-to-purchase conversion from 7.55% to 16.01%.",
+          "Tightened campaign structure and bidding, pulling Real ACOS from 18.74% down to 14.60%.",
+          "Built Subscribe-and-Save and reorder flows that nearly doubled active subscriptions in a single quarter (70 → 145).",
+          "Scaled to 58,416 units ordered with fulfilment reliable enough to sustain the higher velocity.",
+          "Grew awareness customers ~2× year on year, widening the funnel beyond category search.",
         ],
         metrics: [
-          { value: "+184%", label: "Organic sessions", note: "90 days vs. prior 90" },
-          { value: "#3", label: "Rank, primary keyword", note: "from #34" },
-          { value: "-38%", label: "TACoS", note: "22.6% → 14.0%" },
-          { value: "4.6★", label: "Average rating", note: "from 3.9★" },
+          { value: "12×", label: "Monthly revenue", note: "$14.8K → $178.6K" },
+          { value: "$1.78M", label: "Cumulative sales", note: "58,416 units · 24 months" },
+          { value: "+14.6", label: "Net margin, points", note: "−2.75% → +11.90%" },
+          { value: "2.1×", label: "Conversion rate", note: "7.55% → 16.01%" },
         ],
-        tools: ["Helium 10", "Seller Central", "Amazon Ads", "DataDive"],
-        testimonial: {
-          quote:
-            "They found things our last agency had been billing us to maintain. First month paid for itself in reimbursements alone.",
-          author: "Founder",
-          role: "Kitchenware brand · 8-figure seller",
-        },
+        tools: ["Seller Central", "Amazon Ads", "Brand Analytics", "Subscribe & Save"],
+        pdf: "/casestudies/Pearl%20Linens%20Growth%20Case%20Study.pdf",
       },
       {
-        id: "cs-02",
+        id: "cs-supplements",
         tab: "Supplements",
         accent: "violet",
-        client: "Sports nutrition seller",
-        category: "Health & Household · FBA · US + CA",
-        timeline: "6 months",
-        scope: ["Account health", "Reimbursements", "Inventory planning"],
-        headline: "Suppressed listings and a 4.1 IPI turned into a clean, in-stock account.",
+        client: "Supplement brand, multi-SKU sports nutrition",
+        category: "Health & Household · Amazon Advertising · US",
+        timeline: "24 months",
+        scope: ["PPC restructure", "TACoS discipline", "Organic rank"],
+        headline: "35%+ sustained growth built on TACoS discipline, not bigger budgets.",
         challenge:
-          "Three top-revenue ASINs suppressed for compliance documentation, an IPI score of 4.1 threatening storage limits ahead of Q4, and 14 months of unclaimed FBA discrepancies sitting untouched in the reports.",
+          "High-quality products with no structured approach to ad spend. ACoS was the only metric tracked, so real per-SKU profitability was invisible. Campaigns leaked on broad match with no separation between branded, category and competitor targeting, and only hero SKUs got budget, leaving secondary products with no path to growth.",
         approach: [
-          "Assembled and filed compliance documentation, clearing all three suppressions within 19 days.",
-          "Audited 14 months of inventory adjustments and filed 47 reimbursement claims with shipment-level evidence.",
-          "Removed aged inventory and rebuilt reorder points off 30/60/90-day velocity plus supplier lead time.",
-          "Set up stock-out and IPI alerting so nothing depends on someone remembering to check.",
+          "Rebuilt campaign architecture: branded, category and competitor targeting separated, autos reduced to harvesting only.",
+          "Scaled spend on top-revenue SKUs and pushed Top-of-Search dominance to lock organic rank through sustained velocity.",
+          "Built dedicated campaigns for secondary ASINs, graduating high-CVR products to full investment.",
+          "Shifted from ACoS to per-ASIN TACoS as the true-north metric, with every bid and budget decision flowing from margin targets.",
+          "As rank improved, eased bid aggression on ranking terms and freed budget for keyword expansion.",
         ],
         metrics: [
-          { value: "$61k", label: "Reimbursements recovered", note: "47 claims filed" },
-          { value: "712", label: "IPI score", note: "from 411" },
-          { value: "19", label: "Days to clear suppressions", note: "3 top ASINs" },
-          { value: "0", label: "Stock-outs since", note: "6 months running" },
+          { value: "$9.8M", label: "Revenue", note: "24 months · 329K order items" },
+          { value: "357K", label: "Units ordered", note: "avg $29.76 per order" },
+          { value: "21.9%", label: "TACoS controlled", note: "with margin guardrails" },
+          { value: "75M+", label: "Impressions", note: "all ad formats" },
         ],
-        tools: ["Seller Central", "Sellerboard", "Google Sheets", "Slack"],
-        testimonial: {
-          quote:
-            "We'd written that money off. Having someone who actually chases Seller Support to a close is the whole value.",
-          author: "Operations Lead",
-          role: "Sports nutrition · DTC + Amazon",
-        },
+        tools: ["Amazon Ads", "Campaign Manager", "Seller Central", "Business Reports"],
+        pdf: "/casestudies/Supplement%20Case%20Study.pdf",
       },
       {
-        id: "cs-03",
-        tab: "Pet Supplies",
+        id: "cs-dental",
+        tab: "Dental Care",
         accent: "lime",
-        client: "Pet accessories startup",
-        category: "Pet Supplies · FBM → FBA · US",
-        timeline: "120 days",
-        scope: ["Launch strategy", "PPC build", "Brand Registry"],
-        headline: "A cold launch to $48k monthly revenue without discounting to zero margin.",
+        client: "Dental care brand, nightguards & denture care",
+        category: "Health & Household · Amazon PPC · US",
+        timeline: "Jan - Jun 2026",
+        scope: ["Cannibalisation fix", "Category capture", "ROAS recovery"],
+        headline: "From ROAS crisis to category dominance: a brand that was paying to cannibalise itself.",
         challenge:
-          "New brand, no review velocity, no Brand Registry, and a category dominated by three sellers with 4,000+ reviews each. Previous attempt burned $9k on auto campaigns at 71% ACoS.",
+          "ROAS had fallen below 2.0 and high ACOS was eating product margins. The account bid aggressively on its own brand keywords in broad and phrase match, paying for traffic that would have converted organically, while holding virtually no presence on high-volume category terms like 'dental night guard' and 'denture cleaner'. Competitors owned that space entirely.",
         approach: [
-          "Filed Brand Registry and built A+ content plus a storefront before spending a dollar on ads.",
-          "Launched into three long-tail sub-niches instead of the head term, where CPCs ran 60% cheaper.",
-          "Ran Vine plus compliant follow-up to 24 reviews before scaling budget past $40/day.",
-          "Moved to FBA once velocity justified it, then reinvested the Prime conversion lift into exact-match scaling.",
+          "Isolated branded terms into exact-match-only campaigns with strict negatives to stop brand bleed, cutting branded spend 60%.",
+          "Launched dedicated category campaigns with aggressive Top-of-Search bids, gaining impression share in target dental terms within 30 days.",
+          "Paused low-CVR, high-spend ad groups dragging ROAS below 2.0 and set ACOS targets by product margin tier.",
+          "Ran competitor ASIN targeting and category remarketing, driving 1,903 New-to-Brand purchases.",
+          "Layered Subscribe & Save coupons (10-25%) to lower the perceived price point and build recurring revenue.",
         ],
         metrics: [
-          { value: "$48k", label: "Monthly revenue", note: "month 4, from $0" },
-          { value: "19%", label: "ACoS at scale", note: "from 71%" },
-          { value: "2.4x", label: "Conversion rate", note: "vs. category median" },
-          { value: "24", label: "Reviews before scale", note: "Vine + follow-up" },
+          { value: "3.04", label: "ROAS", note: "from sub-2.0 at onboarding" },
+          { value: "$679K", label: "Sales, YTD", note: "Jan - 9 Jun 2026" },
+          { value: "+121%", label: "Awareness customers", note: "397K in Q1 2026" },
+          { value: "+57%", label: "Consideration growth", note: "4.25× category median" },
         ],
-        tools: ["Brand Registry", "Amazon Ads", "Helium 10", "Canva"],
-        testimonial: {
-          quote:
-            "They talked us out of the head keyword and they were right. We'd have spent our whole budget losing to incumbents.",
-          author: "Co-founder",
-          role: "Pet accessories · first-time seller",
-        },
+        tools: ["Amazon Ads", "Brand Analytics", "Customer Journey Analytics", "Seller Central"],
+        pdf: "/casestudies/Dental%20PPC%20-%20Case%20Study%20(2).pdf",
+      },
+      {
+        id: "cs-essential-oils",
+        tab: "Essential Oils",
+        accent: "violet",
+        client: "Essential oils brand, 38 active SKUs",
+        category: "Health & Household · Amazon PPC · US",
+        timeline: "Jan - Jun 2026",
+        scope: ["Account audit", "Campaign rebuild", "Retention"],
+        headline: "A 50% revenue slide reversed into $3.76M YTD through structural PPC repair.",
+        challenge:
+          "Revenue had fallen from a ~$1.35M peak to ~$650K, a 50%+ drop in six months the previous management never addressed. Budget sat in low-intent broad-match placements, product targeting campaigns cannibalised each other, there was no negative keyword strategy, and high-volume, mid-tail and brand terms were mixed into single campaigns. Impressions had collapsed from 12M+ to under 3M.",
+        approach: [
+          "Harvested high-converting search terms from the search-term report, cut semi-relevant spend and built tiered keyword lists.",
+          "Rebuilt campaign structure: branded separated from generic, SKU-level ASIN targeting, top performers isolated into exact campaigns.",
+          "Redirected spend to Top-of-Search with dayparting and multiplier bidding per keyword intent tier.",
+          "Ran rank-push campaigns on hero ASINs (Rosemary, Lavender, Peppermint) to sub-1000 BSR in Health & Household.",
+          "Built a retention engine: 124 tailored promotions, a 204K cart-abandoner pool, and 1,253 Subscribe & Save customers.",
+        ],
+        metrics: [
+          { value: "$3.76M", label: "Sales, YTD", note: "from a declining base" },
+          { value: "35%", label: "Conversion rate", note: "vs 18% category average" },
+          { value: "1,253", label: "Subscribe & Save", note: "+505% vs median of 75" },
+          { value: "1.28M", label: "Awareness reach", note: "+98% vs prior period" },
+        ],
+        tools: ["Amazon Ads", "Brand Analytics", "Tailored Promotions", "Seller Central"],
+        pdf: "/casestudies/Essential%20Oils%20-%20PPC%20Case%20Study%20(1).pdf",
       },
     ],
   },
@@ -283,7 +303,7 @@ export const amazonVa = {
       {
         icon: "report",
         title: "Metrics agreed up front",
-        body: "Each lane gets a target — TACoS, index count, IPI, response time. If we miss it two months running, you stop paying for that lane.",
+        body: "Each lane gets a target: TACoS, index count, IPI, response time. If we miss it two months running, you stop paying for that lane.",
       },
       {
         icon: "account",
@@ -311,7 +331,7 @@ export const amazonVa = {
   teaser: {
     eyebrow: "New service",
     title: ["Selling on Amazon?", "We run that too."],
-    desc: "Dedicated Amazon VAs for listings, PPC, inventory and account health — with case studies and real numbers, not promises.",
+    desc: "Dedicated Amazon VAs for listings, PPC, inventory and account health, with case studies and real numbers, not promises.",
     bullets: [
       "Listing & SEO rebuilds",
       "PPC against a TACoS target",
@@ -320,6 +340,6 @@ export const amazonVa = {
     ],
     cta: { label: "Explore Amazon VA", href: "/amazon-va" },
     // Headline figure pulled forward as social proof.
-    highlight: { value: "+184%", label: "organic sessions in 90 days", note: "Home & Kitchen case study" },
+    highlight: { value: "12×", label: "monthly revenue in 24 months", note: "Pearl Linens case study" },
   },
 };

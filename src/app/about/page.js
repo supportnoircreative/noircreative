@@ -7,7 +7,7 @@ import { CtaBanner } from "@/components/shared/CtaBanner";
 export const metadata = {
   title: "About",
   description:
-    "Noir Creative is a digital engineering and design collective — strategic discovery, creative innovation, and scalable growth, built entirely in-house.",
+    "Noir Creative is a digital engineering and design collective: strategic discovery, creative innovation, and scalable growth, built entirely in-house.",
 };
 
 export default function AboutPage() {
@@ -24,7 +24,7 @@ export default function AboutPage() {
       />
       <CompanyProfile long />
       <Solutions />
-      <Statement caption="We understand cultures, trends, and behaviors to build strategies that connect locally — with global insight to help your brand succeed in every market." />
+      <Statement caption="We understand cultures, trends, and behaviors to build strategies that connect locally, with global insight to help your brand succeed in every market." />
       <CtaBanner />
     </>
   );

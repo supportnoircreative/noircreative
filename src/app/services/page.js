@@ -7,7 +7,7 @@ import { CtaBanner } from "@/components/shared/CtaBanner";
 export const metadata = {
   title: "Services",
   description:
-    "Graphic design, web development, digital marketing, brand strategy, UI/UX design, and video editing — six disciplines under one accountable Noir Creative team.",
+    "Graphic design, web development, digital marketing, brand strategy, UI/UX design, and video editing: six disciplines under one accountable Noir Creative team.",
 };
 
 export default function ServicesPage() {
@@ -20,7 +20,7 @@ export default function ServicesPage() {
             Six disciplines. <em className="lime-accent not-italic">One</em> accountable team.
           </>
         }
-        description="From first sketch to shipped product — we cover the full stack of a modern brand's digital presence, so nothing gets lost between vendors, hand-offs, or sub-contractors."
+        description="From first sketch to shipped product, we cover the full stack of a modern brand's digital presence, so nothing gets lost between vendors, hand-offs, or sub-contractors."
       />
       <ServicesGrid />
       <Process />

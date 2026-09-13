@@ -30,11 +30,11 @@ const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('noir-theme')||
 
 export const metadata = {
   title: {
-    default: "Noir Creative LLC — Digital Engineering & Design Collective",
-    template: "%s — Noir Creative LLC",
+    default: "Noir Creative LLC | Digital Engineering & Design Collective",
+    template: "%s | Noir Creative LLC",
   },
   description:
-    "Noir Creative transforms bold ideas into lasting digital experiences — brand design, web development, digital marketing and brand strategy for ambitious businesses.",
+    "Noir Creative transforms bold ideas into lasting digital experiences: brand design, web development, digital marketing and brand strategy for ambitious businesses.",
   metadataBase: new URL("https://noircreativellc.com"),
   alternates: {
     canonical: "/",
@@ -46,7 +46,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     siteName: "Noir Creative LLC",
-    title: "Noir Creative LLC — Where Bold Ideas Get Built",
+    title: "Noir Creative LLC | Where Bold Ideas Get Built",
     description: "Digital Engineering & Design Collective. Fusing technical mastery with visual excellence.",
     images: [{ url: "/images/logo-wordmark-transparent.svg" }],
   },

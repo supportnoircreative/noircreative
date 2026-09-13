@@ -3,13 +3,13 @@ export const faqs = [
     id: "01",
     question: "How long does a typical project take?",
     answer:
-      "Most brand and website engagements run 3–6 weeks depending on scope. Brand strategy and UI/UX sprints are usually 1–3 weeks once access and requirements are confirmed. You'll get a firm timeline in your proposal, not a guess.",
+      "Most brand and website engagements run 3-6 weeks depending on scope. Brand strategy and UI/UX sprints are usually 1-3 weeks once access and requirements are confirmed. You'll get a firm timeline in your proposal, not a guess.",
   },
   {
     id: "02",
     question: "Do you work with businesses outside the US?",
     answer:
-      "Yes — we work with clients across time zones and keep support available 24/7 so distance never becomes a bottleneck on your project.",
+      "Yes. We work with clients across time zones and keep support available 24/7 so distance never becomes a bottleneck on your project.",
   },
   {
     id: "03",
