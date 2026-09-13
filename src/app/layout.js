@@ -64,6 +64,12 @@ export const metadata = {
       },
     ],
   },
+  // Proves ownership of the www property in Google Search Console. Renders as
+  // <meta name="google-site-verification">. Do not remove: Search Console
+  // re-checks it periodically and un-verifies the property if it disappears.
+  verification: {
+    google: "XJXgbAT3pyNGa7GE8Ynhkfhjfc-Dx2D6hRNHwPPRt9Q",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Noir Creative LLC | Where Bold Ideas Get Built",
