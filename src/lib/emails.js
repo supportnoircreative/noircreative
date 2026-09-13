@@ -15,7 +15,7 @@ const TOKENS = {
   radius: "2px",
 };
 
-const SITE_URL = process.env.SITE_URL || "https://noircreativellc.com";
+const SITE_URL = process.env.SITE_URL || "https://www.noircreativellc.com";
 
 const SITE = {
   name: "Noir Creative",

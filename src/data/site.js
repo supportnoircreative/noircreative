@@ -1,8 +1,12 @@
 export const site = {
   name: "Noir Creative LLC",
-  // Canonical origin. Single source for metadataBase, the sitemap, robots.txt
-  // and structured data, so they can never drift apart. No trailing slash.
-  url: "https://noircreativellc.com",
+  /* Canonical origin. Single source for metadataBase, the sitemap, robots.txt
+     and structured data, so they can never drift apart. No trailing slash.
+
+     Must be the hostname that actually serves, NOT one that redirects: the
+     host 308s the apex to www, so canonicals and sitemap entries built from
+     the apex would every one of them point at a redirect. */
+  url: "https://www.noircreativellc.com",
   tagline: "Digital Engineering & Design Collective",
   description:
     "Digital Engineering & Design Collective. Fusing technical mastery with visual excellence.",
