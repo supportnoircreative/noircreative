@@ -1,5 +1,8 @@
 export const site = {
   name: "Noir Creative LLC",
+  // Canonical origin. Single source for metadataBase, the sitemap, robots.txt
+  // and structured data, so they can never drift apart. No trailing slash.
+  url: "https://noircreativellc.com",
   tagline: "Digital Engineering & Design Collective",
   description:
     "Digital Engineering & Design Collective. Fusing technical mastery with visual excellence.",

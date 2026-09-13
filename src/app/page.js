@@ -8,6 +8,12 @@ import { Statement } from "@/components/shared/Statement";
 import { Testimonials } from "@/components/home/Testimonials";
 import { CtaBanner } from "@/components/shared/CtaBanner";
 
+// Title and description come from the root layout's defaults; only the
+// canonical is page-specific.
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default function HomePage() {
   return (
     <>

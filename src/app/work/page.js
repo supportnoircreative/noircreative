@@ -7,6 +7,7 @@ export const metadata = {
   title: "Work",
   description:
     "Case studies from Noir Creative: brand identity, web development and growth work for The Gallery Event, Elite Tax Solutions, TerraLogistical, and Nexus Guard.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {

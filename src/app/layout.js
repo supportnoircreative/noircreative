@@ -7,6 +7,8 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Loader } from "@/components/layout/Loader";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import { site } from "@/data/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,23 +37,38 @@ export const metadata = {
   },
   description:
     "Noir Creative transforms bold ideas into lasting digital experiences: brand design, web development, digital marketing and brand strategy for ambitious businesses.",
-  metadataBase: new URL("https://noircreativellc.com"),
-  alternates: {
-    canonical: "/",
-  },
+  metadataBase: new URL(site.url),
+  /* No `alternates.canonical` here on purpose: metadata set on the root layout
+     is inherited by every route, so a canonical of "/" made each page declare
+     itself a duplicate of the homepage. Each page sets its own instead. */
   icons: {
+    // SVG favicon stays: it stays sharp at every size in modern browsers.
+    // The Apple touch icon must be raster and opaque, though: iOS ignores SVG
+    // and fills any transparency with black.
     icon: [{ url: "/images/logo-mark.svg", type: "image/svg+xml" }],
-    apple: "/images/logo-mark.svg",
+    apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     type: "website",
     siteName: "Noir Creative LLC",
     title: "Noir Creative LLC | Where Bold Ideas Get Built",
     description: "Digital Engineering & Design Collective. Fusing technical mastery with visual excellence.",
-    images: [{ url: "/images/logo-wordmark-transparent.svg" }],
+    // Must be raster: Facebook, LinkedIn and X do not render SVG, so an SVG
+    // here means links preview with no image at all.
+    images: [
+      {
+        url: "/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "Noir Creative LLC",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    title: "Noir Creative LLC | Where Bold Ideas Get Built",
+    description: site.description,
+    images: ["/images/og-default.png"],
   },
 };
 
@@ -69,6 +86,10 @@ export default function RootLayout({ children }) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        {/* Entity data for the whole site. Individual pages add their own
+            (FAQ, Service, breadcrumbs) on top of these. */}
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
       </head>
       <body>
         <Loader />

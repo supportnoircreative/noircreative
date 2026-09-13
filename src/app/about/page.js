@@ -8,6 +8,7 @@ export const metadata = {
   title: "About",
   description:
     "Noir Creative is a digital engineering and design collective: strategic discovery, creative innovation, and scalable growth, built entirely in-house.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

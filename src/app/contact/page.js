@@ -8,6 +8,7 @@ export const metadata = {
   title: "Contact",
   description:
     "Start a project with Noir Creative. Tell us what you're building and we'll reply within one business day.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

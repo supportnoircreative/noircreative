@@ -3,16 +3,22 @@ import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { Process } from "@/components/services/Process";
 import { Faq } from "@/components/services/Faq";
 import { CtaBanner } from "@/components/shared/CtaBanner";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { servicesSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata = {
   title: "Services",
   description:
     "Graphic design, web development, digital marketing, brand strategy, UI/UX design, and video editing: six disciplines under one accountable Noir Creative team.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={servicesSchema()} />
+      <JsonLd data={faqSchema()} />
+      <JsonLd data={breadcrumbSchema("Services", "/services")} />
       <PageHero
         eyebrow="What we do"
         title={

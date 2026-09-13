@@ -1,0 +1,109 @@
+import { site } from "@/data/site";
+import { faqs } from "@/data/faqs";
+import { services } from "@/data/services";
+import { amazonVa } from "@/data/amazonVa";
+
+const abs = (path) => `${site.url}${path}`;
+
+/**
+ * Organization, emitted on every page from the root layout.
+ *
+ * `logo` points at a raster PNG because Google ignores SVG for the logo rich
+ * result. It is also flattened onto ink rather than transparent: Google renders
+ * the logo on a white surface, where the bone mark would otherwise vanish.
+ */
+export function organizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": abs("/#organization"),
+    name: site.name,
+    url: site.url,
+    logo: abs("/images/logo-mark-512.png"),
+    description: site.description,
+    email: site.email,
+    telephone: site.phone,
+    image: abs("/images/og-default.png"),
+    sameAs: site.socials.map((s) => s.href),
+  };
+}
+
+/** WebSite entity, lets Google associate the domain with the organization. */
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": abs("/#website"),
+    url: site.url,
+    name: site.name,
+    publisher: { "@id": abs("/#organization") },
+  };
+}
+
+/** FAQPage for /services, built from the same data the page renders. */
+export function faqSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+}
+
+/** The six disciplines as an offer catalog on /services. */
+export function servicesSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${site.name} services`,
+    provider: { "@id": abs("/#organization") },
+    url: abs("/services"),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Disciplines",
+      itemListElement: services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.title, description: s.full },
+      })),
+    },
+  };
+}
+
+/** Service entity for /amazon-va, with the scope lanes as the catalog. */
+export function amazonServiceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Amazon Virtual Assistant Services",
+    serviceType: "Amazon marketplace management",
+    provider: { "@id": abs("/#organization") },
+    url: abs("/amazon-va"),
+    description: amazonVa.hero.description,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Scope of work",
+      itemListElement: amazonVa.pillars.items.map((p) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: p.title, description: p.body },
+      })),
+    },
+  };
+}
+
+/**
+ * BreadcrumbList for a sub-page. Helps Google render the site hierarchy in
+ * results instead of a bare URL.
+ */
+export function breadcrumbSchema(name, path) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name, item: abs(path) },
+    ],
+  };
+}
