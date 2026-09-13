@@ -23,6 +23,7 @@ export const site = {
 export const navLinks = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
+  { label: "Amazon VA", href: "/amazon-va" },
   { label: "About", href: "/about" },
   { label: "Reviews", href: "/#testimonials" },
   { label: "FAQ", href: "/services#faq" },

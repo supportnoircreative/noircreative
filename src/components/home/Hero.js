@@ -5,6 +5,7 @@ import { RollText } from "@/components/ui/RollText";
 import { Button } from "@/components/ui/Button";
 import { StarRating } from "@/components/ui/StarRating";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { AmazonMark } from "@/components/amazon/AmazonMark";
 
 const chips = [
   { text: "const brand = bold;", className: "top-[22%] left-[7%]", delay: "0s" },
@@ -51,16 +52,23 @@ export function Hero() {
           />
           <Reveal delay={450}>
             <p className="mx-auto mt-[30px] max-w-[56ch] text-lg text-body">
-              Noir Creative transforms ambitious ideas into lasting digital experiences 
+              Noir Creative transforms ambitious ideas into lasting digital experiences and
+              manage your Amazon store like never before
             </p>
           </Reveal>
           <Reveal delay={620}>
             <div className="mt-11 flex flex-wrap justify-center gap-3.5 max-sm:w-full max-sm:flex-col max-sm:[&>a]:w-full">
-              <Button href="/contact" arrow roll>
+              <Button href="/contact" arrow roll className="cta-tall">
                 Start a project
               </Button>
-              <Button href="/work" variant="outline" roll>
-                See the work
+              {/* Amazon-intent entry point — routes sellers straight to the VA offer. */}
+              {/* No `roll` here — the roll mask clips to one line height, which
+                  would crop the smile sitting under the label. */}
+              <Button href="/amazon-va" variant="outline" arrow className="btn-amazon cta-tall">
+                <span className="amazon-cta">
+                  <span className="amazon-cta-label">Sell More</span>
+                  <AmazonMark className="amazon-smile lime-accent" />
+                </span>
               </Button>
             </div>
           </Reveal>

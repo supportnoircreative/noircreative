@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { RollText } from "@/components/ui/RollText";
-import { StarRating } from "@/components/ui/StarRating";
 import { testimonials } from "@/data/testimonials";
+import { TestimonialCard } from "@/components/home/TestimonialCard";
+import { TestimonialDialog } from "@/components/home/TestimonialDialog";
 
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 const DURATION = 700;
@@ -30,6 +31,8 @@ export function Testimonials() {
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
   const [showHint, setShowHint] = useState(false);
+  // review shown in the full-text dialog (null = closed)
+  const [expanded, setExpanded] = useState(null);
   const stripRef = useRef(null);
 
   // gesture / momentum state (kept in refs — updated every pointermove)
@@ -228,7 +231,8 @@ export function Testimonials() {
               "--card-w": "min(380px,86vw)",
               "--gap": "18px",
               "--step": "calc(var(--card-w) + var(--gap))",
-              "--vh": "560px",
+              "--card-h": "min(500px,78vh)",
+              "--vh": "calc(var(--card-h) + 40px)",
               touchAction: "pan-y",
               userSelect: "none",
             }}
@@ -273,26 +277,12 @@ export function Testimonials() {
                 };
 
                 return (
-                  <article
+                  <TestimonialCard
                     key={t.name}
+                    testimonial={t}
                     style={style}
-                    className="testi-card rounded-2xl border border-lime bg-ink-raised p-8 shadow-[0_0_0_1px_rgba(198,242,78,.2),0_10px_30px_-14px_rgba(198,242,78,.35)]"
-                  >
-                    <div className="mb-[22px] flex items-center justify-between">
-                      <StarRating rating={t.rating} />
-                      <span className="font-mono text-[13px] text-ash">{t.rating.toFixed(1)}</span>
-                    </div>
-                    <span className="mb-4 inline-block text-[11px] font-semibold uppercase tracking-[0.1em] text-violet">
-                      {t.category}
-                    </span>
-                    <blockquote className="m-0 flex-1 text-[15.5px] leading-relaxed text-text-1">
-                      &ldquo;{t.quote}&rdquo;
-                    </blockquote>
-                    <div className="mt-6 border-t border-(--line) pt-5 text-[13px] text-ash">
-                      <strong className="mb-0.5 block text-sm text-body">{t.name}</strong>
-                      {t.role}
-                    </div>
-                  </article>
+                    onExpand={setExpanded}
+                  />
                 );
               })}
             </div>
@@ -348,6 +338,8 @@ export function Testimonials() {
           </div>
         </Reveal>
       </div>
+
+      <TestimonialDialog testimonial={expanded} onClose={() => setExpanded(null)} />
     </section>
   );
 }

@@ -33,8 +33,11 @@ export function ThemeToggle({ className }) {
       type="button"
       onClick={toggle}
       aria-label="Toggle light and dark theme"
+      // Colour, surface and hover live in globals.css (.theme-toggle): this
+      // button floats over both ink and bone sections, so it can't inherit
+      // theme text/line tokens the way an in-flow control can.
       className={cn(
-        "theme-toggle surface-hover flex size-11 flex-none items-center justify-center rounded-full border border-(--line-strong) bg-transparent text-text-1",
+        "theme-toggle flex size-11 flex-none items-center justify-center rounded-full border",
         className
       )}
     >

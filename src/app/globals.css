@@ -707,3 +707,246 @@ select option {
 [data-theme="light"] .link-lime:hover {
   color: var(--ink);
 }
+
+/* ---------- amazon CTA (hero) ----------
+   Deliberately louder than the outline buttons beside it: a lime hairline that
+   brightens, a slow breathing glow to catch the eye, and a one-pass sheen
+   sweep on hover. Stays inside the brand rule — flat fills only, the sweep is
+   a moving highlight rather than a painted gradient. */
+.btn-amazon {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-color: rgba(198, 242, 78, 0.45);
+  background: var(--ink-raised-role);
+  animation: amazon-breathe 3.4s var(--ease) infinite;
+  /* the out-of-flow smile lives in the extra bottom padding, which keeps the
+     label + smile pair optically centred inside the pill */
+  padding-top: 10px;
+  padding-bottom: 24px;
+}
+.btn-amazon:hover {
+  border-color: var(--lime);
+  animation-play-state: paused;
+}
+/* sheen sweep */
+.btn-amazon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translateX(-120%) skewX(-18deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(198, 242, 78, 0.22),
+    transparent
+  );
+  transition: transform 0.75s var(--ease-premium);
+}
+.btn-amazon:hover::after {
+  transform: translateX(120%) skewX(-18deg);
+}
+@keyframes amazon-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(198, 242, 78, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(198, 242, 78, 0.09), 0 10px 30px -14px rgba(198, 242, 78, 0.5);
+  }
+}
+[data-theme="light"] .btn-amazon {
+  border-color: rgba(10, 10, 11, 0.28);
+  background: #ffffff;
+}
+[data-theme="light"] .btn-amazon:hover {
+  border-color: var(--ink);
+}
+[data-theme="light"] .btn-amazon::after {
+  background: linear-gradient(90deg, transparent, rgba(10, 10, 11, 0.07), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-amazon,
+  .btn-amazon::after,
+  .btn-amazon .amazon-smile {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ---------- amazon CTA: stacked label + smiling swoosh ----------
+   The label sits above the smile, and the smile stretches to whatever width
+   the label happens to be. It breathes on its own (a slow "smiling" deepen and
+   relax via scaleY) and grins wider on hover. */
+/* The label is the only thing in flow, so the button's flex row centres the
+   trailing arrow against the TEXT rather than against text + smile (which
+   would drop the arrow visibly below the label). The smile hangs underneath
+   out of flow, and .btn-amazon's asymmetric padding gives it the room. */
+.amazon-cta {
+  position: relative;
+  display: inline-block;
+}
+.amazon-cta-label {
+  display: block;
+  line-height: 1.15;
+}
+.amazon-smile {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  display: block;
+  /* A replaced SVG reports a 300px default intrinsic width, which would size
+     the whole group. Zeroing width drops it out of the intrinsic calculation
+     so the label sets the width, then min-width stretches the smile to match. */
+  width: 0;
+  min-width: 100%;
+  height: auto;
+  aspect-ratio: 285.71 / 74.14;
+  /* pivot at the top edge so the arc deepens downward, the way a smile does */
+  transform-origin: 50% 0%;
+  transform: scaleY(0.86);
+  animation: amazon-smiling 3.2s var(--ease) infinite;
+  transition: transform 0.4s var(--ease-premium);
+}
+.btn-amazon:hover .amazon-smile {
+  animation: none;
+  transform: scaleY(1.32);
+}
+@keyframes amazon-smiling {
+  0%,
+  100% {
+    transform: scaleY(0.82);
+  }
+  50% {
+    transform: scaleY(1.14);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amazon-smile {
+    animation: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- hero CTA sizing ----------
+   The hero pair runs 20% taller than the default button so the call to action
+   gets breathing room. Set as a min-height rather than extra padding so both
+   buttons match in every layout — on mobile they stack into a column, where
+   flex stretch equalises widths but not heights. */
+.cta-tall {
+  min-height: 70px;
+}
+
+/* ---------- floating theme toggle ----------
+   This control is fixed over the scrolling page, so whatever is behind it
+   changes as the user moves between ink and bone sections. It therefore can't
+   use --line-strong / --text-1 the way an in-flow control can: on a bone
+   section in dark theme, a white hairline and bone icon vanish into the page.
+
+   Instead it carries its own graphite glass surface — opaque enough to sit on
+   any background, blurred so it still reads as a floating control rather than
+   a solid chip. The palette is deliberately the same in both themes: the
+   button has to stay legible over light AND dark sections either way, and a
+   dark glass is the only one that does both. */
+.theme-toggle {
+  background: rgba(40, 42, 46, 0.58);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #f4f4ef;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.09) inset, 0 8px 22px -10px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+.theme-toggle:hover {
+  background: rgba(58, 61, 66, 0.72);
+  border-color: rgba(255, 255, 255, 0.38);
+  transform: translateY(-1px);
+}
+/* Safari/Firefox without backdrop-filter get a more opaque fill so the control
+   never turns into a faint outline. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .theme-toggle {
+    background: rgba(34, 36, 40, 0.94);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle {
+    transition: none;
+  }
+  .theme-toggle:hover {
+    transform: none;
+  }
+}
+
+/* ---------- review cards: clipped quote + full-text dialog ----------
+   Cards are a fixed size, so a long review is clipped. The mask fades the last
+   couple of lines out instead of slicing them mid-stroke, which is what signals
+   "there's more" before the reader even reaches the Read more button. */
+.testi-quote--clipped {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 42px), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 42px), transparent 100%);
+}
+
+.testi-dialog::backdrop {
+  background: rgba(6, 6, 7, 0.72);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.testi-dialog {
+  margin: auto; /* centre in the top layer */
+  box-shadow: 0 0 0 1px rgba(198, 242, 78, 0.2), 0 40px 80px -30px rgba(0, 0, 0, 0.9);
+}
+.testi-dialog[open] {
+  animation: testi-dialog-in 0.28s var(--ease-premium);
+}
+@keyframes testi-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testi-dialog[open] {
+    animation: none;
+  }
+}
+
+/* ---------- review card header band ----------
+   A flat tint rather than a colour fill: the band has to sit on ink-raised in
+   dark theme and white in light, so it's expressed as a neutral overlay that
+   works over either. The nib watermark gives it the same texture the CTA
+   banner uses, tying the card back to the rest of the site. */
+.testi-band {
+  background: rgba(255, 255, 255, 0.045);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+[data-theme="light"] .testi-band {
+  background: rgba(10, 10, 11, 0.04);
+}
+.testi-band-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 190px;
+  height: 190px;
+  transform: translate(-50%, -46%);
+  background: var(--lime);
+  opacity: 0.07;
+  pointer-events: none;
+  -webkit-mask-image: url("/images/mark-nib-solid.svg");
+  mask-image: url("/images/mark-nib-solid.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+[data-theme="light"] .testi-band-mark {
+  background: var(--ink);
+  opacity: 0.06;
+}
