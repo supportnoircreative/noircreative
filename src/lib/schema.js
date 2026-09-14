@@ -94,6 +94,53 @@ export function amazonServiceSchema() {
 }
 
 /**
+ * An individual Amazon case study page.
+ *
+ * Typed as Article rather than CaseStudy: schema.org has no CaseStudy type,
+ * and Article is what Google actually understands for this shape of content.
+ */
+export function caseStudySchema(study) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: study.headline,
+    description: study.challenge,
+    url: abs(`/amazon-va/${study.slug}`),
+    author: { "@id": abs("/#organization") },
+    publisher: { "@id": abs("/#organization") },
+    about: {
+      "@type": "Service",
+      name: "Amazon Virtual Assistant Services",
+      provider: { "@id": abs("/#organization") },
+    },
+    articleSection: study.category,
+  };
+}
+
+/** Three-level breadcrumb: Home > Amazon VA > this case study. */
+export function caseStudyBreadcrumbSchema(study) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Amazon Virtual Assistant Services",
+        item: abs("/amazon-va"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: study.tab,
+        item: abs(`/amazon-va/${study.slug}`),
+      },
+    ],
+  };
+}
+
+/**
  * BreadcrumbList for a sub-page. Helps Google render the site hierarchy in
  * results instead of a bare URL.
  */

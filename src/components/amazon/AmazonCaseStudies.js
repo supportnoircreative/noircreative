@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import Link from "next/link";
 import { ArrowUpRight, Quote } from "lucide-react";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
@@ -169,11 +170,11 @@ export function AmazonCaseStudies() {
                 ))}
               </ul>
 
-              {study.pdf && (
-                <a
-                  href={study.pdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {/* Sends readers to the study's own indexable page; the PDF is
+                  offered there as a secondary download. */}
+              {study.slug && (
+                <Link
+                  href={`/amazon-va/${study.slug}`}
                   className="group mt-7 inline-flex items-center gap-2 text-[13.5px] font-semibold underline underline-offset-4 transition-opacity duration-200 lime-accent hover:opacity-70"
                 >
                   Read the full case study
@@ -182,7 +183,7 @@ export function AmazonCaseStudies() {
                     strokeWidth={2}
                     className="transition-transform duration-300 ease-(--ease) group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   />
-                </a>
+                </Link>
               )}
             </div>
 

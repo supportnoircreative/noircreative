@@ -1,4 +1,5 @@
 import { site } from "@/data/site";
+import { amazonVa } from "@/data/amazonVa";
 
 /**
  * Generates /sitemap.xml at build time.
@@ -16,9 +17,17 @@ const ROUTES = [
   { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
 ];
 
+/* Case study pages are derived from the data rather than listed by hand, so
+   adding a study to amazonVa.caseStudies.items puts it in the sitemap too. */
+const CASE_STUDIES = amazonVa.caseStudies.items.map((s) => ({
+  path: `/amazon-va/${s.slug}`,
+  priority: 0.8,
+  changeFrequency: "yearly",
+}));
+
 export default function sitemap() {
   const lastModified = new Date();
-  return ROUTES.map(({ path, priority, changeFrequency }) => ({
+  return [...ROUTES, ...CASE_STUDIES].map(({ path, priority, changeFrequency }) => ({
     url: `${site.url}${path}`,
     lastModified,
     changeFrequency,

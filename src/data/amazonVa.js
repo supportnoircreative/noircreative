@@ -179,6 +179,7 @@ export const amazonVa = {
     items: [
       {
         id: "cs-pearl-linens",
+        slug: "pearl-linens",
         tab: "Home & Linens",
         accent: "lime",
         client: "Pearl Linens, private-label home textiles",
@@ -206,6 +207,7 @@ export const amazonVa = {
       },
       {
         id: "cs-supplements",
+        slug: "supplement-brand",
         tab: "Supplements",
         accent: "violet",
         client: "Supplement brand, multi-SKU sports nutrition",
@@ -233,6 +235,7 @@ export const amazonVa = {
       },
       {
         id: "cs-dental",
+        slug: "dental-care",
         tab: "Dental Care",
         accent: "lime",
         client: "Dental care brand, nightguards & denture care",
@@ -260,6 +263,7 @@ export const amazonVa = {
       },
       {
         id: "cs-essential-oils",
+        slug: "essential-oils",
         tab: "Essential Oils",
         accent: "violet",
         client: "Essential oils brand, 38 active SKUs",
