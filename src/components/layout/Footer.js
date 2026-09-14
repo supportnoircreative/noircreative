@@ -39,9 +39,9 @@ export function Footer() {
           <FooterCol title="Studio" links={studioLinks} />
           <FooterCol title="Services" links={serviceLinks} />
           <div>
-            <h4 className="mb-5 text-xs font-semibold uppercase tracking-[0.14em] text-ash">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.14em] text-ash">
               Contact
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-[13px]">
               <li>
                 <a href={`mailto:${site.email}`} className="text-sm text-body transition-colors link-lime">
@@ -83,7 +83,7 @@ export function Footer() {
 function FooterCol({ title, links }) {
   return (
     <div>
-      <h4 className="mb-5 text-xs font-semibold uppercase tracking-[0.14em] text-ash">{title}</h4>
+      <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.14em] text-ash">{title}</h3>
       <ul className="flex flex-col gap-[13px]">
         {links.map((link) => (
           <li key={link.label}>

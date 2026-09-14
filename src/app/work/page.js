@@ -25,6 +25,8 @@ export default function WorkPage() {
       />
       <section id="work" className="px-5 py-[130px] max-sm:py-[88px] md:px-8">
         <div className="mx-auto max-w-[1220px]">
+          {/* Heading for the grid: keeps the card h3s from jumping off the h1. */}
+          <h2 className="sr-only">Selected projects</h2>
           <WorkGrid />
         </div>
       </section>

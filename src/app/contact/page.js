@@ -28,6 +28,9 @@ export default function ContactPage() {
       />
       <section id="contact-form" className="px-5 pb-[130px] pt-20 max-sm:pb-[88px] md:px-8">
         <div className="mx-auto max-w-[1220px]">
+          {/* This page has no visible h2, so the footer h3s were jumping
+              straight off the h1. */}
+          <h2 className="sr-only">Contact details and project brief</h2>
           <Reveal>
             <div className="grid grid-cols-1 gap-px border border-(--line) bg-(--line) lg:grid-cols-[0.85fr_1.15fr]">
               <div className="flex flex-col bg-surface py-2">
