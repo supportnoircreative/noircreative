@@ -2,11 +2,12 @@ import { PageHero } from "@/components/shared/PageHero";
 import { WorkGrid } from "@/components/shared/WorkGrid";
 import { Statement } from "@/components/shared/Statement";
 import { CtaBanner } from "@/components/shared/CtaBanner";
+import { AmazonCaseStudyLinks } from "@/components/amazon/AmazonCaseStudyLinks";
 
 export const metadata = {
   title: "Work",
   description:
-    "Case studies from Noir Creative: brand identity, web development and growth work for The Gallery Event, Elite Tax Solutions, TerraLogistical, and Nexus Guard.",
+    "Case studies from Noir Creative: brand identity, web development, and Amazon marketplace growth work for The Gallery Event, Elite Tax Solutions, TerraLogistical, Nexus Guard, and four Amazon brands.",
   alternates: { canonical: "/work" },
 };
 
@@ -27,6 +28,7 @@ export default function WorkPage() {
           <WorkGrid />
         </div>
       </section>
+      <AmazonCaseStudyLinks />
       <Statement caption="Want your project featured here next? Tell us what you're building. We reply within one business day." />
       <CtaBanner />
     </>
