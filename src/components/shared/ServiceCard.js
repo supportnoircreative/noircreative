@@ -105,10 +105,11 @@ export function ServiceCard({ service, descriptionKey = "short" }) {
           >
             <p className="pt-3 text-sm text-body">{desc}</p>
             <Link
-              href="/contact"
+              href={service.slug ? `/services/${service.slug}` : "/contact"}
               className="mt-[14px] inline-flex items-center gap-2 text-[12.5px] font-semibold text-text-1"
             >
-              Start a brief <ArrowUpRight size={13} className="lime-accent" />
+              {service.slug ? `Explore ${service.title}` : "Start a brief"}
+              <ArrowUpRight size={13} className="lime-accent" />
             </Link>
           </div>
         </div>
@@ -131,11 +132,14 @@ export function ServiceCard({ service, descriptionKey = "short" }) {
             className="overflow-hidden opacity-0 -translate-y-0.5 transition-[opacity,transform] duration-[380ms] ease-(--ease) md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100"
           >
             <p className="m-0 text-sm text-body">{desc}</p>
+            {/* Points at the discipline's own page when it has one, so the
+                card is an entry point to that page rather than a dead end. */}
             <Link
-              href="/contact"
+              href={service.slug ? `/services/${service.slug}` : "/contact"}
               className="mt-[22px] inline-flex items-center gap-2 text-[12.5px] font-semibold text-text-1"
             >
-              Start a brief <ArrowUpRight size={13} className="lime-accent" />
+              {service.slug ? `Explore ${service.title}` : "Start a brief"}
+              <ArrowUpRight size={13} className="lime-accent" />
             </Link>
           </div>
         </div>

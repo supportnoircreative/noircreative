@@ -93,6 +93,46 @@ export function amazonServiceSchema() {
   };
 }
 
+/** One discipline's own page, with its deliverables as the offer catalog. */
+export function singleServiceSchema(service) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.intro || service.full,
+    url: abs(`/services/${service.slug}`),
+    provider: { "@id": abs("/#organization") },
+    ...(service.deliverables?.length && {
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: `${service.title} deliverables`,
+        itemListElement: service.deliverables.map((d) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: d.title, description: d.body },
+        })),
+      },
+    }),
+  };
+}
+
+/** Three-level breadcrumb: Home > Services > this discipline. */
+export function serviceBreadcrumbSchema(service) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Services", item: abs("/services") },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.title,
+        item: abs(`/services/${service.slug}`),
+      },
+    ],
+  };
+}
+
 /**
  * An individual Amazon case study page.
  *

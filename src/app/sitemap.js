@@ -1,5 +1,6 @@
 import { site } from "@/data/site";
 import { amazonVa } from "@/data/amazonVa";
+import { services } from "@/data/services";
 
 /**
  * Generates /sitemap.xml at build time.
@@ -25,9 +26,14 @@ const CASE_STUDIES = amazonVa.caseStudies.items.map((s) => ({
   changeFrequency: "yearly",
 }));
 
+/* Service pages, derived the same way. */
+const SERVICE_PAGES = services
+  .filter((s) => s.slug)
+  .map((s) => ({ path: `/services/${s.slug}`, priority: 0.8, changeFrequency: "yearly" }));
+
 export default function sitemap() {
   const lastModified = new Date();
-  return [...ROUTES, ...CASE_STUDIES].map(({ path, priority, changeFrequency }) => ({
+  return [...ROUTES, ...SERVICE_PAGES, ...CASE_STUDIES].map(({ path, priority, changeFrequency }) => ({
     url: `${site.url}${path}`,
     lastModified,
     changeFrequency,
