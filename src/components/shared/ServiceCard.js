@@ -32,10 +32,21 @@ export function ServiceCard({ service, descriptionKey = "short" }) {
   const Icon = ICONS[service.icon];
   const desc = service[descriptionKey];
 
+  /* The card's own box, cached on enter.
+     Reading getBoundingClientRect() inside mousemove forces the browser to
+     recalculate layout on every event, while the same handler is also writing
+     a transform: that read-write-read-write loop is the "forced reflow"
+     PageSpeed flags. The box cannot change mid-hover, so measure it once. */
+  const rectRef = useRef(null);
+
+  function onMouseEnter() {
+    rectRef.current = ref.current?.getBoundingClientRect() ?? null;
+  }
+
   function onMouseMove(e) {
     const el = ref.current;
     if (!el || !window.matchMedia(TILT_OK).matches || window.matchMedia(MOTION_OK).matches) return;
-    const rect = el.getBoundingClientRect();
+    const rect = rectRef.current ?? el.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
     const rx = (0.5 - py) * 7;
@@ -52,6 +63,7 @@ export function ServiceCard({ service, descriptionKey = "short" }) {
   return (
     <article
       ref={ref}
+      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={cn(

@@ -3,16 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export function Reveal({ children, stagger, delay = 0, className, ...props }) {
+/**
+ * Fades content up as it scrolls into view.
+ *
+ * `immediate` renders it already revealed, from the server HTML. Use it for
+ * anything above the fold: the reveal starts at opacity 0, so animating
+ * hero content in delays both Largest Contentful Paint and Speed Index until
+ * JavaScript has hydrated. Below the fold the animation is free, because the
+ * user has to scroll there first.
+ */
+export function Reveal({ children, stagger, delay = 0, immediate = false, className, ...props }) {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(immediate);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || !("IntersectionObserver" in window)) {
-      setVisible(true);
-      return;
+    if (!el || immediate) return;
+
+    // No IntersectionObserver: reveal on the next frame rather than calling
+    // setState in the effect body, which would cascade renders.
+    if (!("IntersectionObserver" in window)) {
+      const frame = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(frame);
     }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -24,7 +38,7 @@ export function Reveal({ children, stagger, delay = 0, className, ...props }) {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [immediate]);
 
   return (
     <div
@@ -34,7 +48,7 @@ export function Reveal({ children, stagger, delay = 0, className, ...props }) {
         visible && "is-visible",
         className
       )}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={delay && !immediate ? { transitionDelay: `${delay}ms` } : undefined}
       {...props}
     >
       {children}

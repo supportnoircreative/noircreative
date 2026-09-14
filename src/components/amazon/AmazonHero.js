@@ -39,7 +39,7 @@ export function AmazonHero() {
       </div>
 
       <div className="relative mx-auto max-w-[1220px]">
-        <Reveal>
+        <Reveal immediate>
           <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-(--line-strong) px-4 py-2">
             <span className="dot" />
             <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ash">
@@ -48,12 +48,13 @@ export function AmazonHero() {
           </div>
         </Reveal>
 
-        <Reveal>
+        <Reveal immediate>
           <Eyebrow center bare>{hero.eyebrow}</Eyebrow>
         </Reveal>
 
         <RollText
           as="h1"
+          immediate
           stagger={90}
           className="mx-auto text-[clamp(36px,6vw,72px)]"
           lines={hero.title.map((line, i) => (
@@ -61,11 +62,11 @@ export function AmazonHero() {
           ))}
         />
 
-        <Reveal>
+        <Reveal immediate>
           <p className="mx-auto mt-[22px] max-w-[58ch] text-[16.5px] text-body">{hero.description}</p>
         </Reveal>
 
-        <Reveal className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
+        <Reveal immediate className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
           <Button href={hero.primaryCta.href} roll arrow>
             {hero.primaryCta.label}
           </Button>
@@ -75,7 +76,7 @@ export function AmazonHero() {
         </Reveal>
 
         {hero.footnote && (
-          <Reveal>
+          <Reveal immediate>
             <p className="mt-5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-ash">
               {hero.footnote}
             </p>

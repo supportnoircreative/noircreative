@@ -22,7 +22,7 @@ export function ServiceDetail({ service }) {
       {/* ---------- header ---------- */}
       <section className="border-b border-(--line) bg-[radial-gradient(circle_at_88%_0%,rgba(198,242,78,.10),transparent_42%)] px-5 pb-20 pt-[176px] md:px-8">
         <div className="mx-auto max-w-[1220px]">
-          <Reveal>
+          <Reveal immediate>
             <Link
               href="/services"
               className="group mb-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ash transition-colors duration-200 hover:text-text-1"
@@ -36,23 +36,24 @@ export function ServiceDetail({ service }) {
             </Link>
           </Reveal>
 
-          <Reveal>
+          <Reveal immediate>
             <Eyebrow bare>Service {service.id}</Eyebrow>
           </Reveal>
 
           <RollText
             as="h1"
+            immediate
             stagger={90}
             className="text-[clamp(38px,6vw,72px)]"
             lines={[service.title]}
           />
 
-          <Reveal>
+          <Reveal immediate>
             <p className="mt-7 max-w-[58ch] text-[17px] leading-[1.7] text-body">{service.intro}</p>
           </Reveal>
 
           {service.bestFor && (
-            <Reveal>
+            <Reveal immediate>
               <p className="mt-8 max-w-[54ch] border-l-2 border-lime/40 pl-5 text-[15px] leading-[1.7] text-ash">
                 <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-mute">
                   Best for
@@ -63,7 +64,7 @@ export function ServiceDetail({ service }) {
             </Reveal>
           )}
 
-          <Reveal className="mt-10">
+          <Reveal immediate className="mt-10">
             <Button href="/contact" roll arrow>
               Start a brief
             </Button>

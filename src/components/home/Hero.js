@@ -1,4 +1,4 @@
-import { HeroCanvas } from "@/components/home/HeroCanvas";
+import { HeroCanvasLazy } from "@/components/home/HeroCanvasLazy";
 import { Marquee } from "@/components/shared/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { RollText } from "@/components/ui/RollText";
@@ -17,7 +17,7 @@ const chips = [
 export function Hero() {
   return (
     <section className="hero relative overflow-hidden bg-[radial-gradient(circle_at_86%_4%,rgba(198,242,78,.12),transparent_40%),radial-gradient(circle_at_2%_96%,rgba(124,92,255,.12),transparent_38%)] px-5 pb-[60px] pt-[150px] md:px-8 md:pb-[90px] md:pt-[210px]">
-      <HeroCanvas />
+      <HeroCanvasLazy />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(180deg,var(--hero-fade-1)_0%,var(--hero-fade-2)_78%,var(--surface)_100%)]"
@@ -36,11 +36,12 @@ export function Hero() {
 
       <div className="relative z-[2] mx-auto max-w-[1220px]">
         <div className="mx-auto max-w-[1000px] text-center">
-          <Reveal delay={50}>
+          <Reveal immediate>
             <Eyebrow center bare>Digital Engineering &amp; Design Collective</Eyebrow>
           </Reveal>
           <RollText
             as="h1"
+            immediate
             stagger={90}
             className="mx-auto max-w-[1000px] text-[clamp(44px,8.6vw,118px)] tracking-[-0.045em]"
             lines={[
@@ -50,13 +51,13 @@ export function Hero() {
               </em>,
             ]}
           />
-          <Reveal delay={450}>
+          <Reveal immediate>
             <p className="mx-auto mt-[30px] max-w-[56ch] text-lg text-body">
               Noir Creative transforms ambitious ideas into lasting digital experiences and
               manage your Amazon store like never before
             </p>
           </Reveal>
-          <Reveal delay={620}>
+          <Reveal immediate>
             <div className="mt-11 flex flex-wrap justify-center gap-3.5 max-sm:w-full max-sm:flex-col max-sm:[&>a]:w-full">
               <Button href="/contact" arrow roll className="cta-tall">
                 Start a project

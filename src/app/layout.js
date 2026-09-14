@@ -4,7 +4,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
-import { Loader } from "@/components/layout/Loader";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import { site } from "@/data/site";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -98,7 +97,6 @@ export default function RootLayout({ children }) {
         <JsonLd data={websiteSchema()} />
       </head>
       <body>
-        <Loader />
         <Header />
         <main id="top">{children}</main>
         <Footer />

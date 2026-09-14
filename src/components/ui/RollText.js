@@ -23,11 +23,18 @@ export function RollText({
   as: Tag = "div",
   lines,
   stagger = 80,
+  immediate = false,
   className,
   ...props
 }) {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  /* `immediate` renders the text already rolled in, straight from the server
+     HTML. Use it for anything above the fold: the roll starts at opacity 0,
+     and Largest Contentful Paint ignores elements at opacity 0, so animating
+     the hero headline in makes LCP wait for hydration plus the animation.
+     Below the fold the animation costs nothing, because the user has to
+     scroll there anyway. */
+  const [visible, setVisible] = useState(immediate);
   const [reduced, setReduced] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
@@ -41,7 +48,7 @@ export function RollText({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || immediate) return; // already visible, nothing to observe
 
     /* Reduced motion, or a browser without IntersectionObserver: reveal
        straight away. Scheduling the reveal on the next frame rather than
@@ -64,7 +71,7 @@ export function RollText({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [reduced]);
+  }, [reduced, immediate]);
 
   return (
     <Tag

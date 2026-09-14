@@ -26,7 +26,7 @@ export function CaseStudyDetail({ study }) {
       {/* ---------- header ---------- */}
       <section className={cn("border-b border-(--line) px-5 pb-20 pt-[176px] md:px-8", accent.glow)}>
         <div className="mx-auto max-w-[1220px]">
-          <Reveal>
+          <Reveal immediate>
             <Link
               href="/amazon-va#amazon-case-studies"
               className="group mb-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ash transition-colors duration-200 hover:text-text-1"
@@ -40,22 +40,23 @@ export function CaseStudyDetail({ study }) {
             </Link>
           </Reveal>
 
-          <Reveal>
+          <Reveal immediate>
             <Eyebrow bare>{study.category}</Eyebrow>
           </Reveal>
 
           <RollText
             as="h1"
+            immediate
             stagger={90}
             className="max-w-[20ch] text-[clamp(32px,5vw,60px)]"
             lines={[study.headline]}
           />
 
-          <Reveal>
+          <Reveal immediate>
             <p className="mt-6 m-0 text-[16px] text-body">{study.client}</p>
           </Reveal>
 
-          <Reveal>
+          <Reveal immediate>
             <dl className="mt-10 flex flex-wrap gap-x-14 gap-y-6">
               <div>
                 <dt className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-mute">Timeline</dt>
