@@ -4,6 +4,9 @@ import { Children, cloneElement, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { EMAIL_RE, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
+// Read from the single source rather than hardcoding: the previous literal
+// here pointed at noircreative.com, missing the "llc" in the real domain.
+import { site } from "@/data/site";
 
 const initialStatus = { type: null, text: "" };
 
@@ -78,8 +81,8 @@ export function ContactForm() {
         text: (
           <>
             Couldn&apos;t reach the server. Please email us directly at{" "}
-            <a href="mailto:support@noircreative.com" className="underline">
-              support@noircreative.com
+            <a href={`mailto:${site.email}`} className="underline">
+              {site.email}
             </a>
             .
           </>

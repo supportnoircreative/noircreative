@@ -21,7 +21,7 @@ const SITE = {
   name: "Noir Creative",
   legal: "Noir Creative LLC",
   tagline: "Digital Engineering & Design Collective",
-  email: process.env.CONTACT_EMAIL || "supportnoircreative@gmail.com",
+  email: process.env.CONTACT_EMAIL || "info@noircreativellc.com",
   phone: "+1 (628) 272-4787",
   phoneHref: "tel:+16282724787",
   facebook: "https://www.facebook.com/share/19Z97rLmGv/",
@@ -29,7 +29,7 @@ const SITE = {
 };
 
 export function fromEmail() {
-  return process.env.RESEND_FROM_EMAIL || "Noir Creative <noir@noircreativellc.com>";
+  return process.env.RESEND_FROM_EMAIL || "Noir Creative <info@noircreativellc.com>";
 }
 
 function esc(value) {

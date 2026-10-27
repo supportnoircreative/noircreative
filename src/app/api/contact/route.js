@@ -27,7 +27,7 @@ export async function POST(request) {
 
   try {
     await sendEmail({
-      to: process.env.CONTACT_EMAIL || "supportnoircreative@gmail.com",
+      to: process.env.CONTACT_EMAIL || "info@noircreativellc.com",
       replyTo: email,
       ...inquiry,
     });

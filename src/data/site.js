@@ -10,7 +10,7 @@ export const site = {
   tagline: "Digital Engineering & Design Collective",
   description:
     "Digital Engineering & Design Collective. Fusing technical mastery with visual excellence.",
-  email: "supportnoircreative@gmail.com",
+  email: "info@noircreativellc.com",
   phone: "+1 (628) 272-4787",
   phoneHref: "tel:+16282724787",
   socials: [
