@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/shared/ServiceCard";
+import { serviceGridItemClass } from "@/lib/utils";
 import { services } from "@/data/services";
 
 export function ServicesGrid() {
@@ -10,8 +11,13 @@ export function ServicesGrid() {
             heading, which left the card h3s jumping straight off the page h1. */}
         <h2 className="sr-only">All services</h2>
         <Reveal stagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard key={service.id} service={service} descriptionKey="full" />
+          {services.map((service, i) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              descriptionKey="full"
+              className={serviceGridItemClass(i, services.length)}
+            />
           ))}
         </Reveal>
       </div>

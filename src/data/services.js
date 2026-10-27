@@ -1,13 +1,18 @@
-/* The six disciplines.
+import { AMAZON_PATH } from "@/data/amazonVa";
+
+/* The seven disciplines.
    ------------------------------------------------------------------
    `short` and `full` feed the cards on /services and the home teaser.
    Everything below `slug` feeds that service's own page at
    /services/<slug>, which exists so each discipline can rank for its own
-   terms instead of six topics competing on one URL.
+   terms instead of every topic competing on one URL.
 
    A service page is only worth having if it says something: thin pages get
    crawled and dropped. Keep `intro`, `deliverables` and `approach` filled in
-   for every entry, and add a `slug` to create the page. */
+   for every entry, and add a `slug` to create the page.
+
+   An entry with `href` instead of a `slug` already has a page elsewhere:
+   its card links there and no /services/<slug> page is generated. */
 export const services = [
   {
     id: "01",
@@ -278,5 +283,13 @@ export const services = [
         body: "Vertical, square and wide, exported to each platform's spec.",
       },
     ],
+  },
+  {
+    id: "07",
+    href: AMAZON_PATH,
+    icon: "cart",
+    title: "Amazon Growth",
+    short: "Amazon and Walmart accounts run end to end: listings, advertising, inventory and account health.",
+    full: "Amazon and Walmart account management: listings, advertising, inventory and account health, run as one strategy against revenue and margin.",
   },
 ];

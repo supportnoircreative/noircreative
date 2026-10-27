@@ -9,8 +9,8 @@ import { services } from "@/data/services";
 /**
  * One discipline as its own page.
  *
- * /services lists all six, so only that URL could rank and it had to cover
- * six unrelated topics at once. Each service now has a page deep enough to
+ * /services lists every discipline, so only that URL could rank and it had to cover
+ * several unrelated topics at once. Each service now has a page deep enough to
  * stand on its own, cross-linked to the other five so none of them is
  * a dead end.
  */

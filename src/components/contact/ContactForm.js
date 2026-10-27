@@ -17,6 +17,7 @@ const SERVICE_OPTIONS = [
   "Brand Strategy",
   "UI/UX Design",
   "Video Editing",
+  "Amazon & Walmart",
   "Something else",
 ];
 

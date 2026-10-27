@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/data/site";
+import { AMAZON_PATH } from "@/data/amazonVa";
 import { LogoWordmark } from "@/components/layout/LogoWordmark";
 import { SocialLinks } from "@/components/shared/SocialLinks";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
@@ -16,6 +17,7 @@ const serviceLinks = [
   { label: "Web Development", href: "/services" },
   { label: "Digital Marketing", href: "/services" },
   { label: "Brand Strategy", href: "/services" },
+  { label: "Amazon Growth", href: AMAZON_PATH },
 ];
 
 export function Footer() {

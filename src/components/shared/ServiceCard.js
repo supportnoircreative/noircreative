@@ -9,6 +9,7 @@ import {
   Monitor,
   Palette,
   Plus,
+  ShoppingCart,
   Target,
   Video,
 } from "lucide-react";
@@ -21,16 +22,25 @@ const ICONS = {
   target: Target,
   layout: LayoutTemplate,
   video: Video,
+  cart: ShoppingCart,
 };
+
+/** Where a card leads: an external page (`href`), its own service page, or the brief form. */
+function cardLink(service) {
+  if (service.href) return { href: service.href, label: `Explore ${service.title}` };
+  if (service.slug) return { href: `/services/${service.slug}`, label: `Explore ${service.title}` };
+  return { href: "/contact", label: "Start a brief" };
+}
 
 const TILT_OK = "(hover: hover) and (pointer: fine)";
 const MOTION_OK = "(prefers-reduced-motion: reduce)";
 
-export function ServiceCard({ service, descriptionKey = "short" }) {
+export function ServiceCard({ service, descriptionKey = "short", className }) {
   const ref = useRef(null);
   const [open, setOpen] = useState(false);
   const Icon = ICONS[service.icon];
   const desc = service[descriptionKey];
+  const link = cardLink(service);
 
   /* The card's own box, cached on enter.
      Reading getBoundingClientRect() inside mousemove forces the browser to
@@ -67,7 +77,8 @@ export function ServiceCard({ service, descriptionKey = "short" }) {
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={cn(
-        "service-card group relative overflow-hidden rounded-card border border-(--line) bg-ink-raised p-5 shadow-card transition-[box-shadow,border-color,transform] duration-[350ms] hover:border-(--line-strong) hover:shadow-card-hover md:p-10"
+        "service-card group relative overflow-hidden rounded-card border border-(--line) bg-ink-raised p-5 shadow-card transition-[box-shadow,border-color,transform] duration-[350ms] hover:border-(--line-strong) hover:shadow-card-hover md:p-10",
+        className
       )}
     >
       <div
@@ -117,10 +128,10 @@ export function ServiceCard({ service, descriptionKey = "short" }) {
           >
             <p className="pt-3 text-sm text-body">{desc}</p>
             <Link
-              href={service.slug ? `/services/${service.slug}` : "/contact"}
+              href={link.href}
               className="mt-[14px] inline-flex items-center gap-2 text-[12.5px] font-semibold text-text-1"
             >
-              {service.slug ? `Explore ${service.title}` : "Start a brief"}
+              {link.label}
               <ArrowUpRight size={13} className="lime-accent" />
             </Link>
           </div>
@@ -147,10 +158,10 @@ export function ServiceCard({ service, descriptionKey = "short" }) {
             {/* Points at the discipline's own page when it has one, so the
                 card is an entry point to that page rather than a dead end. */}
             <Link
-              href={service.slug ? `/services/${service.slug}` : "/contact"}
+              href={link.href}
               className="mt-[22px] inline-flex items-center gap-2 text-[12.5px] font-semibold text-text-1"
             >
-              {service.slug ? `Explore ${service.title}` : "Start a brief"}
+              {link.label}
               <ArrowUpRight size={13} className="lime-accent" />
             </Link>
           </div>

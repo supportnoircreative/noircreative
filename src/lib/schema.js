@@ -53,7 +53,7 @@ export function faqSchema() {
   };
 }
 
-/** The six disciplines as an offer catalog on /services. */
+/** The seven disciplines as an offer catalog on /services. */
 export function servicesSchema() {
   return {
     "@context": "https://schema.org",
