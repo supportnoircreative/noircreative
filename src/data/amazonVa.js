@@ -72,8 +72,8 @@ export const amazonVa = {
   /* --------------------------------------------------- what's different */
   principles: {
     eyebrow: "Why it works",
-    title: ["Not a task list.", "An owner for the account."],
-    desc: "A VA works the queue you hand them. We own the outcome, and run every lane of the account towards it.",
+    title: ["Not a task list.", "A team accountable for results."],
+    desc: "A VA works the queue you hand them. We're accountable for the outcome, and run every lane of the account towards it.",
     items: [
       {
         icon: "account",
