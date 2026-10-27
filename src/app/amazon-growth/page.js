@@ -12,7 +12,7 @@ import { AMAZON_PATH } from "@/data/amazonVa";
 export const metadata = {
   title: "Amazon Account Management & Growth",
   description:
-    "A dedicated team that owns and scales your Amazon and Walmart accounts: listings, advertising, inventory and account health, with detailed case studies and real Seller Central numbers.",
+    "A dedicated team that runs and scales your Amazon and Walmart accounts: listings, advertising, inventory and account health, with detailed case studies and real Seller Central numbers.",
   alternates: { canonical: AMAZON_PATH },
 };
 

@@ -113,7 +113,7 @@ export function CaseStudyDetail({ study }) {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr]">
             <Reveal>
               <Eyebrow>The problem</Eyebrow>
-              <h2 className="max-w-[14ch] text-[clamp(26px,3vw,38px)]">What we took over.</h2>
+              <h2 className="max-w-[14ch] text-[clamp(26px,3vw,38px)]">Where the account started.</h2>
             </Reveal>
             <Reveal delay={90}>
               <p className="m-0 text-[16.5px] leading-[1.8]">{study.challenge}</p>

@@ -47,7 +47,7 @@ export const amazonVa = {
     // One clear promise. Keep it under ~30 words: it sits directly under an
     // oversized headline and competes with it if it runs long.
     description:
-      "We take full ownership of your Amazon and Walmart accounts. Listings, advertising, inventory and account health run as one strategy, reported against revenue, margin and TACoS.",
+      "We run your Amazon and Walmart accounts end to end. Listings, advertising, inventory and account health, managed as one strategy and reported against revenue, margin and TACoS.",
     primaryCta: { label: "Get a free account audit", href: "/contact" },
     secondaryCta: { label: "See the results", href: "#amazon-case-studies" },
     // Small trust line beneath the buttons.
@@ -65,7 +65,7 @@ export const amazonVa = {
      so this block only holds the panel's own heading. */
   proof: {
     eyebrow: "Proof, not promises",
-    title: ["Accounts we took over,", "in their own numbers."],
+    title: ["Accounts we've managed,", "in their own numbers."],
     desc: "Every figure comes straight from the client's own Seller Central reports.",
   },
 
@@ -77,7 +77,7 @@ export const amazonVa = {
     items: [
       {
         icon: "account",
-        title: "Full ownership",
+        title: "Full accountability",
         body: "One team accountable for the whole account, so listings, ads and stock decisions stop pulling in different directions.",
       },
       {
@@ -217,7 +217,7 @@ export const amazonVa = {
   caseStudies: {
     eyebrow: "Exclusive case studies",
     title: ["Receipts, not", "round numbers."],
-    desc: "Four accounts we took over, what was actually broken, and what the numbers looked like afterwards.",
+    desc: "Four accounts we have managed, what was actually broken, and what the numbers looked like afterwards.",
     side: "Every figure comes from the client's own Seller Central Business Reports and Advertising console.",
     items: [
       {
@@ -349,7 +349,7 @@ export const amazonVa = {
       tone: "dark",
       eyebrow: "Still deciding?",
       title: "Read the case studies",
-      body: "Four accounts we took over, what was actually broken, and what the numbers looked like afterwards.",
+      body: "Four accounts we have managed, what was actually broken, and what the numbers looked like afterwards.",
       cta: { label: "See the results", href: "#amazon-case-studies" },
     },
   ],
@@ -360,7 +360,7 @@ export const amazonVa = {
   teaser: {
     eyebrow: "Amazon & Walmart growth",
     title: ["Selling on Amazon?", "We grow that too."],
-    desc: "A dedicated team that owns and scales your Amazon and Walmart accounts, from listings and advertising to inventory and account health, with case studies and real numbers.",
+    desc: "A dedicated team that runs and scales your Amazon and Walmart accounts, from listings and advertising to inventory and account health, with case studies and real numbers.",
     bullets: [
       "Listing & SEO rebuilds",
       "Advertising against a TACoS target",

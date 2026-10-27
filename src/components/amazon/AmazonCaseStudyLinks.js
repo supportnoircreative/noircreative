@@ -23,7 +23,7 @@ export function AmazonCaseStudyLinks() {
         <SectionHead
           eyebrow="Amazon growth"
           title={["Marketplace work,", "measured."]}
-          desc="Four Amazon accounts we took over, with the numbers straight from the client's Seller Central."
+          desc="Four Amazon accounts we have managed, with the numbers straight from the client's Seller Central."
           side={
             <>
               Full service breakdown.{" "}
