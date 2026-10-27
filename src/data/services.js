@@ -1,6 +1,6 @@
-import { AMAZON_PATH } from "@/data/amazonVa";
+import { AMAZON_PATH, AMAZON_AUDIT_PATH } from "@/data/amazonVa";
 
-/* The seven disciplines.
+/* The eight disciplines.
    ------------------------------------------------------------------
    `short` and `full` feed the cards on /services and the home teaser.
    Everything below `slug` feeds that service's own page at
@@ -12,10 +12,22 @@ import { AMAZON_PATH } from "@/data/amazonVa";
    for every entry, and add a `slug` to create the page.
 
    An entry with `href` instead of a `slug` already has a page elsewhere:
-   its card links there and no /services/<slug> page is generated. */
+   its card links there and no /services/<slug> page is generated.
+   `featured` makes a card span two columns; `cta` overrides the "Start a
+   brief" button on a service's own page. */
 export const services = [
   {
     id: "01",
+    href: AMAZON_PATH,
+    icon: "cart",
+    title: "Amazon Growth",
+    // Spans two columns in the grids so the lead service reads as the lead.
+    featured: true,
+    short: "Amazon accounts run end to end: listings, advertising, inventory and account health, with real case studies behind it.",
+    full: "Amazon account management: listings, advertising, inventory and account health, run as one strategy against revenue and margin, with real Seller Central case studies behind it.",
+  },
+  {
+    id: "02",
     slug: "graphic-design",
     icon: "palette",
     title: "Graphic Design",
@@ -60,7 +72,7 @@ export const services = [
     ],
   },
   {
-    id: "02",
+    id: "03",
     slug: "web-development",
     icon: "monitor",
     title: "Web Development",
@@ -105,7 +117,7 @@ export const services = [
     ],
   },
   {
-    id: "03",
+    id: "04",
     slug: "digital-marketing",
     icon: "chart",
     title: "Digital Marketing",
@@ -150,7 +162,7 @@ export const services = [
     ],
   },
   {
-    id: "04",
+    id: "05",
     slug: "brand-strategy",
     icon: "target",
     title: "Brand Strategy",
@@ -195,7 +207,7 @@ export const services = [
     ],
   },
   {
-    id: "05",
+    id: "06",
     slug: "ui-ux-design",
     icon: "layout",
     title: "UI/UX Design",
@@ -240,7 +252,7 @@ export const services = [
     ],
   },
   {
-    id: "06",
+    id: "07",
     slug: "video-editing",
     icon: "video",
     title: "Video Editing",
@@ -285,11 +297,51 @@ export const services = [
     ],
   },
   {
-    id: "07",
-    href: AMAZON_PATH,
-    icon: "cart",
-    title: "Amazon Growth",
-    short: "Amazon and Walmart accounts run end to end: listings, advertising, inventory and account health.",
-    full: "Amazon and Walmart account management: listings, advertising, inventory and account health, run as one strategy against revenue and margin.",
+    id: "08",
+    slug: "walmart-account-management",
+    icon: "store",
+    title: "Walmart Account Management",
+    short: "Walmart Marketplace run with the same discipline as Amazon: item setup, content, pricing, fulfilment and ads.",
+    full: "Walmart Marketplace and Walmart Connect: item setup, listing quality, pricing, WFS fulfilment and Sponsored Search, run with the same discipline as an Amazon account.",
+    // This service's page sends people to the marketplace audit form rather
+    // than the general project brief.
+    cta: { label: "Get a free account audit", href: AMAZON_AUDIT_PATH },
+
+    intro:
+      "Walmart is the obvious second marketplace for most Amazon sellers, and the one most often launched and then left alone. Catalogue data gets copied across without being rewritten for Walmart search, pricing drifts out of the Buy Box, and ads run on defaults. We run the account properly, as its own channel with its own targets.",
+    bestFor:
+      "Brands already selling on Amazon that want Walmart to pull its weight, and sellers launching on Walmart Marketplace for the first time.",
+    deliverables: [
+      {
+        title: "Item setup and content",
+        body: "Listings built for Walmart search rather than pasted from Amazon: titles, attributes, descriptions and images that lift the listing quality score.",
+      },
+      {
+        title: "Pricing and Buy Box",
+        body: "Pricing kept competitive against the rest of the marketplace so your offer holds the Buy Box without giving away margin.",
+      },
+      {
+        title: "Fulfilment and WFS",
+        body: "Walmart Fulfillment Services set up and stocked, or your own fulfilment kept inside Walmart's delivery and performance standards.",
+      },
+      {
+        title: "Walmart Connect advertising",
+        body: "Sponsored Search campaigns structured and optimised to a margin target, reported alongside the rest of the account.",
+      },
+    ],
+    approach: [
+      {
+        title: "Audit the account",
+        body: "Listing quality, pricing, fulfilment and seller performance reviewed line by line, with a prioritised list of fixes.",
+      },
+      {
+        title: "Fix the catalogue first",
+        body: "Content and pricing come before ad spend, so every dollar of advertising lands on a listing that can convert.",
+      },
+      {
+        title: "Run and report",
+        body: "Daily operations inside Seller Center, with one weekly summary of what moved and what happens next.",
+      },
+    ],
   },
 ];

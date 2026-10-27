@@ -10,6 +10,7 @@ import {
   Palette,
   Plus,
   ShoppingCart,
+  Store,
   Target,
   Video,
 } from "lucide-react";
@@ -23,6 +24,7 @@ const ICONS = {
   layout: LayoutTemplate,
   video: Video,
   cart: ShoppingCart,
+  store: Store,
 };
 
 /** Where a card leads: an external page (`href`), its own service page, or the brief form. */
@@ -78,6 +80,7 @@ export function ServiceCard({ service, descriptionKey = "short", className }) {
       onMouseLeave={onMouseLeave}
       className={cn(
         "service-card group relative overflow-hidden rounded-card border border-(--line) bg-ink-raised p-5 shadow-card transition-[box-shadow,border-color,transform] duration-[350ms] hover:border-(--line-strong) hover:shadow-card-hover md:p-10",
+        service.featured && "lg:col-span-2",
         className
       )}
     >

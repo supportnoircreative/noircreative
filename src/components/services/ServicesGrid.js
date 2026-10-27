@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/shared/ServiceCard";
-import { serviceGridItemClass } from "@/lib/utils";
+import { serviceGridItemClass, serviceSlots } from "@/lib/utils";
 import { services } from "@/data/services";
 
 export function ServicesGrid() {
@@ -16,7 +16,7 @@ export function ServicesGrid() {
               key={service.id}
               service={service}
               descriptionKey="full"
-              className={serviceGridItemClass(i, services.length)}
+              className={serviceGridItemClass(i, services.length, serviceSlots(services))}
             />
           ))}
         </Reveal>

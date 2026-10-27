@@ -18,6 +18,7 @@ const serviceLinks = [
   { label: "Digital Marketing", href: "/services" },
   { label: "Brand Strategy", href: "/services" },
   { label: "Amazon Growth", href: AMAZON_PATH },
+  { label: "Walmart Accounts", href: "/services/walmart-account-management" },
 ];
 
 export function Footer() {

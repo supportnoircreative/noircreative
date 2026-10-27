@@ -11,7 +11,7 @@ import { services } from "@/data/services";
  *
  * /services lists every discipline, so only that URL could rank and it had to cover
  * several unrelated topics at once. Each service now has a page deep enough to
- * stand on its own, cross-linked to the other five so none of them is
+ * stand on its own, cross-linked to the others so none of them is
  * a dead end.
  */
 export function ServiceDetail({ service }) {
@@ -65,8 +65,8 @@ export function ServiceDetail({ service }) {
           )}
 
           <Reveal immediate className="mt-10">
-            <Button href="/contact" roll arrow>
-              Start a brief
+            <Button href={service.cta?.href ?? "/contact"} roll arrow>
+              {service.cta?.label ?? "Start a brief"}
             </Button>
           </Reveal>
         </div>
