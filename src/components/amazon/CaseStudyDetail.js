@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RollText } from "@/components/ui/RollText";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { AMAZON_PATH } from "@/data/amazonVa";
 
 const ACCENTS = {
   lime: { value: "lime-accent", glow: "bg-[radial-gradient(circle_at_88%_0%,rgba(198,242,78,.10),transparent_42%)]" },
@@ -14,7 +15,7 @@ const ACCENTS = {
 /**
  * A single case study as its own page.
  *
- * The /amazon-va tab rail shows the same four studies, but tabs share one URL,
+ * The Amazon page tab rail shows the same four studies, but tabs share one URL,
  * so only that one page can ever rank. Each study rendered here is separately
  * indexable and can target its own category terms.
  */
@@ -28,7 +29,7 @@ export function CaseStudyDetail({ study }) {
         <div className="mx-auto max-w-[1220px]">
           <Reveal immediate>
             <Link
-              href="/amazon-va#amazon-case-studies"
+              href={`${AMAZON_PATH}#amazon-case-studies`}
               className="group mb-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ash transition-colors duration-200 hover:text-text-1"
             >
               <ArrowLeft
@@ -193,7 +194,7 @@ export function CaseStudyDetail({ study }) {
             <Button href="/contact" roll arrow>
               Get a free account audit
             </Button>
-            <Button href="/amazon-va#amazon-case-studies" variant="outline" roll>
+            <Button href={`${AMAZON_PATH}#amazon-case-studies`} variant="outline" roll>
               See the other case studies
             </Button>
           </Reveal>

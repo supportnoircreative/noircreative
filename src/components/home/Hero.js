@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { StarRating } from "@/components/ui/StarRating";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { AmazonMark } from "@/components/amazon/AmazonMark";
+import { AMAZON_PATH } from "@/data/amazonVa";
 
 const chips = [
   { text: "const brand = bold;", className: "top-[22%] left-[7%]", delay: "0s" },
@@ -62,10 +63,10 @@ export function Hero() {
               <Button href="/contact" arrow roll className="cta-tall">
                 Start a project
               </Button>
-              {/* Amazon-intent entry point — routes sellers straight to the VA offer. */}
+              {/* Amazon-intent entry point — routes sellers straight to the Amazon growth page. */}
               {/* No `roll` here — the roll mask clips to one line height, which
                   would crop the smile sitting under the label. */}
-              <Button href="/amazon-va" variant="outline" arrow className="btn-amazon cta-tall">
+              <Button href={AMAZON_PATH} variant="outline" arrow className="btn-amazon cta-tall">
                 <span className="amazon-cta">
                   <span className="amazon-cta-label">Sell More</span>
                   <AmazonMark className="amazon-smile lime-accent" />

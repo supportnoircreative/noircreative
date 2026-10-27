@@ -1,3 +1,4 @@
+import { AMAZON_PATH } from "@/data/amazonVa";
 export const site = {
   name: "Noir Creative LLC",
   /* Canonical origin. Single source for metadataBase, the sitemap, robots.txt
@@ -30,7 +31,7 @@ export const site = {
 export const navLinks = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Amazon VA", href: "/amazon-va" },
+  { label: "Amazon Growth", href: AMAZON_PATH },
   { label: "About", href: "/about" },
   { label: "Reviews", href: "/#testimonials" },
   { label: "FAQ", href: "/services#faq" },

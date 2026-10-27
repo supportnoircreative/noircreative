@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { amazonVa } from "@/data/amazonVa";
 
 /**
- * Home-page entry point for the Amazon VA offering. Two columns: the pitch on
+ * Home-page entry point for the Amazon growth offering. Two columns: the pitch on
  * the left, a single headline metric lifted from the case studies on the right.
  * Content lives in amazonVa.teaser.
  */
@@ -14,7 +14,7 @@ export function AmazonTeaser() {
   const { teaser } = amazonVa;
 
   return (
-    <section id="amazon-va" className="border-y border-(--line) px-5 py-[130px] max-sm:py-[72px] md:px-8">
+    <section id="amazon-growth" className="border-y border-(--line) px-5 py-[130px] max-sm:py-[72px] md:px-8">
       <div className="mx-auto grid max-w-[1220px] grid-cols-1 items-center gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
         <div>
           <Reveal>

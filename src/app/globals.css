@@ -126,13 +126,24 @@ button {
   font-family: inherit;
 }
 
+/* The margin reset lives in the base layer so margin utilities (mx-auto,
+   mt-*) on a heading still win; unlayered, it beat them and pinned centred
+   headings to the left edge of their container. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+  }
+}
+
 h1,
 h2,
 h3,
 h4 {
   line-height: 1.08;
   letter-spacing: -0.03em;
-  margin: 0;
   font-weight: 800;
   font-family: var(--font-display);
 }
@@ -921,4 +932,26 @@ select option {
 [data-theme="light"] .testi-band-mark {
   background: var(--ink);
   opacity: 0.06;
+}
+
+/* ---------- Amazon process step-through ----------
+   The active step's copy is re-keyed on every switch, so this replays each
+   time the user moves to another step. */
+.step-fade {
+  animation: step-fade 0.5s var(--ease-premium) both;
+}
+@keyframes step-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .step-fade {
+    animation: none;
+  }
 }

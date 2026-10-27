@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
-import { amazonVa } from "@/data/amazonVa";
+import { amazonVa, AMAZON_PATH } from "@/data/amazonVa";
 
 /**
  * Links out to every Amazon case study page.
@@ -27,8 +27,8 @@ export function AmazonCaseStudyLinks() {
           side={
             <>
               Full service breakdown.{" "}
-              <Link href="/amazon-va" className="lime-accent underline">
-                Amazon VA services →
+              <Link href={AMAZON_PATH} className="lime-accent underline">
+                Amazon growth services →
               </Link>
             </>
           }
@@ -40,7 +40,7 @@ export function AmazonCaseStudyLinks() {
             return (
               <Reveal key={study.id} delay={i * 60}>
                 <Link
-                  href={`/amazon-va/${study.slug}`}
+                  href={`${AMAZON_PATH}/${study.slug}`}
                   className="group flex h-full flex-col rounded-card border border-(--line) bg-ink-raised p-[30px] shadow-card transition-all duration-400 ease-(--ease) hover:-translate-y-1 hover:border-lime/30 hover:shadow-card-hover"
                 >
                   <div className="mb-6 flex items-start justify-between gap-4">

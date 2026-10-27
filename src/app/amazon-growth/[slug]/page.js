@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { CaseStudyDetail } from "@/components/amazon/CaseStudyDetail";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { caseStudySchema, caseStudyBreadcrumbSchema } from "@/lib/schema";
-import { amazonVa } from "@/data/amazonVa";
+import { amazonVa, AMAZON_PATH } from "@/data/amazonVa";
 
 const studies = amazonVa.caseStudies.items;
 const findStudy = (slug) => studies.find((s) => s.slug === slug);
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description: study.headline,
-    alternates: { canonical: `/amazon-va/${study.slug}` },
+    alternates: { canonical: `${AMAZON_PATH}/${study.slug}` },
     openGraph: {
       type: "article",
       title,

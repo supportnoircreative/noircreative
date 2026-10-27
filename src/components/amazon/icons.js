@@ -4,9 +4,11 @@ import {
   Boxes,
   Clock4,
   Megaphone,
+  Percent,
   Search,
   ShieldCheck,
   Star,
+  Store,
   TextQuote,
   TrendingUp,
 } from "lucide-react";
@@ -26,6 +28,8 @@ export const AMAZON_ICONS = {
   clock: Clock4,
   reviews: Star,
   report: BarChart3,
+  margin: Percent,
+  store: Store,
 };
 
 /** Falls back to a neutral icon so a typo in the data file never crashes a page. */

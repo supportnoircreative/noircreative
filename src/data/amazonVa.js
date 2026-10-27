@@ -1,20 +1,27 @@
 /* ==========================================================================
-   Amazon VA — single source of content for the /amazon-va page and its home
-   teaser. Everything rendered on that page is defined here; the components
-   only lay it out. Swap this file's values for your own and nothing else
-   needs to change.
+   Amazon Growth: single source of content for the Amazon page (see
+   AMAZON_PATH) and its home teaser. Everything rendered on that page is
+   defined here; the components only lay it out. Swap this file's values for
+   your own and nothing else needs to change.
 
    Editing rules of thumb
    ----------------------
    • `icon` fields accept only the keys listed in AMAZON_ICON_KEYS below
      (they map to lucide-react icons inside the components).
-   • Arrays are rendered in order, and every list is length-agnostic — add or
+   • Arrays are rendered in order, and every list is length-agnostic: add or
      remove entries freely. The layouts read best at:
-       pillars 3 or 6 · painPoints 4 · process 4 or 5 · caseStudies 2–5
-       metrics 3 or 4 per case study · proofBar 3 or 4
+       principles 4 · platforms 5 (3 + 2) · process 4 · caseStudies 2–5
+       metrics 3 or 4 per case study · closing 2
+   • Headline arrays are [plain line, accent line]: the second line renders
+     in the accent colour.
    • `accent` on a case study tints its metric rail: "lime" | "violet".
-   • Keep metric `value` short (≤7 chars) — it renders at display size.
+   • Keep metric `value` short (≤7 chars): it renders at display size.
    ========================================================================== */
+
+/** Where the Amazon service lives. Every link, canonical, sitemap entry and
+    schema URL builds from this, so the address is defined exactly once. The
+    old /amazon-va URLs redirect here (see next.config.mjs). */
+export const AMAZON_PATH = "/amazon-growth";
 
 /** Icon keys the Amazon components know how to render. */
 export const AMAZON_ICON_KEYS = [
@@ -28,105 +35,141 @@ export const AMAZON_ICON_KEYS = [
   "clock",
   "reviews",
   "report",
+  "margin",
+  "store",
 ];
 
 export const amazonVa = {
   /* ---------------------------------------------------------------- hero */
   hero: {
-    eyebrow: "Amazon seller support",
-    title: [
-      "Your Amazon account,",
-      "run like it's ours.",
-    ],
-    // One clear promise. Keep it under ~30 words — it sits directly under an
+    eyebrow: "Amazon & Walmart account management",
+    title: ["Amazon growth, driven by data.", "Run by people, not\u00A0bots."],
+    // One clear promise. Keep it under ~30 words: it sits directly under an
     // oversized headline and competes with it if it runs long.
     description:
-      "Dedicated Amazon virtual assistants who own the unglamorous work: listings, PPC, cases and inventory, so you get your week back and your catalogue stops leaking margin.",
+      "We take full ownership of your Amazon and Walmart accounts. Listings, advertising, inventory and account health run as one strategy, reported against revenue, margin and TACoS.",
     primaryCta: { label: "Get a free account audit", href: "/contact" },
-    secondaryCta: { label: "See the case studies", href: "#amazon-case-studies" },
+    secondaryCta: { label: "See the results", href: "#amazon-case-studies" },
     // Small trust line beneath the buttons.
     footnote: "No retainer to see the audit. You keep the findings either way.",
-    // Floating marketplace chips in the hero (label + tone).
-    chips: [
-      { label: "Seller Central", tone: "lime" },
-      { label: "Vendor Central", tone: "plain" },
-      { label: "FBA + FBM", tone: "plain" },
-      { label: "Brand Registry", tone: "violet" },
+    // Marketplace strip under the hero, grouped by marketplace. Plain text
+    // badges rather than logos, so no trademark artwork is reproduced.
+    marketplaces: [
+      { group: "Amazon", items: ["Seller Central", "Vendor Central", "Amazon Ads", "Brand Registry"] },
+      { group: "Walmart", items: ["Walmart Marketplace", "Walmart Connect"] },
     ],
   },
 
-  /* --------------------------------------------- the problem we mirror back
-     This is the "they get it" section. Write these as the sentences a seller
-     would actually say out loud, not as service descriptions. */
-  painPoints: {
-    eyebrow: "Sound familiar?",
-    title: ["Most sellers aren't", "short on product."],
-    desc: "They're short on hours. Here's what we hear on almost every first call, and what changes once someone owns it full-time.",
-    items: [
-      {
-        icon: "clock",
-        quote: "I'm spending my evenings in Seller Central instead of on the business.",
-        shift: "A VA takes the daily queue of cases, pricing and stock alerts, and reports once a week.",
-      },
-      {
-        icon: "ads",
-        quote: "Ad spend keeps climbing and I can't tell which campaigns actually pay.",
-        shift: "Search-term level pruning and a TACoS target you can actually hold us to.",
-      },
-      {
-        icon: "listing",
-        quote: "My listings rank for the wrong things and convert worse than they should.",
-        shift: "Keyword-mapped titles, bullets and backend terms rebuilt around real search volume.",
-      },
-      {
-        icon: "inventory",
-        quote: "I've gone out of stock on my best ASIN more than once.",
-        shift: "Reorder points tied to velocity and lead time, reviewed weekly, not guessed.",
-      },
-    ],
+  /* ------------------------------------------------- floating proof panel
+     The tiles are built from caseStudies.items below (first metric of each),
+     so this block only holds the panel's own heading. */
+  proof: {
+    eyebrow: "Proof, not promises",
+    title: ["Accounts we took over,", "in their own numbers."],
+    desc: "Every figure comes straight from the client's own Seller Central reports.",
   },
 
-  /* ------------------------------------------------------- what we cover */
-  pillars: {
-    eyebrow: "Scope of work",
-    title: ["Everything inside", "Seller Central."],
-    desc: "Pick the lanes you need. Most clients start with two and expand once the reporting proves out.",
+  /* --------------------------------------------------- what's different */
+  principles: {
+    eyebrow: "Why it works",
+    title: ["Not a task list.", "An owner for the account."],
+    desc: "A VA works the queue you hand them. We own the outcome, and run every lane of the account towards it.",
     items: [
-      {
-        icon: "listing",
-        title: "Listing & Catalogue",
-        body: "Titles, bullets, A+ content, variations, flat files and error-free bulk uploads. Copy written for the algorithm and the human scrolling past it.",
-        deliverables: ["Keyword-mapped copy", "A+ / brand story", "Variation clean-up", "Flat-file fixes"],
-      },
-      {
-        icon: "search",
-        title: "SEO & Keyword Research",
-        body: "Helium 10 and Cerebro-driven research turned into an indexing plan, with front-end, backend and PPC sharing one keyword universe.",
-        deliverables: ["Relevancy map", "Backend terms", "Index audits", "Competitor gap"],
-      },
-      {
-        icon: "ads",
-        title: "PPC Management",
-        body: "Sponsored Products, Brands and Display built around margin, not impressions. Weekly bid and negative-keyword passes against a fixed TACoS target.",
-        deliverables: ["Campaign builds", "Bid & budget passes", "Negative mining", "Placement tuning"],
-      },
-      {
-        icon: "inventory",
-        title: "Inventory & FBA Ops",
-        body: "Shipment plans, reorder points, removal orders, stranded and aged inventory: the stuff that quietly costs you the Buy Box.",
-        deliverables: ["Reorder planning", "Shipment creation", "Stranded recovery", "IPI health"],
-      },
       {
         icon: "account",
-        title: "Account Health & Cases",
-        body: "Suppressed listings, policy flags, IP complaints and reimbursement claims, chased through Seller Support until they actually close.",
-        deliverables: ["Case management", "Suppression fixes", "Reimbursements", "Policy appeals"],
+        title: "Full ownership",
+        body: "One team accountable for the whole account, so listings, ads and stock decisions stop pulling in different directions.",
+      },
+      {
+        icon: "margin",
+        title: "Margin first",
+        body: "Growth measured against profit, not impressions. Every campaign answers to a TACoS target, not a spend budget.",
+      },
+      {
+        icon: "report",
+        title: "Clear reporting",
+        body: "One dashboard and one weekly summary: what moved, what didn't, and what happens next.",
+      },
+      {
+        icon: "growth",
+        title: "Compounding growth",
+        body: "Catalogue, advertising and reviews feed each other, so this quarter's gains make next quarter cheaper to win.",
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------- what we run
+     `marketplace` is the small badge on each card; `deliverables` is the
+     list revealed by "See more". */
+  platforms: {
+    eyebrow: "What we run",
+    title: ["Every lane,", "one strategy."],
+    desc: "Amazon and Walmart, managed end to end. Open any card for the full scope.",
+    items: [
+      {
+        icon: "listing",
+        marketplace: "Amazon",
+        title: "Seller Central",
+        body: "Catalogue, listings, SEO and the daily operations inside Seller Central, from flat files to suppressed ASINs.",
+        deliverables: [
+          "Keyword-mapped listings",
+          "Backend search terms",
+          "Variation & flat-file fixes",
+          "Inventory & FBA planning",
+          "Account health & cases",
+          "Reimbursement claims",
+        ],
+      },
+      {
+        icon: "ads",
+        marketplace: "Amazon",
+        title: "Amazon Advertising",
+        body: "Sponsored Products, Brands and Display built around margin, with weekly bid, budget and negative-keyword passes against a TACoS target.",
+        deliverables: [
+          "Campaign architecture",
+          "Bid & budget passes",
+          "Negative keyword mining",
+          "Placement tuning",
+          "Search-term reporting",
+        ],
       },
       {
         icon: "reviews",
-        title: "Reviews & Customer Care",
-        body: "Buyer messages answered inside SLA, review and feedback monitoring, and compliant follow-up sequences that lift your rating over time.",
-        deliverables: ["Message handling", "Review monitoring", "Feedback removal", "Q&A upkeep"],
+        marketplace: "Amazon",
+        title: "Brand Registry & Retention",
+        body: "The Brand Registry tools that lift conversion and repeat purchase: A+ content, storefronts, Subscribe & Save and review monitoring.",
+        deliverables: [
+          "A+ content & brand story",
+          "Brand Store",
+          "Subscribe & Save",
+          "Review & feedback monitoring",
+          "Brand Analytics insights",
+        ],
+      },
+      {
+        icon: "store",
+        marketplace: "Walmart",
+        title: "Walmart Marketplace",
+        body: "Item setup, content, pricing and fulfilment on Walmart, run with the same discipline as your Amazon account.",
+        deliverables: [
+          "Item setup & content",
+          "Listing quality score",
+          "Pricing & Buy Box",
+          "Walmart Fulfillment Services",
+          "Seller performance",
+        ],
+      },
+      {
+        icon: "ads",
+        marketplace: "Walmart",
+        title: "Walmart Connect",
+        body: "Sponsored Search on Walmart, structured and optimised to the same margin targets as your Amazon advertising.",
+        deliverables: [
+          "Sponsored Search campaigns",
+          "Keyword & bid management",
+          "Budget pacing",
+          "Performance reporting",
+        ],
       },
     ],
   },
@@ -134,7 +177,7 @@ export const amazonVa = {
   /* ------------------------------------------------------ how engagement runs */
   process: {
     eyebrow: "How it runs",
-    title: "Four weeks to hands-off.",
+    title: ["Four steps to", "hands-off growth."],
     steps: [
       {
         id: "01",
@@ -149,7 +192,7 @@ export const amazonVa = {
       {
         id: "03",
         title: "Run",
-        body: "Your VA works the queue daily inside your Seller Central with role-scoped access. Slack or WhatsApp for anything urgent.",
+        body: "Your account team works inside Seller Central and Walmart Seller Center every day, with role-scoped access. Slack or WhatsApp for anything urgent.",
       },
       {
         id: "04",
@@ -292,57 +335,39 @@ export const amazonVa = {
     ],
   },
 
-  /* ------------------------------------------------- risk reversal / offer
-     The close. Keep the guarantees to things you will genuinely honour. */
-  offer: {
-    eyebrow: "Why sellers stay",
-    title: ["Low risk to start.", "Hard to leave."],
-    desc: "We'd rather earn the retainer every month than lock you into one.",
-    guarantees: [
-      {
-        icon: "shield",
-        title: "No long-term contract",
-        body: "Month to month after the first 30 days. Cancel with two weeks' notice and we hand over every doc and dashboard.",
-      },
-      {
-        icon: "report",
-        title: "Metrics agreed up front",
-        body: "Each lane gets a target: TACoS, index count, IPI, response time. If we miss it two months running, you stop paying for that lane.",
-      },
-      {
-        icon: "account",
-        title: "Least-privilege access",
-        body: "Role-scoped Seller Central users only. No password sharing, no admin rights, full audit trail of who changed what.",
-      },
-      {
-        icon: "growth",
-        title: "Your account stays yours",
-        body: "Every campaign, SOP and keyword file is built in your accounts under your ownership. Nothing is hostage to the retainer.",
-      },
-    ],
-    // Small stat strip above the closing CTA.
-    proofBar: [
-      { value: "24h", label: "Case response SLA" },
-      { value: "6", label: "Marketplaces supported" },
-      { value: "100%", label: "Client retention, 12mo" },
-    ],
-    cta: { label: "Book the free audit", href: "/contact" },
-  },
+  /* --------------------------------------------------- two closing cards
+     `tone: "bone"` renders the light card; anything else the dark one. */
+  closing: [
+    {
+      tone: "bone",
+      eyebrow: "Start here",
+      title: "Get a free account audit",
+      body: "A line-by-line review of listings, campaigns, account health and stock, delivered as a prioritised findings doc. Free, and yours either way.",
+      cta: { label: "Book the audit", href: "/contact" },
+    },
+    {
+      tone: "dark",
+      eyebrow: "Still deciding?",
+      title: "Read the case studies",
+      body: "Four accounts we took over, what was actually broken, and what the numbers looked like afterwards.",
+      cta: { label: "See the results", href: "#amazon-case-studies" },
+    },
+  ],
 
   /* --------------------------------------------------- home-page teaser
-     Rendered by <AmazonTeaser /> on the home page. Keep it short — it exists
+     Rendered by <AmazonTeaser /> on the home page. Keep it short: it exists
      to send the right visitor to the full page. */
   teaser: {
-    eyebrow: "New service",
-    title: ["Selling on Amazon?", "We run that too."],
-    desc: "Dedicated Amazon VAs for listings, PPC, inventory and account health, with case studies and real numbers, not promises.",
+    eyebrow: "Amazon & Walmart growth",
+    title: ["Selling on Amazon?", "We grow that too."],
+    desc: "A dedicated team that owns and scales your Amazon and Walmart accounts, from listings and advertising to inventory and account health, with case studies and real numbers.",
     bullets: [
       "Listing & SEO rebuilds",
-      "PPC against a TACoS target",
+      "Advertising against a TACoS target",
       "Inventory & FBA operations",
-      "Account health & reimbursements",
+      "Walmart Marketplace & Connect",
     ],
-    cta: { label: "Explore Amazon VA", href: "/amazon-va" },
+    cta: { label: "Explore Amazon Growth", href: AMAZON_PATH },
     // Headline figure pulled forward as social proof.
     highlight: { value: "12×", label: "monthly revenue in 24 months", note: "Pearl Linens case study" },
   },

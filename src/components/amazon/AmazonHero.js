@@ -4,40 +4,18 @@ import { RollText } from "@/components/ui/RollText";
 import { Button } from "@/components/ui/Button";
 import { amazonVa } from "@/data/amazonVa";
 
-const TONES = {
-  lime: "code-chip--lime",
-  violet: "code-chip--violet",
-  plain: "",
-};
-
-// Fixed positions so the chips read as a composed cluster rather than a random
-// scatter. They deliberately sit below the fixed header and inside of the
-// floating theme / WhatsApp buttons so nothing overlaps. Index maps to data
-// order; extra chips cycle back through the list.
-const CHIP_POS = [
-  "left-[3%] top-[34%] [animation-delay:-1.2s]",
-  "right-[4%] top-[27%] [animation-delay:-3.6s]",
-  "left-[7%] bottom-[18%] [animation-delay:-5.1s]",
-  "right-[9%] bottom-[26%] [animation-delay:-2.4s]",
-];
-
+/**
+ * Centred two-tone hero with the marketplace strip underneath.
+ *
+ * Everything here is above the fold, so every Reveal is `immediate`: the
+ * content ships visible in the server HTML instead of waiting on hydration.
+ */
 export function AmazonHero() {
   const { hero } = amazonVa;
+  const [plain, accent] = hero.title;
 
   return (
-    <section className="relative overflow-hidden border-b border-(--line) bg-[radial-gradient(circle_at_88%_0%,rgba(198,242,78,.10),transparent_42%)] px-5 pb-[104px] pt-[176px] text-center md:px-8">
-      {/* decorative marketplace chips — hidden on small screens where they'd crowd the type */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 max-lg:hidden">
-        {hero.chips.map((chip, i) => (
-          <span
-            key={chip.label}
-            className={`code-chip ${TONES[chip.tone] ?? ""} ${CHIP_POS[i % CHIP_POS.length]}`}
-          >
-            {chip.label}
-          </span>
-        ))}
-      </div>
-
+    <section className="relative overflow-hidden bg-[radial-gradient(circle_at_50%_-10%,rgba(198,242,78,.11),transparent_48%),radial-gradient(circle_at_100%_100%,rgba(124,92,255,.09),transparent_40%)] px-5 pb-[72px] pt-[176px] text-center max-sm:pt-[150px] md:px-8">
       <div className="relative mx-auto max-w-[1220px]">
         <Reveal immediate>
           <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-(--line-strong) px-4 py-2">
@@ -56,21 +34,27 @@ export function AmazonHero() {
           as="h1"
           immediate
           stagger={90}
-          className="mx-auto text-[clamp(36px,6vw,72px)]"
-          lines={hero.title.map((line, i) => (
-            <span key={i}>{line}</span>
-          ))}
+          className="mx-auto max-w-[1220px] text-[clamp(38px,5.6vw,78px)] tracking-[-0.04em]"
+          lines={[
+            <span key="p">{plain}</span>,
+            <em key="a" className="lime-accent not-italic">
+              {accent}
+            </em>,
+          ]}
         />
 
         <Reveal immediate>
-          <p className="mx-auto mt-[22px] max-w-[58ch] text-[16.5px] text-body">{hero.description}</p>
+          <p className="mx-auto mt-[26px] max-w-[58ch] text-[17px] text-body">{hero.description}</p>
         </Reveal>
 
-        <Reveal immediate className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
-          <Button href={hero.primaryCta.href} roll arrow>
+        <Reveal
+          immediate
+          className="mt-10 flex flex-wrap items-center justify-center gap-3.5 max-sm:flex-col max-sm:[&>a]:w-full"
+        >
+          <Button href={hero.primaryCta.href} roll arrow className="cta-tall">
             {hero.primaryCta.label}
           </Button>
-          <Button href={hero.secondaryCta.href} variant="outline" roll>
+          <Button href={hero.secondaryCta.href} variant="outline" roll className="cta-tall">
             {hero.secondaryCta.label}
           </Button>
         </Reveal>
@@ -82,6 +66,30 @@ export function AmazonHero() {
             </p>
           </Reveal>
         )}
+
+        {/* marketplace strip: plain text badges, grouped by marketplace */}
+        <Reveal immediate className="mx-auto mt-[72px] max-w-[980px] border-t border-(--line) pt-9">
+          <p className="m-0 mb-6 font-mono text-[10.5px] font-semibold uppercase tracking-[0.22em] text-mute">
+            Marketplaces we run
+          </p>
+          <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-x-8 gap-y-5 p-0">
+            {hero.marketplaces.map((group) => (
+              <li key={group.group} className="flex flex-wrap items-center justify-center gap-2.5">
+                <span className="mr-1 text-[15px] font-extrabold tracking-[-0.02em] text-text-1">
+                  {group.group}
+                </span>
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-(--line-strong) bg-ink-raised/60 px-3.5 py-1.5 text-[12.5px] font-semibold text-body"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import { site } from "@/data/site";
 import { faqs } from "@/data/faqs";
 import { services } from "@/data/services";
-import { amazonVa } from "@/data/amazonVa";
+import { amazonVa, AMAZON_PATH } from "@/data/amazonVa";
 
 const abs = (path) => `${site.url}${path}`;
 
@@ -72,22 +72,26 @@ export function servicesSchema() {
   };
 }
 
-/** Service entity for /amazon-va, with the scope lanes as the catalog. */
+/** Service entity for the Amazon growth page, with the platform lanes as the catalog. */
 export function amazonServiceSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Amazon Virtual Assistant Services",
-    serviceType: "Amazon marketplace management",
+    name: "Amazon & Walmart Account Management",
+    serviceType: "Marketplace account management",
     provider: { "@id": abs("/#organization") },
-    url: abs("/amazon-va"),
+    url: abs(AMAZON_PATH),
     description: amazonVa.hero.description,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Scope of work",
-      itemListElement: amazonVa.pillars.items.map((p) => ({
+      itemListElement: amazonVa.platforms.items.map((p) => ({
         "@type": "Offer",
-        itemOffered: { "@type": "Service", name: p.title, description: p.body },
+        itemOffered: {
+          "@type": "Service",
+          name: p.title.startsWith(p.marketplace) ? p.title : `${p.marketplace} ${p.title}`,
+          description: p.body,
+        },
       })),
     },
   };
@@ -145,19 +149,19 @@ export function caseStudySchema(study) {
     "@type": "Article",
     headline: study.headline,
     description: study.challenge,
-    url: abs(`/amazon-va/${study.slug}`),
+    url: abs(`${AMAZON_PATH}/${study.slug}`),
     author: { "@id": abs("/#organization") },
     publisher: { "@id": abs("/#organization") },
     about: {
       "@type": "Service",
-      name: "Amazon Virtual Assistant Services",
+      name: "Amazon & Walmart Account Management",
       provider: { "@id": abs("/#organization") },
     },
     articleSection: study.category,
   };
 }
 
-/** Three-level breadcrumb: Home > Amazon VA > this case study. */
+/** Three-level breadcrumb: Home > Amazon Growth > this case study. */
 export function caseStudyBreadcrumbSchema(study) {
   return {
     "@context": "https://schema.org",
@@ -167,14 +171,14 @@ export function caseStudyBreadcrumbSchema(study) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Amazon Virtual Assistant Services",
-        item: abs("/amazon-va"),
+        name: "Amazon & Walmart Account Management",
+        item: abs(AMAZON_PATH),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: study.tab,
-        item: abs(`/amazon-va/${study.slug}`),
+        item: abs(`${AMAZON_PATH}/${study.slug}`),
       },
     ],
   };

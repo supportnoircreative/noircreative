@@ -7,7 +7,7 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import { amazonVa } from "@/data/amazonVa";
+import { amazonVa, AMAZON_PATH } from "@/data/amazonVa";
 
 const ACCENTS = {
   lime: {
@@ -174,7 +174,7 @@ export function AmazonCaseStudies() {
                   offered there as a secondary download. */}
               {study.slug && (
                 <Link
-                  href={`/amazon-va/${study.slug}`}
+                  href={`${AMAZON_PATH}/${study.slug}`}
                   className="group mt-7 inline-flex items-center gap-2 text-[13.5px] font-semibold underline underline-offset-4 transition-opacity duration-200 lime-accent hover:opacity-70"
                 >
                   Read the full case study

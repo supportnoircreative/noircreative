@@ -1,5 +1,5 @@
 import { site } from "@/data/site";
-import { amazonVa } from "@/data/amazonVa";
+import { amazonVa, AMAZON_PATH } from "@/data/amazonVa";
 import { services } from "@/data/services";
 
 /**
@@ -11,7 +11,7 @@ import { services } from "@/data/services";
  */
 const ROUTES = [
   { path: "", priority: 1.0, changeFrequency: "monthly" },
-  { path: "/amazon-va", priority: 0.9, changeFrequency: "monthly" },
+  { path: AMAZON_PATH, priority: 0.9, changeFrequency: "monthly" },
   { path: "/services", priority: 0.9, changeFrequency: "monthly" },
   { path: "/work", priority: 0.8, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "yearly" },
@@ -21,7 +21,7 @@ const ROUTES = [
 /* Case study pages are derived from the data rather than listed by hand, so
    adding a study to amazonVa.caseStudies.items puts it in the sitemap too. */
 const CASE_STUDIES = amazonVa.caseStudies.items.map((s) => ({
-  path: `/amazon-va/${s.slug}`,
+  path: `${AMAZON_PATH}/${s.slug}`,
   priority: 0.8,
   changeFrequency: "yearly",
 }));
