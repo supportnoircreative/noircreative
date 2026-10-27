@@ -208,38 +208,58 @@ function messagePanel(label, message) {
   `;
 }
 
+/* Wording that differs between a general project inquiry and an Amazon /
+   Walmart audit request (sent from the audit page with kind="audit"). */
+const KINDS = {
+  project: {
+    label: "project inquiry",
+    eyebrow: "NEW PROJECT INQUIRY",
+    budget: "BUDGET",
+    details: "PROJECT DETAILS",
+  },
+  audit: {
+    label: "marketplace audit request",
+    eyebrow: "NEW AUDIT REQUEST",
+    budget: "MONTHLY SALES",
+    details: "ABOUT THE ACCOUNT",
+  },
+};
+
+const cap = (s) => s.charAt(0) + s.slice(1).toLowerCase();
+
 /* ---------- inquiry notification (to the agency) ---------- */
 
-export function inquiryEmail({ name, email, service, budget, message }) {
+export function inquiryEmail({ name, email, service, budget, message, kind = "project" }) {
+  const k = KINDS[kind] ?? KINDS.project;
   const first = name.split(/\s+/)[0] || name;
-  const subject = `New project inquiry from ${name}`;
+  const subject = `New ${k.label} from ${name}`;
 
   const html = shell({
-    preheader: `New project inquiry from ${name} about ${service}.`,
+    preheader: `New ${k.label} from ${name} about ${service}.`,
     cta: { href: mailto(name, email), label: `Reply to ${first}` },
     children: `
-      ${eyebrow("NEW PROJECT INQUIRY")}
+      ${eyebrow(k.eyebrow)}
       ${heading(`Someone wants to build <span style="color:${TOKENS.lime};">with&nbsp;us.</span>`)}
       ${lead(`${esc(name)} reached out through the site${service && service !== "Not specified" ? ` about ${esc(service.toLowerCase())}` : ""}. Details below.`)}
       ${detailTable([
         ["NAME", esc(name)],
         ["EMAIL", `<a href="mailto:${esc(email)}" style="color:${TOKENS.lime};text-decoration:underline;">${esc(email)}</a>`],
         ["SERVICE", esc(service)],
-        ["BUDGET", esc(budget)],
+        [k.budget, esc(budget)],
       ])}
-      ${messagePanel("PROJECT DETAILS", message)}
+      ${messagePanel(k.details, message)}
     `,
   });
 
   const text = [
-    `New project inquiry from ${name}`,
+    `New ${k.label} from ${name}`,
     "",
     `Name: ${name}`,
     `Email: ${email}`,
     `Service: ${service}`,
-    `Budget: ${budget}`,
+    `${cap(k.budget)}: ${budget}`,
     "",
-    "Project details:",
+    `${cap(k.details)}:`,
     message,
     "",
     `Reply: ${mailto(name, email)}`,
@@ -250,7 +270,8 @@ export function inquiryEmail({ name, email, service, budget, message }) {
 
 /* ---------- acknowledgment (to the inquirer) ---------- */
 
-export function ackEmail({ name, email, service, budget, message }) {
+export function ackEmail({ name, email, service, budget, message, kind = "project" }) {
+  const k = KINDS[kind] ?? KINDS.project;
   const first = name.split(/\s+/)[0] || name;
   const subject = `We received your inquiry. ${SITE.name} will be in touch`;
 
@@ -264,7 +285,7 @@ export function ackEmail({ name, email, service, budget, message }) {
       ${detailTable([
         ["INQUIRY ID", `NC-${Date.now().toString(36).toUpperCase().slice(-6)}`],
         ["SERVICE", esc(service)],
-        ["BUDGET", esc(budget)],
+        [k.budget, esc(budget)],
       ])}
       ${messagePanel("WHAT YOU SENT US", message)}
     `,
@@ -276,7 +297,7 @@ export function ackEmail({ name, email, service, budget, message }) {
     `Your inquiry about ${service} is with the team now. Someone from ${SITE.name} will reply to this address within one business day.`,
     "",
     `Service: ${service}`,
-    `Budget: ${budget}`,
+    `${cap(k.budget)}: ${budget}`,
     "",
     "What you sent us:",
     message,

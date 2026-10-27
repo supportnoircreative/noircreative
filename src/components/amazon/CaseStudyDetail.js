@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RollText } from "@/components/ui/RollText";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import { AMAZON_PATH } from "@/data/amazonVa";
+import { AMAZON_PATH, AMAZON_AUDIT_PATH } from "@/data/amazonVa";
 
 const ACCENTS = {
   lime: { value: "lime-accent", glow: "bg-[radial-gradient(circle_at_88%_0%,rgba(198,242,78,.10),transparent_42%)]" },
@@ -191,7 +191,7 @@ export function CaseStudyDetail({ study }) {
             </p>
           </Reveal>
           <Reveal className="flex flex-wrap justify-center gap-3.5">
-            <Button href="/contact" roll arrow>
+            <Button href={AMAZON_AUDIT_PATH} roll arrow>
               Get a free account audit
             </Button>
             <Button href={`${AMAZON_PATH}#amazon-case-studies`} variant="outline" roll>

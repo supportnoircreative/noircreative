@@ -27,12 +27,28 @@ const BUDGET_OPTIONS = [
   "$15,000+",
 ];
 
-export function ContactForm() {
+/**
+ * The site's enquiry form. Defaults to the general project brief; every
+ * label and option list can be overridden, which is how the Amazon audit
+ * page reuses it. `kind` is sent with the submission and only changes the
+ * wording of the notification emails ("project" | "audit").
+ */
+export function ContactForm({
+  kind = "project",
+  services = SERVICE_OPTIONS,
+  multiService = false,
+  budgetLabel = "Budget",
+  budgets = BUDGET_OPTIONS,
+  messageLabel = "Project details",
+  messagePlaceholder = "What are you building, and by when?",
+  messageError = "Give us a few details about the project.",
+  submitLabel = "Send message",
+}) {
   const [status, setStatus] = useState(initialStatus);
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
   const [toast, setToast] = useState(false);
-  const [service, setService] = useState("");
+  const [service, setService] = useState(multiService ? [] : "");
   const [budget, setBudget] = useState("");
 
   function clearError(name) {
@@ -55,7 +71,7 @@ export function ContactForm() {
     const nextErrors = {};
     if (!name) nextErrors.name = "Please tell us your name.";
     if (!EMAIL_RE.test(email)) nextErrors.email = "Enter a valid email address.";
-    if (!message) nextErrors.message = "Give us a few details about the project.";
+    if (!message) nextErrors.message = messageError;
     setErrors(nextErrors);
     setStatus(initialStatus);
 
@@ -69,6 +85,8 @@ export function ContactForm() {
       const res = await fetch("/api/contact", { method: "POST", body: data });
       if (!res.ok) throw new Error("Submission rejected");
       form.reset();
+      setService(multiService ? [] : "");
+      setBudget("");
       setStatus({
         type: "ok",
         text: "Message sent. We'll reply within one business day.",
@@ -130,30 +148,33 @@ export function ContactForm() {
             />
           </Field>
         </div>
+        <input type="hidden" name="kind" value={kind} />
         <ChoiceField
           name="service"
-          label="Service"
-          options={SERVICE_OPTIONS}
+          label={multiService ? "Marketplaces" : "Service"}
+          hint={multiService ? "Pick one or both" : undefined}
+          options={services}
           value={service}
           onChange={setService}
+          multiple={multiService}
         />
         <ChoiceField
           name="budget"
-          label="Budget"
-          options={BUDGET_OPTIONS}
+          label={budgetLabel}
+          options={budgets}
           value={budget}
           onChange={setBudget}
         />
         <Field
           id="message"
-          label="Project details"
+          label={messageLabel}
           error={errors.message}
           onClear={() => clearError("message")}
           className="mb-5"
         >
           <textarea
             name="message"
-            placeholder="What are you building, and by when?"
+            placeholder={messagePlaceholder}
             required
             rows={5}
             aria-invalid={Boolean(errors.message)}
@@ -170,7 +191,7 @@ export function ContactForm() {
           <span className="text-xs text-ash">We&apos;ll never share your info. Reply within 1 business day.</span>
           <Button type="submit" disabled={sending} className="max-sm:w-full">
             {sending && <Loader2 size={15} className="animate-spin" />}
-            {sending ? "Sending…" : "Send message"}
+            {sending ? "Sending…" : submitLabel}
           </Button>
         </div>
 
@@ -230,21 +251,30 @@ function Field({ id, label, error, onClear, children, className }) {
   );
 }
 
-function ChoiceField({ name, label, options, value, onChange }) {
+/* Pill choices. Single-select by default; `multiple` keeps an array and
+   submits it comma-joined, so the API still receives one string. */
+function ChoiceField({ name, label, hint, options, value, onChange, multiple = false }) {
+  const isOn = (opt) => (multiple ? value.includes(opt) : value === opt);
+  const toggle = (opt) => {
+    if (!multiple) return onChange(value === opt ? "" : opt);
+    onChange(value.includes(opt) ? value.filter((v) => v !== opt) : [...value, opt]);
+  };
+
   return (
     <div className="mb-5">
       <span className="mb-2.5 block text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ash">
         {label}
+        {hint && <span className="ml-2 font-normal normal-case tracking-normal text-mute">({hint})</span>}
       </span>
       <div className="flex flex-wrap gap-2" role="group" aria-label={label}>
         {options.map((opt) => {
-          const active = value === opt;
+          const active = isOn(opt);
           return (
             <button
               key={opt}
               type="button"
               aria-pressed={active}
-              onClick={() => onChange(active ? "" : opt)}
+              onClick={() => toggle(opt)}
               className={cn(
                 "rounded-full border px-4 py-2 text-[13px] font-medium leading-none transition-colors duration-200",
                 active
@@ -257,7 +287,7 @@ function ChoiceField({ name, label, options, value, onChange }) {
           );
         })}
       </div>
-      <input type="hidden" name={name} value={value} />
+      <input type="hidden" name={name} value={multiple ? value.join(", ") : value} />
     </div>
   );
 }

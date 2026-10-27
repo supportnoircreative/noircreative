@@ -23,6 +23,10 @@
     old /amazon-va URLs redirect here (see next.config.mjs). */
 export const AMAZON_PATH = "/amazon-growth";
 
+/** The marketplace audit request form. Every "free audit" button on the
+    Amazon pages points here rather than at the general /contact form. */
+export const AMAZON_AUDIT_PATH = `${AMAZON_PATH}/audit`;
+
 /** Icon keys the Amazon components know how to render. */
 export const AMAZON_ICON_KEYS = [
   "search",
@@ -48,7 +52,7 @@ export const amazonVa = {
     // oversized headline and competes with it if it runs long.
     description:
       "We run your Amazon and Walmart accounts end to end. Listings, advertising, inventory and account health, managed as one strategy and reported against revenue, margin and TACoS.",
-    primaryCta: { label: "Get a free account audit", href: "/contact" },
+    primaryCta: { label: "Get a free account audit", href: AMAZON_AUDIT_PATH },
     secondaryCta: { label: "See the results", href: "#amazon-case-studies" },
     // Small trust line beneath the buttons.
     footnote: "No retainer to see the audit. You keep the findings either way.",
@@ -335,6 +339,36 @@ export const amazonVa = {
     ],
   },
 
+  /* --------------------------------------------------- audit request page
+     Content for AMAZON_AUDIT_PATH. `form` configures the shared contact
+     form; `covers` is the checklist beside it. */
+  audit: {
+    eyebrow: "Free account audit",
+    title: ["Get a free", "account audit."],
+    description:
+      "Tell us about your Amazon or Walmart account. We'll review it line by line and send back a prioritised findings doc. Free, and yours either way.",
+    coversTitle: "What the audit covers",
+    covers: [
+      "Listing quality, keywords and indexing",
+      "Advertising structure, wasted spend and TACoS",
+      "Inventory health, stock-outs and fees",
+      "Account health, suppressions and open cases",
+      "A prioritised list of fixes, highest impact first",
+    ],
+    form: {
+      kind: "audit",
+      services: ["Amazon", "Walmart"],
+      multiService: true,
+      budgetLabel: "Monthly sales",
+      budgets: ["Under $10K", "$10K - $50K", "$50K - $250K", "$250K+"],
+      messageLabel: "About your account",
+      messagePlaceholder:
+        "Your store or product link, what you sell, and what isn't working right now.",
+      messageError: "Tell us a little about the account.",
+      submitLabel: "Request my audit",
+    },
+  },
+
   /* --------------------------------------------------- two closing cards
      `tone: "bone"` renders the light card; anything else the dark one. */
   closing: [
@@ -343,7 +377,7 @@ export const amazonVa = {
       eyebrow: "Start here",
       title: "Get a free account audit",
       body: "A line-by-line review of listings, campaigns, account health and stock, delivered as a prioritised findings doc. Free, and yours either way.",
-      cta: { label: "Book the audit", href: "/contact" },
+      cta: { label: "Book the audit", href: AMAZON_AUDIT_PATH },
     },
     {
       tone: "dark",

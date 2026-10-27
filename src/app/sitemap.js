@@ -1,5 +1,5 @@
 import { site } from "@/data/site";
-import { amazonVa, AMAZON_PATH } from "@/data/amazonVa";
+import { amazonVa, AMAZON_PATH, AMAZON_AUDIT_PATH } from "@/data/amazonVa";
 import { services } from "@/data/services";
 
 /**
@@ -12,6 +12,7 @@ import { services } from "@/data/services";
 const ROUTES = [
   { path: "", priority: 1.0, changeFrequency: "monthly" },
   { path: AMAZON_PATH, priority: 0.9, changeFrequency: "monthly" },
+  { path: AMAZON_AUDIT_PATH, priority: 0.7, changeFrequency: "yearly" },
   { path: "/services", priority: 0.9, changeFrequency: "monthly" },
   { path: "/work", priority: 0.8, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "yearly" },

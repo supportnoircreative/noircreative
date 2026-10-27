@@ -7,7 +7,7 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import { amazonVa, AMAZON_PATH } from "@/data/amazonVa";
+import { amazonVa, AMAZON_PATH, AMAZON_AUDIT_PATH } from "@/data/amazonVa";
 
 const ACCENTS = {
   lime: {
@@ -232,7 +232,7 @@ export function AmazonCaseStudies() {
           <p className="m-0 max-w-[52ch] text-[14px] text-ash">
             Want the same breakdown for your account? The audit is the first deliverable, and it&rsquo;s free.
           </p>
-          <Button href="/contact" size="sm" roll arrow>
+          <Button href={AMAZON_AUDIT_PATH} size="sm" roll arrow>
             Request your audit
           </Button>
         </Reveal>

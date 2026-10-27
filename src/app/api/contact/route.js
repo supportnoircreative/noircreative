@@ -14,6 +14,8 @@ export async function POST(request) {
   const service = String(form.get("service") || "").trim() || "Not specified";
   const budget = String(form.get("budget") || "").trim() || "Not specified";
   const message = String(form.get("message") || "").trim();
+  // Whitelisted: only switches the email wording, never anything user-written.
+  const kind = form.get("kind") === "audit" ? "audit" : "project";
 
   if (!name || !EMAIL_RE.test(email) || !message) {
     return Response.json({ error: "Missing required fields" }, { status: 400 });
@@ -23,7 +25,7 @@ export async function POST(request) {
     return Response.json({ error: "Email service not configured" }, { status: 500 });
   }
 
-  const inquiry = inquiryEmail({ name, email, service, budget, message });
+  const inquiry = inquiryEmail({ name, email, service, budget, message, kind });
 
   try {
     await sendEmail({
@@ -32,7 +34,7 @@ export async function POST(request) {
       ...inquiry,
     });
 
-    const ack = ackEmail({ name, email, service, budget, message });
+    const ack = ackEmail({ name, email, service, budget, message, kind });
     sendEmail({ to: email, ...ack }).catch(() => {});
 
     return Response.json({ ok: true });
