@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
+import { TrustpilotWidget } from "@/components/shared/TrustpilotWidget";
 import { RollText } from "@/components/ui/RollText";
 import { testimonials } from "@/data/testimonials";
 import { TestimonialCard } from "@/components/home/TestimonialCard";
@@ -300,6 +301,12 @@ export function Testimonials() {
               </button>
             ))}
           </div>
+        </Reveal>
+
+        {/* Invite past clients to review us on Trustpilot. */}
+        <Reveal className="mx-auto mt-14 flex max-w-[420px] flex-col items-center gap-4 border-t border-(--line) pt-10 text-center">
+          <p className="m-0 text-[14px] text-ash">Worked with us? We&apos;d love to hear how it went.</p>
+          <TrustpilotWidget />
         </Reveal>
       </div>
 
